@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Foodfolio.Views.Pantry"
+             Title="Pantry">
+    <VerticalStackLayout Padding="10,10,10,10">
+        <Grid ColumnDefinitions="Auto,Auto,Auto">
+            <Label Text="Let's hope you've got everything at home ^^''" 
+               FontSize="21" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Start" 
+               Grid.Column="0"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

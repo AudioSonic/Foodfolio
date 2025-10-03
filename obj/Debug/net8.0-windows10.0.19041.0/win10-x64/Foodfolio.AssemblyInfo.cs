@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Foodfolio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+00a40c8c45629204d85ce6d2d073891d5b0f87fd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+2dd0bc22aef26773e84b1095a6a9bfb0c9387ba9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Foodfolio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Foodfolio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
