@@ -4,12 +4,154 @@
              x:Class="Foodfolio.Views.Pantry"
              Title="Pantry">
     <VerticalStackLayout Padding="10,10,10,10">
-        <Grid ColumnDefinitions="Auto,Auto,Auto">
-            <Label Text="Let's hope you've got everything at home ^^''" 
-               FontSize="21" 
-               HorizontalOptions="Center" 
-               VerticalOptions="Start" 
-               Grid.Column="0"/>
+        <Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+            <Label Text="Name des Essens" 
+                   FontSize="15" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Start" 
+                   Grid.Column="1"
+                   Grid.Row="0"
+            />
+
+            <Entry
+                  MaxLength="20"
+                  Text=" " 
+                  Grid.Column="1"
+                  Grid.Row="1" 
+            />       
+
+            <Label Text="Kalorien" 
+                   FontSize="15" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Start" 
+                   Grid.Column="0"
+                   Grid.Row="2"
+            />
+
+            <Entry
+                  MaxLength="20"
+                  Text=" " 
+                  Grid.Column="0"
+                  Grid.Row="3" 
+            />
+
+            <Label Text="Gramm/ml" 
+                   FontSize="15" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Start" 
+                   Grid.Column="2"
+                   Grid.Row="2"
+            />
+
+            <Entry
+                  MaxLength="20"
+                  Text=" " 
+                  Grid.Column="2"
+                  Grid.Row="3" 
+            />
+
+            <Label Text="KH (g)" 
+                   FontSize="15" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Start" 
+                   Grid.Column="1"
+                   Grid.Row="4"
+            />
+
+            <Entry
+                  MaxLength="20"                  
+                  Text=" " 
+                  Grid.Column="1"
+                  Grid.Row="5" 
+            />
+
+            <Label Text="Eiweiß (g)" 
+                   FontSize="15" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Start" 
+                   Grid.Column="0"
+                   Grid.Row="6"
+            />
+
+            <Entry
+                  MaxLength="20"                  
+                  Text=" " 
+                  Grid.Column="0"
+                  Grid.Row="7" 
+            />
+
+            <Label Text="Fett (g)" 
+                  FontSize="15" 
+                  HorizontalOptions="Center" 
+                  VerticalOptions="Start" 
+                  Grid.Column="2"
+                  Grid.Row="6"
+            />
+
+            <Entry
+                  MaxLength="20"                  
+                  Text=" " 
+                  Grid.Column="2"
+                  Grid.Row="7" 
+            />
+
+            <Label Text="Icon wählen" 
+                  FontSize="15" 
+                  HorizontalOptions="Center" 
+                  VerticalOptions="Start" 
+                  Grid.Column="0"
+                  Grid.Row="8"
+            />
+
+            <Button Text="Icon" 
+                    FontSize="22"
+                    BackgroundColor="LimeGreen"
+                    WidthRequest="100" 
+                    HeightRequest="100"
+                    Grid.Column="0"
+                    Grid.Row="9"
+            />
+
+
+            <Label Text="Kategorie wählen" 
+                  FontSize="15" 
+                  HorizontalOptions="Center" 
+                  VerticalOptions="Start" 
+                  Grid.Column="2"
+                  Grid.Row="8"
+            />
+
+            <Picker Grid.Column="2"
+                    Grid.Row="9"
+                    WidthRequest="120"
+                    HeightRequest="40"
+                    BackgroundColor="LimeGreen"
+                
+            />
+
+            <Label Text="Extra Einheiten" 
+                  FontSize="15" 
+                  HorizontalOptions="Center" 
+                  VerticalOptions="Start" 
+                  Grid.Column="2"
+                  Grid.Row="10"
+            />
+
+            <Button Text="Optional" 
+                    WidthRequest="120" 
+                    HeightRequest="40"
+                    BackgroundColor="LimeGreen"
+                    Grid.Column="2"
+                    Grid.Row="11"
+            />
+
+            <Button Text="ESSEN ERSTELLEN" 
+                    WidthRequest="170" 
+                    HeightRequest="50"
+                    BackgroundColor="LimeGreen"
+                    Grid.Column="1"
+                    Grid.Row="13"
+            />
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
