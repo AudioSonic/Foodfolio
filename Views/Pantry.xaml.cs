@@ -6,4 +6,9 @@ public partial class Pantry : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void AddItemButton_Clicked(object sender, EventArgs e)
+    {
+         await Shell.Current.GoToAsync("AddGroceriesPage");
+    }
 }
