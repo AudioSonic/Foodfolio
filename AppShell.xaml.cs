@@ -8,6 +8,7 @@ namespace Foodfolio
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(AddGroceriesPage), typeof(AddGroceriesPage));
+            Routing.RegisterRoute(nameof(AddRecipePage), typeof(AddRecipePage));
         }
 
 

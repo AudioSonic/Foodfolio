@@ -1,8 +1,8 @@
 namespace Foodfolio.Views;
 
-public partial class Pantry : ContentPage
+public partial class PantryPage : ContentPage
 {
-	public Pantry()
+	public PantryPage()
 	{
 		InitializeComponent();
 	}

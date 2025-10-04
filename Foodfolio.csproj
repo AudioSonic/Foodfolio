@@ -63,8 +63,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\Mealplanner.xaml.cs">
-	    <DependentUpon>MealPlanner.xaml</DependentUpon>
+	  <Compile Update="Views\MealPlannerPage.xaml.cs">
+	    <DependentUpon>MealPlannerPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PantryPage.xaml.cs">
+	    <DependentUpon>PantryPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\RecipesPage.xaml.cs">
+	    <DependentUpon>RecipesPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -72,13 +78,16 @@
 	  <MauiXaml Update="Views\AddGroceriesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\MealPlanner.xaml">
+	  <MauiXaml Update="Views\AddRecipePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Pantry.xaml">
+	  <MauiXaml Update="Views\MealPlannerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Recipes.xaml">
+	  <MauiXaml Update="Views\PantryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RecipesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

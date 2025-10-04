@@ -19,21 +19,21 @@
         <Tab Title="Mealplanner" Icon="icon_mealplan.png">
             <ShellContent
         Title="Mealplanner"
-        ContentTemplate="{DataTemplate local:MealPlanner}"
+        ContentTemplate="{DataTemplate local:MealPlannerPage}"
         Route="Mealplanner" />
         </Tab>
 
         <Tab Title="Recipes" Icon="icon_recipe.png">
             <ShellContent
        Title="Recipes"
-       ContentTemplate="{DataTemplate local:Recipes}"
+       ContentTemplate="{DataTemplate local:RecipesPage}"
        Route="Recipes" />
         </Tab>
 
         <Tab Title="Pantry" Icon="icon_pantry.png">
             <ShellContent
        Title="Pantry"
-       ContentTemplate="{DataTemplate local:Pantry}"
+       ContentTemplate="{DataTemplate local:PantryPage}"
        Route="Pantry" />
         </Tab>
     </TabBar>

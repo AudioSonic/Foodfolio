@@ -4,21 +4,11 @@
              x:Class="Foodfolio.Views.AddGroceriesPage"
              Title="AddGroceriesPage">
     <VerticalStackLayout>
-        <Grid ColumnDefinitions="Auto,130,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
-            <Label Text="Name des Essens" 
-                   FontSize="15" 
-                   HorizontalOptions="Center" 
-                   VerticalOptions="Start" 
-                   Grid.Column="1"
-                   Grid.Row="0"
-            />
 
-            <Entry
-                  MaxLength="20"
-                  Text=" " 
-                  Grid.Column="1"
-                  Grid.Row="1" 
-            />
+        <Label Text="Name des Essens" FontSize="15" HorizontalOptions="Center"/>
+        <Entry MaxLength="20"/>
+
+        <Grid ColumnDefinitions="Auto,130,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
 
             <Label Text="Kalorien" 
                    FontSize="15" 
@@ -153,7 +143,7 @@
                     Grid.Row="11"
                     Margin="10,7,0,30"
             />
-            
+
             <Label Text="Extra Einheiten" 
                   FontSize="15" 
                   HorizontalOptions="Center" 
@@ -169,15 +159,9 @@
                     Grid.Column="2"
                     Grid.Row="11"
             />
-
-            <Button Text="ESSEN ERSTELLEN" 
-                    WidthRequest="170" 
-                    HeightRequest="50"
-                    BackgroundColor="LimeGreen"
-                    Grid.Column="1"
-                    Grid.Row="13"
-                    Margin="0,140,0,0"
-            />
         </Grid>
+        <Button Text="ESSEN ERSTELLEN" WidthRequest="170" HeightRequest="50" BackgroundColor="LimeGreen" HorizontalOptions="Center"/>
     </VerticalStackLayout>
+    
+
 </ContentPage>
