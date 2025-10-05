@@ -7,7 +7,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="15">
 
-            <!-- Icon Button -->
+<!-- Icon Button -->
             <Button Text="Icon" 
                     FontSize="22"
                     BackgroundColor="LimeGreen"
@@ -15,51 +15,51 @@
                     HeightRequest="100"
                     HorizontalOptions="Center"/>
 
-            <!-- Name -->
+<!-- Name -->
             <Label Text="Name" FontSize="15"/>
             <Entry MaxLength="20"/>
 
-            <!-- Beschreibung -->
+<!-- Beschreibung -->
             <Label Text="Beschreibung" FontSize="15"/>
             <Entry MaxLength="20"/>
 
-            <!-- Portionen -->
+<!-- Portionen -->
             <Label Text="Portionen" FontSize="15"/>
             <Entry MaxLength="20"/>
 
-            <!-- Aktivzeit -->
+<!-- Aktivzeit -->
             <Label Text="Aktivzeit" FontSize="15"/>
             <Entry MaxLength="20"/>
 
-            <!-- Gesamtzeit -->
+<!-- Gesamtzeit -->
             <Label Text="Gesamtzeit" FontSize="15"/>
             <Entry MaxLength="20"/>
 
-            <!-- Quelle -->
+<!-- Quelle -->
             <Label Text="Quelle" FontSize="15"/>
             <Entry MaxLength="20"/>
 
-            <!-- Bewertung -->
+<!-- Bewertung -->
             <Label Text="Bewertung" FontSize="15"/>
             <Entry MaxLength="20"/>
 
-            <!-- Zutaten -->
+<!-- Zutaten -->
             <Label Text="Zutaten" FontSize="15"/>
             <Entry MaxLength="20"/>
 
-            <!-- Anleitung -->
+<!-- Anleitung -->
             <Label Text="Anleitung" FontSize="15"/>
             <Entry MaxLength="20"/>
 
-            <!-- Notizen -->
+<!-- Notizen -->
             <Label Text="Notizen" FontSize="15"/>
             <Entry MaxLength="20"/>
 
-            <!-- Kategorien -->
+<!-- Kategorien -->
             <Label Text="Kategorien" FontSize="15"/>
             <Picker WidthRequest="120" HeightRequest="40" BackgroundColor="LimeGreen"/>
 
-            <!-- Speichern Button -->
+<!-- Speichern Button -->
             <Button Text="REZEPT SPEICHERN" 
                     WidthRequest="170" 
                     HeightRequest="50"

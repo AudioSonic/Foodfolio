@@ -7,7 +7,7 @@
         <Button 
         HeightRequest="50"
         WidthRequest="50"
-        ImageSource="icon_additem.png"
+        ImageSource="icon_additem.svg"
         VerticalOptions="Center" 
         HorizontalOptions="End" 
         Clicked="AddItemButton_Clicked"

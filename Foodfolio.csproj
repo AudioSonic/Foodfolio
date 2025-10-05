@@ -63,33 +63,40 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\MealPlannerPage.xaml.cs">
+	  <Compile Update="MVVM\Views\MealPlannerPage.xaml.cs">
 	    <DependentUpon>MealPlannerPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\PantryPage.xaml.cs">
+	  <Compile Update="MVVM\Views\PantryPage.xaml.cs">
 	    <DependentUpon>PantryPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\RecipesPage.xaml.cs">
+	  <Compile Update="MVVM\Views\RecipesPage.xaml.cs">
 	    <DependentUpon>RecipesPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\AddGroceriesPage.xaml">
+	  <MauiXaml Update="MVVM\Views\AddGroceriesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AddRecipePage.xaml">
+	  <MauiXaml Update="MVVM\Views\AddRecipePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\MealPlannerPage.xaml">
+	  <MauiXaml Update="MVVM\Views\MealPlannerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\PantryPage.xaml">
+	  <MauiXaml Update="MVVM\Views\PantryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\RecipesPage.xaml">
+	  <MauiXaml Update="MVVM\Views\RecipesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="MVVM\Models\" />
+	  <Folder Include="MVVM\ViewModels\" />
+	  <Folder Include="Repositories\" />
+	  <Folder Include="Services\" />
 	</ItemGroup>
 
 </Project>

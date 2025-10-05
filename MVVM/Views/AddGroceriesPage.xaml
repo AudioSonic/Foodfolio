@@ -5,11 +5,12 @@
              Title="AddGroceriesPage">
     <VerticalStackLayout>
 
-        <Label Text="Name des Essens" FontSize="15" HorizontalOptions="Center"/>
+<!-- Icon Name des Essens -->
+            <Label Text="Name des Essens" FontSize="15" HorizontalOptions="Center"/>
         <Entry MaxLength="20"/>
 
         <Grid ColumnDefinitions="Auto,130,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
-
+<!-- Kalorien -->
             <Label Text="Kalorien" 
                    FontSize="15" 
                    HorizontalOptions="Center" 
@@ -17,14 +18,15 @@
                    Grid.Column="0"
                    Grid.Row="2"
             />
-
+            
             <Entry
                   MaxLength="20"
                   Text=" " 
                   Grid.Column="0"
                   Grid.Row="3" 
             />
-
+            
+<!-- Menge -->
             <Label Text="Gramm/ml" 
                    FontSize="15" 
                    HorizontalOptions="Center" 
@@ -39,7 +41,8 @@
                   Grid.Column="2"
                   Grid.Row="3" 
             />
-
+            
+<!-- Kohlenhydrate -->
             <Label Text="KH (g)" 
                    FontSize="15" 
                    HorizontalOptions="Center" 
@@ -54,7 +57,8 @@
                   Grid.Column="1"
                   Grid.Row="5" 
             />
-
+            
+<!-- Eiweiß -->
             <Label Text="Eiweiß (g)" 
                    FontSize="15" 
                    HorizontalOptions="Center" 
@@ -70,6 +74,7 @@
                   Grid.Row="7" 
             />
 
+<!-- Fett -->
             <Label Text="Fett (g)" 
                   FontSize="15" 
                   HorizontalOptions="Center" 
@@ -85,6 +90,7 @@
                   Grid.Row="7" 
             />
 
+<!-- Icon  -->
             <Label Text="Icon wählen" 
                   FontSize="15" 
                   HorizontalOptions="Center" 
@@ -102,7 +108,7 @@
                     Grid.Row="9"
             />
 
-
+<!-- Kategorie -->
             <Label Text="Kategorie wählen" 
                   FontSize="15" 
                   HorizontalOptions="Center" 
@@ -118,6 +124,8 @@
                     BackgroundColor="LimeGreen"
                 
             />
+
+<!-- Vorhandene Menge -->
             <Label Text="Vorhandene Menge" 
                   FontSize="15" 
                   HorizontalOptions="Center" 
@@ -134,6 +142,7 @@
                   Grid.Row="11"
                   Margin="10,10,0,30"
             />
+            
             <Button ImageSource="icon_edit.svg"
                     HorizontalOptions="Start"
                     WidthRequest="30" 
@@ -144,6 +153,7 @@
                     Margin="10,7,0,30"
             />
 
+<!-- Extra Einheiten -->
             <Label Text="Extra Einheiten" 
                   FontSize="15" 
                   HorizontalOptions="Center" 
@@ -160,6 +170,7 @@
                     Grid.Row="11"
             />
         </Grid>
+<!-- Essen erstellen -->
         <Button Text="ESSEN ERSTELLEN" WidthRequest="170" HeightRequest="50" BackgroundColor="LimeGreen" HorizontalOptions="Center"/>
     </VerticalStackLayout>
     
