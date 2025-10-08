@@ -93,7 +93,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="MVVM\Models\" />
 	  <Folder Include="MVVM\ViewModels\" />
 	  <Folder Include="Repositories\" />
 	  <Folder Include="Services\" />
