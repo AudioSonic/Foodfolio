@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Foodfolio.Views.AddRecipePage"
+             Title="AddRecipePage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="15">
+
+<!-- Icon Button -->
+            <Button Text="Icon" 
+                    FontSize="22"
+                    BackgroundColor="LimeGreen"
+                    WidthRequest="100" 
+                    HeightRequest="100"
+                    HorizontalOptions="Center"/>
+
+<!-- Name -->
+            <Label Text="Name" FontSize="15"/>
+            <Entry MaxLength="20"/>
+
+<!-- Beschreibung -->
+            <Label Text="Beschreibung" FontSize="15"/>
+            <Entry MaxLength="20"/>
+
+<!-- Portionen -->
+            <Label Text="Portionen" FontSize="15"/>
+            <Entry MaxLength="20"/>
+
+<!-- Aktivzeit -->
+            <Label Text="Aktivzeit" FontSize="15"/>
+            <Entry MaxLength="20"/>
+
+<!-- Gesamtzeit -->
+            <Label Text="Gesamtzeit" FontSize="15"/>
+            <Entry MaxLength="20"/>
+
+<!-- Quelle -->
+            <Label Text="Quelle" FontSize="15"/>
+            <Entry MaxLength="20"/>
+
+<!-- Bewertung -->
+            <Label Text="Bewertung" FontSize="15"/>
+            <Entry MaxLength="20"/>
+
+<!-- Zutaten -->
+            <Label Text="Zutaten" FontSize="15"/>
+            <Entry MaxLength="20"/>
+
+<!-- Anleitung -->
+            <Label Text="Anleitung" FontSize="15"/>
+            <Entry MaxLength="20"/>
+
+<!-- Notizen -->
+            <Label Text="Notizen" FontSize="15"/>
+            <Entry MaxLength="20"/>
+
+<!-- Kategorien -->
+            <Label Text="Kategorien" FontSize="15"/>
+            <Picker WidthRequest="120" HeightRequest="40" BackgroundColor="LimeGreen"/>
+
+<!-- Speichern Button -->
+            <Button Text="REZEPT SPEICHERN" 
+                    WidthRequest="170" 
+                    HeightRequest="50"
+                    BackgroundColor="LimeGreen"
+                    HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Foodfolio.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Foodfolio.Views"
+    Shell.FlyoutBehavior="Flyout"
+    Title="Foodfolio">
+
+
+    <TabBar>
+        <Tab Title="Home" Icon="icon_home.png">
+            <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+        </Tab>
+
+        <Tab Title="Mealplanner" Icon="icon_mealplan.png">
+            <ShellContent
+        Title="Mealplanner"
+        ContentTemplate="{DataTemplate local:MealPlannerPage}"
+        Route="Mealplanner" />
+        </Tab>
+
+        <Tab Title="Recipes" Icon="icon_recipe.png">
+            <ShellContent
+       Title="Recipes"
+       ContentTemplate="{DataTemplate local:RecipesPage}"
+       Route="Recipes" />
+        </Tab>
+
+        <Tab Title="Pantry" Icon="icon_pantry.png">
+            <ShellContent
+       Title="Pantry"
+       ContentTemplate="{DataTemplate local:PantryPage}"
+       Route="Pantry" />
+        </Tab>
+    </TabBar>
+</Shell>
