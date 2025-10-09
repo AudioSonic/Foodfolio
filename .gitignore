@@ -94,6 +94,10 @@ ScaffoldingReadMe.txt
 StyleCopReport.xml
 
 # Files built by Visual Studio
+*.apk
+**/appsettings*.json
+**/Properties/launchSettings.json
+**/*.db
 *_i.c
 *_p.c
 *_h.h
