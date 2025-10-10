@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:y="Foodfolio.MVVM.Models"
+             x:Class="Foodfolio.Views.AddPantryItemPage"
+             Title="AddPantryItemPage">
+    <VerticalStackLayout>
+
+<!-- Icon Name des Essens -->
+            <Label Text="Name des Essens" FontSize="15" HorizontalOptions="Center"/>
+            <Entry MaxLength="20" Text="{Binding Name}" Placeholder="Name"/>
+
+        <Grid ColumnDefinitions="Auto,130,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+<!-- Kalorien -->
+            <Label 
+                Text="Kalorien" 
+                FontSize="15" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start" 
+                Grid.Column="0"
+                Grid.Row="2"
+            />
+            
+            <Entry
+                Text="{Binding Calories}"
+                Keyboard="Numeric"
+                MaxLength="20"
+                Grid.Column="0"
+                Grid.Row="3" 
+                Placeholder="Calories"
+            />
+            
+<!-- Menge -->
+            <Label 
+                Text="Gramm/ml" 
+                FontSize="15" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start" 
+                Grid.Column="2"
+                Grid.Row="2"
+            />
+
+            <Entry
+                Text="{Binding Quantity}"
+                Keyboard="Numeric"
+                Placeholder="g"
+                MaxLength="20" 
+                Grid.Column="2"
+                Grid.Row="3" 
+            />
+            
+<!-- Kohlenhydrate -->
+            <Label 
+                Text="KH (g)" 
+                FontSize="15" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start" 
+                Grid.Column="1"
+                Grid.Row="4"
+            />
+
+            <Entry
+                Text="{Binding Carbs}"
+                Keyboard="Numeric"
+                MaxLength="20"                  
+                Grid.Column="1"
+                Grid.Row="5" 
+            />
+            
+<!-- Eiweiß -->
+            <Label 
+                Text="Eiweiß (g)" 
+                FontSize="15" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start" 
+                Grid.Column="0"
+                Grid.Row="6"
+            />
+
+            <Entry
+                Text="{Binding Proteins}"
+                Keyboard="Numeric"
+                MaxLength="20"                  
+                Grid.Column="0"
+                Grid.Row="7" 
+            />
+
+<!-- Fett -->
+            <Label 
+                Text="Fett (g)" 
+                FontSize="15" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start" 
+                Grid.Column="2"
+                Grid.Row="6"
+            />
+
+            <Entry
+                Text="{Binding Fats}"
+                Keyboard="Numeric"
+                MaxLength="20"                  
+                Grid.Column="2"
+                Grid.Row="7" 
+            />
+
+<!-- Icon  -->
+            <Label 
+                Text="Icon wählen" 
+                FontSize="15" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start" 
+                Grid.Column="0"
+                Grid.Row="8"
+            />
+
+            <Button 
+                Text="Icon" 
+                FontSize="22"
+                BackgroundColor="LimeGreen"
+                WidthRequest="100" 
+                HeightRequest="100"
+                Grid.Column="0"
+                Grid.Row="9"
+            />
+
+<!-- Kategorie -->
+            <Label 
+                Text="Kategorie wählen" 
+                FontSize="15" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start" 
+                Grid.Column="2"
+                Grid.Row="8"
+            />
+
+            <Picker 
+                ItemsSource="{Binding AvailableCategories}"
+                SelectedItem="{Binding Category}"
+                Grid.Column="2"
+                Grid.Row="9"
+                WidthRequest="120"
+                HeightRequest="40"
+                BackgroundColor="LimeGreen"
+                
+            />
+
+<!-- Vorhandene Menge -->
+            <Label 
+                Text="Vorhandene Menge" 
+                FontSize="15" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start" 
+                Grid.Column="0"
+                Grid.Row="10"
+                Margin="10,10,0,0"
+            />
+            <Label 
+                Text="{Binding AvailableQuantity}" 
+                FontSize="15" 
+                HorizontalOptions="Start" 
+                VerticalOptions="Start" 
+                Grid.Column="0"
+                Grid.Row="11"
+                Margin="10,10,0,30"
+            />
+            
+            <Button 
+                ImageSource="icon_edit.svg"
+                HorizontalOptions="Start"
+                WidthRequest="30" 
+                HeightRequest="30"
+                BackgroundColor="LimeGreen"
+                Grid.Column="1"
+                Grid.Row="11"
+                Margin="10,7,0,30"
+            />
+
+<!-- Extra Einheiten -->
+            <Label 
+                Text="Extra Einheiten" 
+                FontSize="15" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start" 
+                Grid.Column="2"
+                Grid.Row="10"
+            />
+
+            <Button 
+                Text="Optional" 
+                WidthRequest="120" 
+                HeightRequest="40"
+                BackgroundColor="LimeGreen"
+                Grid.Column="2"
+                Grid.Row="11"
+            />
+        </Grid>
+<!-- Essen erstellen -->
+        <Button 
+                Command="{Binding CreateIngredientCommand}"
+                Text="ESSEN ERSTELLEN" 
+                WidthRequest="170" 
+                HeightRequest="50" 
+                BackgroundColor="LimeGreen" 
+                HorizontalOptions="Center"/>
+    </VerticalStackLayout>
+    
+
+</ContentPage>
