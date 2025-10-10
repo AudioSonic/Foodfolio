@@ -57,12 +57,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="MVVM\Views\AddPantryItemPage.xaml.cs">
+	    <DependentUpon>AddPantryItemPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="MVVM\Views\MealPlannerPage.xaml.cs">
 	    <DependentUpon>MealPlannerPage.xaml</DependentUpon>
 	  </Compile>
@@ -75,7 +79,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="MVVM\Views\AddGroceriesPage.xaml">
+	  <MauiXaml Update="MVVM\Views\AddPantryItemPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\AddRecipePage.xaml">
@@ -90,12 +94,6 @@
 	  <MauiXaml Update="MVVM\Views\RecipesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="MVVM\ViewModels\" />
-	  <Folder Include="Repositories\" />
-	  <Folder Include="Services\" />
 	</ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@ namespace Foodfolio
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(AddGroceriesPage), typeof(AddGroceriesPage));
+            Routing.RegisterRoute(nameof(AddPantryItemPage), typeof(AddPantryItemPage));
             Routing.RegisterRoute(nameof(AddRecipePage), typeof(AddRecipePage));
         }
 
