@@ -19,5 +19,8 @@ namespace Foodfolio.MVVM.Models
         public Dictionary<string,int> ExtraUnits { get; set; } 
         public DateTime? ExpiryDate { get; set; }
         public List<string> Categories { get; set; }
+        public string Icon { get; set; } = "";      
+        public string? Barcode { get; set; }        
+    
     }
 }
