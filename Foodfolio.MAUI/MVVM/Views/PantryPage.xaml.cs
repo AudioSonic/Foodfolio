@@ -1,4 +1,4 @@
-namespace Foodfolio.Views;
+namespace Foodfolio.MVVM.Views;
 
 public partial class PantryPage : ContentPage
 {

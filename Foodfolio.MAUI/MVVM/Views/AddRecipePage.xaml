@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Foodfolio.MVVM.ViewModels"
              xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
-             x:Class="Foodfolio.Views.AddRecipePage"
+             x:Class="Foodfolio.MVVM.Views.AddRecipePage"
              Title="AddRecipePage">
 
     <ScrollView>
@@ -75,14 +75,14 @@
 
             <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
 <!-- Kategorien -->
-                <Label Text="Kategorien" FontSize="15"/>
-                <CollectionView ItemsSource="{Binding AvailableCategories}"
+            <Label Text="Kategorien" FontSize="15"/>
+            <CollectionView ItemsSource="{Binding AvailableCategories}"
                 SelectionMode="Multiple"
                 SelectedItems="{Binding SelectedCategories}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Horizontal" Padding="5">
-                                <Label Text="{Binding AvailableCategories}" WidthRequest="80"/>
+                                <Label Text="{Binding .}" WidthRequest="80"/>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

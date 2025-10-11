@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Foodfolio.MVVM.ViewModels"
+             x:Class="Foodfolio.MVVM.Views.AddCategoryPage"
+             Title="Neue Kategorie">
+
+    <ContentPage.BindingContext>
+        <vm:AddCategoryViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <Label Text="Kategoriename:" />
+        <Entry Placeholder="z. B. Italienisch" Text="{Binding Name}" />
+
+        <Label Text="Farbe (HEX-Wert):" />
+        <Entry Placeholder="#FF6600" Text="{Binding ColorHex}" />
+
+        <Button Text="Speichern"
+                Command="{Binding SaveCommand}"
+                BackgroundColor="LimeGreen"
+                TextColor="White" />
+
+        <Button Text="Abbrechen"
+                Command="{Binding CancelCommand}"
+                BackgroundColor="Gray"
+                TextColor="White" />
+    </VerticalStackLayout>
+</ContentPage>
