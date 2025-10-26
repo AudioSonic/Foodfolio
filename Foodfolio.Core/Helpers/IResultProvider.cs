@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodfolio.Helpers
+namespace Foodfolio.Core.Helpers
 {
-    interface IResultProvider<T>
+    public interface IResultProvider<T>
     {
         T Result { get; }
     }

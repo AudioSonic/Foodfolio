@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.Maui.Controls;
+using Foodfolio.Core.Helpers;
 
-namespace Foodfolio.Helpers
+namespace Foodfolio.MAUI.Services
 {
     public static class ModalExtensions
     {

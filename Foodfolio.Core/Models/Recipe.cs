@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodfolio.MVVM.Models
+namespace Foodfolio.Core.Models
 {
     public class Recipe
     {

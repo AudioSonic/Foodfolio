@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Foodfolio.MVVM.Models;
+using Foodfolio.Core.Models;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 
-namespace Foodfolio.MVVM.ViewModels
+namespace Foodfolio.MAUI.MVVM.ViewModels
 {
     public partial class AddRecipeViewModel : ObservableObject
     {

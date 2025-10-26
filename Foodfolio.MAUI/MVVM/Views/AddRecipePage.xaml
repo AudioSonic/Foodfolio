@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:Foodfolio.MVVM.ViewModels"
+             xmlns:viewmodels="clr-namespace:Foodfolio.MAUI.MVVM.ViewModels"
              xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
-             x:Class="Foodfolio.MVVM.Views.AddRecipePage"
+             x:Class="Foodfolio.MAUI.MVVM.Views.AddRecipePage"
              Title="AddRecipePage">
 
     <ScrollView>

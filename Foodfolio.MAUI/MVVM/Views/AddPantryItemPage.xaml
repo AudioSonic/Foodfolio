@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:y="Foodfolio.MVVM.Models"
-             x:Class="Foodfolio.MVVM.Views.AddPantryItemPage"
+             xmlns:y="Foodfolio.Core.Models"
+            xmlns:vm="clr-namespace:Foodfolio.MAUI.MVVM.ViewModels"
+             x:Class="Foodfolio.MAUI.MVVM.Views.AddPantryItemPage"
              Title="AddPantryItemPage">
     <VerticalStackLayout>
 
@@ -121,6 +122,7 @@
                 HeightRequest="100"
                 Grid.Column="0"
                 Grid.Row="9"
+                Command="{Binding PickIconCommand}"
             />
 
 <!-- Kategorie -->
@@ -133,14 +135,13 @@
                 Grid.Row="8"
             />
 
-            <Picker 
-                ItemsSource="{Binding AvailableCategories}"
-                SelectedItem="{Binding Category}"
+            <Button 
                 Grid.Column="2"
                 Grid.Row="9"
                 WidthRequest="120"
                 HeightRequest="40"
                 BackgroundColor="LimeGreen"
+                Command="{Binding ChooseCategoryCommand}"
                 
             />
 
@@ -155,7 +156,7 @@
                 Margin="10,10,0,0"
             />
             <Label 
-                Text="{Binding AvailableQuantity}" 
+                Text="100g" 
                 FontSize="15" 
                 HorizontalOptions="Start" 
                 VerticalOptions="Start" 
@@ -173,6 +174,7 @@
                 Grid.Column="1"
                 Grid.Row="11"
                 Margin="10,7,0,30"
+                Command="{Binding EditAvailableAmountCommand}"
             />
 
 <!-- Extra Einheiten -->
@@ -192,16 +194,18 @@
                 BackgroundColor="LimeGreen"
                 Grid.Column="2"
                 Grid.Row="11"
+                Command="{Binding AddExtraUnitsCommand}"
             />
         </Grid>
 <!-- Essen erstellen -->
         <Button 
-                Command="{Binding CreateIngredientCommand}"
                 Text="ESSEN ERSTELLEN" 
                 WidthRequest="170" 
                 HeightRequest="50" 
                 BackgroundColor="LimeGreen" 
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                Command="{Binding AddPantryItemCommand}"
+        />
     </VerticalStackLayout>
     
 

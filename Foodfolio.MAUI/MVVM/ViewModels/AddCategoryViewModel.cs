@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Foodfolio.Helpers;
-using Foodfolio.MVVM.Models;
+using Foodfolio.Core.Helpers;
+using Foodfolio.Core.Models;
+using Foodfolio.MAUI.Services;   
 
-namespace Foodfolio.MVVM.ViewModels
+namespace Foodfolio.MAUI.MVVM.ViewModels
 {
     public partial class AddCategoryViewModel : ObservableObject, IResultProvider<Categories>
     {
@@ -15,6 +16,13 @@ namespace Foodfolio.MVVM.ViewModels
 
         public Categories Result { get; private set; }
 
+        private readonly CategoryService _categoryService;
+
+        public AddCategoryViewModel(CategoryService categoryService)
+        {
+            _categoryService = categoryService;
+        }
+
         [RelayCommand]
         private async Task SaveAsync()
         {
@@ -24,20 +32,23 @@ namespace Foodfolio.MVVM.ViewModels
                 return;
             }
 
-            Result = new Categories
+            var newCategory = new Categories
             {
                 Id = Guid.NewGuid(),
                 Name = Name,
                 ColorHex = ColorHex
             };
 
+            await _categoryService.AddCategoryAsync(newCategory);
+
+            await Application.Current.MainPage.DisplayAlert("Gespeichert", "Kategorie erfolgreich hinzugefügt!", "OK");
             await Shell.Current.Navigation.PopModalAsync();
         }
+        
 
         [RelayCommand]
         private async Task CancelAsync()
         {
-            Result = null;
             await Shell.Current.Navigation.PopModalAsync();
         }
     }

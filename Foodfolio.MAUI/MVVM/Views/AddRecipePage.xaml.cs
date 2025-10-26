@@ -1,6 +1,6 @@
-using Foodfolio.MVVM.ViewModels;
+using Foodfolio.MAUI.MVVM.ViewModels;
 
-namespace Foodfolio.MVVM.Views;
+namespace Foodfolio.MAUI.MVVM.Views;
 
 public partial class AddRecipePage : ContentPage
 {

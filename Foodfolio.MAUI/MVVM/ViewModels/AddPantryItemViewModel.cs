@@ -1,14 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Foodfolio.MVVM.Models;
 using System.Collections.ObjectModel;
-using System.Xml.Linq;
+using Foodfolio.Core.Models;
+using Foodfolio.MAUI.Services;
 
-namespace Foodfolio.MVVM.ViewModels
+namespace Foodfolio.MAUI.MVVM.ViewModels
 {
     public partial class AddPantryItemViewModel : ObservableObject
     {
-        // 🔹 Eigenschaften mit automatischem PropertyChanged-Event
+        private readonly PantryService _pantryService;
+        public AddPantryItemViewModel(PantryService pantryService)
+        {
+            _pantryService = pantryService;
+        }
+
         [ObservableProperty]
         private string name = string.Empty;
 
@@ -27,49 +32,85 @@ namespace Foodfolio.MVVM.ViewModels
         [ObservableProperty]
         private decimal fats;
 
-        [ObservableProperty]
-        private decimal availableQuantity;
-
-        [ObservableProperty]
-        private Dictionary<string, int> extraUnits = new Dictionary<string, int>();
-
-        [ObservableProperty]
-        private string category = string.Empty;
-
-        [ObservableProperty]
-        private ObservableCollection<string> availableCategories = new ObservableCollection<string>
-        {
-            "Obst", "Gemüse", "Fleisch", "Getreide"
-        };
-
-        [ObservableProperty]
-        private string icon = string.Empty;
-
-        // 🔹 Command zum Erstellen eines Ingredients
         [RelayCommand]
-        private async Task CreateIngredientAsync()
+        private async Task AddPantryItemAsync()
         {
-            var newIngredient = new PantryItem
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                await Application.Current.MainPage.DisplayAlert("Fehler", "Der Name des Artikels darf nicht leer sein.", "OK");
+                return;
+            }
+
+            if (Quantity <= 0)
+            {
+                await Application.Current.MainPage.DisplayAlert("Fehler", "Die Menge muss größer als 0 sein.", "OK");
+                return;
+            }
+
+            if (Calories < 0)
+            {
+                await Application.Current.MainPage.DisplayAlert("Fehler", "Die Kalorienanzahl darf nicht negativ sein.", "OK");
+                return;
+            }
+
+            if (Carbs < 0 || Proteins < 0 || Fats < 0)
+            {
+                await Application.Current.MainPage.DisplayAlert("Fehler", "Die Nährwerte dürfen nicht negativ sein.", "OK");
+                return;
+            }
+
+            var newItem = new PantryItem
             {
                 Id = Guid.NewGuid(),
                 Name = Name,
+                Calories = Calories,
                 Quantity = Quantity,
-                ExtraUnits = extraUnits
+                Carbs = Carbs,
+                Proteins = Proteins,
+                Fats = Fats
             };
 
-            // TODO: später durch Repository speichern
-            await Application.Current.MainPage.DisplayAlert(
-                "Erstellt",
-                $"Zutat '{Name}' wurde hinzugefügt!",
-                "OK");
+            try
+            {
+                // Item in die Datenbank speichern
+                var result = await _pantryService.CreateItemAsync(newItem);
 
-            // Eingabefelder zurücksetzen
-            Name = string.Empty;
-            Quantity = 0;
-            Calories = 0;
-            Carbs = Proteins = Fats = 0;
-            Category = string.Empty;
-            ExtraUnits.Clear();
+                if (result > 0)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Hinweis", "Das Lebensmittel wurde erfolgreich gespeichert.", "OK");
+                    await Shell.Current.Navigation.PopModalAsync();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Fehler", "Das Lebensmittel konnte nicht gespeichert werden.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Hier kannst du optional auch Logging einbauen
+                await Application.Current.MainPage.DisplayAlert("Fehler", $"Beim Speichern ist ein Fehler aufgetreten: {ex.Message}", "OK");
+            }
+        }
+
+
+        private async Task PickIconAsync()
+        {
+            await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Achtung", "Icons können noch nicht hinzugefügt werden", "OK");
+        }
+
+        private async Task EditAvailableAmountAsync()
+        {
+            await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Achtung", "Die vorhandene Menge kann noch nicht editiert werden", "OK");
+        }
+
+        private async Task ChooseCategoryAsync()
+        {
+            await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Achtung", "Neue Kategorien können noch nicht hinzugefügt werden", "OK");
+        }
+
+        private async Task AddExtraUnits()
+        {
+            await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Achtung", "Neue Einheiten können noch nicht hinzugefügt werden", "OK");
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodfolio.MVVM.ViewModels
+namespace Foodfolio.MAUI.MVVM.ViewModels
 {
     internal class MealPlannerViewModel
     {

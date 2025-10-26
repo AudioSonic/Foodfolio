@@ -1,11 +1,13 @@
-using Foodfolio.MVVM.ViewModels;
+using Foodfolio.MAUI.MVVM.ViewModels;
+using Foodfolio.MAUI.Services;
+using Microsoft.Maui.Controls;
 
-namespace Foodfolio.MVVM.Views;
+namespace Foodfolio.MAUI.MVVM.Views;
 public partial class AddPantryItemPage : ContentPage
 {
-	public AddPantryItemPage()
-	{
-		InitializeComponent();
-		BindingContext = new AddPantryItemViewModel();
-	}
+    public AddPantryItemPage(AddPantryItemViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = viewModel;
+    }
 }

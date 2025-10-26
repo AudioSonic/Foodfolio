@@ -1,11 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Foodfolio.MVVM.Models;
-using Foodfolio.MVVM.Views;
-using Foodfolio.Helpers;
+using Foodfolio.Core.Models;
+using Foodfolio.MAUI.MVVM.Views;
+using Foodfolio.MAUI.Services;
 using System.Collections.ObjectModel;
 
-namespace Foodfolio.MVVM.ViewModels
+namespace Foodfolio.MAUI.MVVM.ViewModels
 {
     public partial class CategoriesViewModel : ObservableObject
     {
@@ -24,13 +24,8 @@ namespace Foodfolio.MVVM.ViewModels
         [RelayCommand]
         private async Task AddCategoryAsync()
         {
-            var addPage = new AddCategoryPage();
-            await Shell.Current.Navigation.PushModalAsync(addPage);
+            await Shell.Current.GoToAsync(nameof(AddCategoryPage));
 
-            var result = await addPage.WaitForResultAsync<Categories>();
-
-            if (result != null)
-                AllCategories.Add(result);
         }
 
         [RelayCommand]

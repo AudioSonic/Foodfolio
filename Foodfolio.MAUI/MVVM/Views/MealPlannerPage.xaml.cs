@@ -1,4 +1,6 @@
-namespace Foodfolio.MVVM.Views;
+using Foodfolio.MAUI.MVVM.ViewModels;
+
+namespace Foodfolio.MAUI.MVVM.Views;
 
 public partial class MealPlannerPage : ContentPage
 {
