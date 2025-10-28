@@ -1,6 +1,5 @@
 using Foodfolio.MAUI.MVVM.ViewModels;
-using Foodfolio.MAUI.Services;
-using Microsoft.Maui.Hosting;
+using Foodfolio.Core.Helpers;
 
 namespace Foodfolio.MAUI.MVVM.Views;
 

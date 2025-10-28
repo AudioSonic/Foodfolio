@@ -25,15 +25,26 @@ namespace Foodfolio.MAUI
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "foodfolio.db3");
 
+
+            #region  Categories  
             // Categories Service und Pages registrieren
-            builder.Services.AddSingleton(new CategoryService(dbPath));
+            builder.Services.AddSingleton(new CategoryRepository(dbPath));
+            builder.Services.AddSingleton(sp =>
+            {
+                var repo = sp.GetRequiredService<CategoryRepository>();
+                var service = new CategoryService(repo);
+                service.InitializeAsync();
+                return service;
+            });
             builder.Services.AddTransient<AddCategoryViewModel>();
             builder.Services.AddTransient<AddCategoryPage>();
             builder.Services.AddTransient<CategoriesPage>();
+            #endregion Categories
 
+            #region Pantry
             // Pantry Service und Pages registrieren
             builder.Services.AddSingleton(new PantryRepository(dbPath));
-            builder.Services.AddSingleton<PantryService>(sp =>
+            builder.Services.AddSingleton(sp =>
             {
                 var repo = sp.GetRequiredService<PantryRepository>();
                 var service = new PantryService(repo);
@@ -45,6 +56,7 @@ namespace Foodfolio.MAUI
 
             builder.Services.AddTransient<PantryPageViewModel>();
             builder.Services.AddTransient<PantryPage>();
+            #endregion Pantry
 
 #if DEBUG
             builder.Logging.AddDebug();

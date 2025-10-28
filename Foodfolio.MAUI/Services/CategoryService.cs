@@ -1,4 +1,5 @@
 ﻿using Foodfolio.Core.Models;
+using Foodfolio.Core.Repositories;
 using SQLite;
 
 
@@ -6,36 +7,58 @@ namespace Foodfolio.MAUI.Services
 {
     public class CategoryService
     {
-        private readonly SQLiteAsyncConnection _database;
+        private readonly CategoryRepository _repository;
+        private bool _initialized = false;
 
-        public CategoryService(string dbPath)
+        public CategoryService(CategoryRepository repository)
         {
-            _database = new SQLiteAsyncConnection(dbPath);
+            // Initialisiere das Repository und erstelle die Tabelle, falls sie nicht existiert
+            _repository = repository;
         }
 
         public async Task InitializeAsync()
         {
-            await _database.CreateTableAsync<Categories>();
+            Console.WriteLine("PantryService.InitializeAsync() gestartet...");
+            await _repository.CreateTableAsync();
+            Console.WriteLine("Tabelle PantryItem angelegt.");
         }
 
-        public Task<List<Categories>> GetAllCategoriesAsync()
+        private async Task EnsureInitializedAsync()
         {
-            return _database.Table<Categories>().ToListAsync();
+            if (!_initialized)
+            {
+                await _repository.CreateTableAsync();
+                _initialized = true;
+            }
         }
 
-        public Task<int> AddCategoryAsync(Categories category)
+        public async Task<int> CreateItemAsync(Category cat)
         {
-            return _database.InsertAsync(category);
+            await EnsureInitializedAsync();
+            return await _repository.CreateItemAsync(cat);
         }
 
-        public Task<int> UpdateCategoryAsync(Categories category)
+        //Liest ein Element anhand der ID
+        public Task<Category?> ReadItemAsync(Guid id)
         {
-            return _database.UpdateAsync(category);
+            return _repository.ReadItemAsync(id);
+        }
+        //Aktualisiert ein vorhandenes Element
+        public Task<int> UpdateItemAsync(Category cat)
+        {
+            return _repository.UpdateItemAsync(cat);
         }
 
-        public Task<int> DeleteCategoryAsync(Categories category)
+        //Löscht ein Element anhand der ID
+        public Task<int> DeleteItemAsync(Guid id)
         {
-            return _database.DeleteAsync(category);
+            return _repository.DeleteItemAsync(id);
+        }
+
+        //Liest alle Elemente aus der Tabelle
+        public Task<List<Category>> GetAllCategoryAsync()
+        {
+            return _repository.GetAllCategoryAsync();
         }
     }
 }

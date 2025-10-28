@@ -16,16 +16,16 @@ namespace Foodfolio.API.Controllers
                 _context = context;
             }
 
-            // GET: api/categories
+            // GET: api/Category
             [HttpGet]
-            public async Task<ActionResult<IEnumerable<Categories>>> GetCategories()
+            public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
             {
                 return await _context.Categories.ToListAsync();
             }
 
-            // GET: api/categories/5
+            // GET: api/Category/5
             [HttpGet("{id}")]
-            public async Task<ActionResult<Categories>> GetCategory(int id)
+            public async Task<ActionResult<Category>> GetCategory(int id)
             {
                 var category = await _context.Categories.FindAsync(id);
 
@@ -35,30 +35,30 @@ namespace Foodfolio.API.Controllers
                 return category;
             }
 
-            // POST: api/categories
+            // POST: api/Category
             [HttpPost]
-            public async Task<ActionResult<Categories>> PostCategory(Categories categories)
+            public async Task<ActionResult<Category>> PostCategory(Category Category)
             {
-                _context.Categories.Add(categories);
+                _context.Categories.Add(Category);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetCategory), new { id = categories.Id }, categories);
+                return CreatedAtAction(nameof(GetCategory), new { id = Category.Id }, Category);
             }
 
-            // PUT: api/categories/5
+            // PUT: api/Category/5
             [HttpPut("{id}")]
-            public async Task<IActionResult> PutCategory(Guid id, Categories categories)
+            public async Task<IActionResult> PutCategory(Guid id, Category Category)
             {
-                if (id != categories.Id)
+                if (id != Category.Id)
                     return BadRequest();
 
-                _context.Entry(categories).State = EntityState.Modified;
+                _context.Entry(Category).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
                 return NoContent();
             }
 
-            // DELETE: api/categories/5
+            // DELETE: api/Category/5
             [HttpDelete("{id}")]
             public async Task<IActionResult> DeleteCategory(int id)
             {

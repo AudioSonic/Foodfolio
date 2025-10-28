@@ -7,18 +7,18 @@ using System.Collections.ObjectModel;
 
 namespace Foodfolio.MAUI.MVVM.ViewModels
 {
-    public partial class CategoriesViewModel : ObservableObject
+    public partial class CategoryViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<Categories> allCategories = new();
+        private ObservableCollection<Category> allCategory = new();
 
         [ObservableProperty]
-        private ObservableCollection<Categories> selectedCategories = new();
+        private ObservableCollection<Category> selectedCategory = new();
 
-        public CategoriesViewModel()
+        public CategoryViewModel()
         {
-            AllCategories.Add(new Categories { Id = Guid.NewGuid(), Name = "Italienisch", ColorHex = "#ff6600" });
-            AllCategories.Add(new Categories { Id = Guid.NewGuid(), Name = "Mexikanisch", ColorHex = "#00cc66" });
+            allCategory.Add(new Category { Id = Guid.NewGuid(), Name = "Italienisch", ColorHex = "#ff6600" });
+            allCategory.Add(new Category { Id = Guid.NewGuid(), Name = "Mexikanisch", ColorHex = "#00cc66" });
         }
 
         [RelayCommand]
@@ -29,29 +29,29 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         }
 
         [RelayCommand]
-        private async Task EditCategoryAsync(Categories category)
+        private async Task EditCategoryAsync(Category category)
         {
             await Application.Current.MainPage.DisplayAlert("Bearbeiten", $"Kategorie: {category.Name}", "OK");
         }
 
         [RelayCommand]
-        private async Task CopyCategoryAsync(Categories category)
+        private async Task CopyCategoryAsync(Category category)
         {
-            var copy = new Categories
+            var copy = new Category
             {
                 Id = Guid.NewGuid(),
                 Name = $"{category.Name} (Kopie)",
                 ColorHex = category.ColorHex
             };
-            AllCategories.Add(copy);
+            allCategory.Add(copy);
         }
 
         [RelayCommand]
-        private async Task DeleteCategoryAsync(Categories category)
+        private async Task DeleteCategoryAsync(Category category)
         {
             bool confirm = await Application.Current.MainPage.DisplayAlert("Löschen", $"Möchtest du {category.Name} löschen?", "Ja", "Nein");
             if (confirm)
-                AllCategories.Remove(category);
+                allCategory.Remove(category);
         }
     }
 }

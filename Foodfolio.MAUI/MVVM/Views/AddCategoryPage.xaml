@@ -13,7 +13,7 @@
         <Entry Placeholder="#FF6600" Text="{Binding ColorHex}" />
 
         <Button Text="Speichern"
-                Command="{Binding SaveCommand}"
+                Command="{Binding SaveCategoryCommand}"
                 BackgroundColor="LimeGreen"
                 TextColor="White" />
 

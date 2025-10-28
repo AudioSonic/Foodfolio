@@ -1,4 +1,6 @@
-﻿namespace Foodfolio.MAUI.Services
+﻿using Foodfolio.MAUI;
+
+namespace Foodfolio.Core.Helpers
 {
     public static class ServiceHelper
     {

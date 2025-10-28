@@ -6,7 +6,7 @@ using Foodfolio.MAUI.Services;
 
 namespace Foodfolio.MAUI.MVVM.ViewModels
 {
-    public partial class AddCategoryViewModel : ObservableObject, IResultProvider<Categories>
+    public partial class AddCategoryViewModel : ObservableObject, IResultProvider<Category>
     {
         [ObservableProperty]
         private string name;
@@ -14,7 +14,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         [ObservableProperty]
         private string colorHex = "#cccccc";
 
-        public Categories Result { get; private set; }
+        public Category Result { get; private set; }
 
         private readonly CategoryService _categoryService;
 
@@ -24,7 +24,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         }
 
         [RelayCommand]
-        private async Task SaveAsync()
+        private async Task SaveCategoryAsync()
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
@@ -32,17 +32,33 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
                 return;
             }
 
-            var newCategory = new Categories
+            var newItem = new Category
             {
                 Id = Guid.NewGuid(),
                 Name = Name,
                 ColorHex = ColorHex
             };
 
-            await _categoryService.AddCategoryAsync(newCategory);
+            try
+            {
+                // Item in die Datenbank speichern
+                var result = await _categoryService.CreateItemAsync(newItem);
 
-            await Application.Current.MainPage.DisplayAlert("Gespeichert", "Kategorie erfolgreich hinzugefügt!", "OK");
-            await Shell.Current.Navigation.PopModalAsync();
+                if (result > 0)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Hinweis", "Das Lebensmittel wurde erfolgreich gespeichert.", "OK");
+                    await Shell.Current.Navigation.PopModalAsync();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Fehler", "Das Lebensmittel konnte nicht gespeichert werden.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Hier kannst du optional auch Logging einbauen
+                await Application.Current.MainPage.DisplayAlert("Fehler", $"Beim Speichern ist ein Fehler aufgetreten: {ex.Message}", "OK");
+            }
         }
         
 
