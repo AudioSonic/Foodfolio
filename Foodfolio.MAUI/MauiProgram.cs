@@ -18,6 +18,9 @@ namespace Foodfolio.MAUI
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("Inter-Italic.ttf", "Inter");
+                    fonts.AddFont("Inter-Variable.ttf", "InterVariable");
+
                 });
 
             // Datenbankpfad

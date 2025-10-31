@@ -1,4 +1,4 @@
-using Foodfolio.Core.Helpers;
+using Foodfolio.MAUI.Helpers;
 using Foodfolio.MAUI.MVVM.ViewModels;
 
 namespace Foodfolio.MAUI.MVVM.Views;

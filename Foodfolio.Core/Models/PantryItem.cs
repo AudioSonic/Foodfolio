@@ -18,14 +18,9 @@ namespace Foodfolio.Core.Models
         public decimal Carbs { get; set; } = 0;
         public decimal Proteins { get; set; } = 0;
         public decimal Fats { get; set; } = 0;
-        
-        /*
-        public decimal AvailableQuantity { get; set; }
-        public decimal ExtraUnits { get; set; } 
-        public DateTime? ExpiryDate { get; set; }
-        public List<string> Categories { get; set; }
-        public string Icon { get; set; } = "";      
-        public string? Barcode { get; set; }        
-        */
+
+        [Ignore]
+        public List<PantryItemCategory> CategoryList { get; set; } 
     }
 }
+

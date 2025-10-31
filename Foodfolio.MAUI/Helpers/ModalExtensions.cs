@@ -1,5 +1,6 @@
-﻿
-namespace Foodfolio.Core.Helpers
+﻿using Foodfolio.Core.Helpers;
+
+namespace Foodfolio.MAUI.Helpers
 {
     public static class ModalExtensions
     {

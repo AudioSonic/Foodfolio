@@ -92,25 +92,28 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
             }
         }
 
-
+        [RelayCommand]
         private async Task PickIconAsync()
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Achtung", "Icons können noch nicht hinzugefügt werden", "OK");
+            await Application.Current.MainPage.DisplayAlert("Achtung", "Icons können noch nicht hinzugefügt werden", "OK");
         }
 
+        [RelayCommand]
         private async Task EditAvailableAmountAsync()
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Achtung", "Die vorhandene Menge kann noch nicht editiert werden", "OK");
+            await Application.Current.MainPage.DisplayAlert("Achtung", "Die vorhandene Menge kann noch nicht editiert werden", "OK");
         }
 
+        [RelayCommand]
         private async Task ChooseCategoryAsync()
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Achtung", "Neue Kategorien können noch nicht hinzugefügt werden", "OK");
+            await Application.Current.MainPage.DisplayAlert("Achtung", "Neue Kategorien können noch nicht hinzugefügt werden", "OK");
         }
 
+        [RelayCommand]
         private async Task AddExtraUnits()
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Achtung", "Neue Einheiten können noch nicht hinzugefügt werden", "OK");
+            await Application.Current.MainPage.DisplayAlert("Achtung", "Neue Einheiten können noch nicht hinzugefügt werden", "OK");
         }
     }
 }

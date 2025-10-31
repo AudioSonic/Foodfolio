@@ -46,12 +46,12 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
 
                 if (result > 0)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Hinweis", "Das Lebensmittel wurde erfolgreich gespeichert.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Hinweis", "Die Kategorie wurde erfolgreich gespeichert.", "OK");
                     await Shell.Current.Navigation.PopModalAsync();
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Fehler", "Das Lebensmittel konnte nicht gespeichert werden.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Fehler", "Die Kategorie konnte nicht gespeichert werden.", "OK");
                 }
             }
             catch (Exception ex)
