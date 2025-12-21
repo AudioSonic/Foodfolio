@@ -5,13 +5,11 @@ namespace Foodfolio.MAUI.MVVM.Views;
 
 public partial class PantryPage : ContentPage
 {
-    private readonly AddPantryItemPage _addPantryItemPage;
-
     public PantryPage(PantryPageViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
-        collectionView.ItemsSource = viewModel.testListe;
+        collectionView.ItemsSource = viewModel.collectedItems;
     }
 
     private async void AddItemButton_Clicked(object sender, EventArgs e)

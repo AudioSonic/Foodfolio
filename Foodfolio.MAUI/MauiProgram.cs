@@ -59,6 +59,9 @@ namespace Foodfolio.MAUI
 
             builder.Services.AddTransient<PantryPageViewModel>();
             builder.Services.AddTransient<PantryPage>();
+
+            builder.Services.AddTransient<CategoryViewModel>();
+            builder.Services.AddTransient<CategoriesPage>();
             #endregion Pantry
 
 #if DEBUG

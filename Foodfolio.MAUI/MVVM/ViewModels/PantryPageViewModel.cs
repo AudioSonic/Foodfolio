@@ -15,8 +15,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         }
 
         [ObservableProperty]
-        private List<PantryItem> collectedItems;
-        public List<string> testListe = new List<string> { "abc", "def", "ghi","a","a","a","a" };
+        public List<PantryItem> collectedItems;
 
         private async Task LoadPantryItemsAsync()
         {
@@ -27,10 +26,6 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
                 if (items != null && items.Any())
                 {
                     collectedItems = items;
-                }
-                else
-                {
-                    //collectedItems = "Keine Einträge vorhanden";
                 }
             }
             catch (Exception ex)

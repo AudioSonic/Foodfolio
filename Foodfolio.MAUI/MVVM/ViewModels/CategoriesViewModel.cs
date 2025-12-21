@@ -9,17 +9,24 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
 {
     public partial class CategoryViewModel : ObservableObject
     {
+        private readonly CategoryService _categoryService;
+
+        public CategoryViewModel(CategoryService categoryService)
+        {
+            _categoryService = categoryService;
+            allCategory.Add(new CategoryModel { Id = Guid.NewGuid(), Name = "Italienisch", ColorHex = "#ff6600" });
+            allCategory.Add(new CategoryModel { Id = Guid.NewGuid(), Name = "Mexikanisch", ColorHex = "#00cc66" });
+            LoadAllCategoriesAsync();
+        }
+
         [ObservableProperty]
         private ObservableCollection<CategoryModel> allCategory = new();
 
         [ObservableProperty]
         private ObservableCollection<CategoryModel> selectedCategory = new();
 
-        public CategoryViewModel()
-        {
-            allCategory.Add(new CategoryModel { Id = Guid.NewGuid(), Name = "Italienisch", ColorHex = "#ff6600" });
-            allCategory.Add(new CategoryModel { Id = Guid.NewGuid(), Name = "Mexikanisch", ColorHex = "#00cc66" });
-        }
+        [ObservableProperty]
+        public List<CategoryModel> categoriesList;
 
         [RelayCommand]
         private async Task AddCategoryAsync()
@@ -52,6 +59,26 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
             bool confirm = await Application.Current.MainPage.DisplayAlert("Löschen", $"Möchtest du {category.Name} löschen?", "Ja", "Nein");
             if (confirm)
                 allCategory.Remove(category);
+        }
+
+
+        [RelayCommand]
+        public async Task LoadAllCategoriesAsync()
+        {
+            try
+            {
+                var items = await _categoryService.GetAllCategoryAsync();
+
+                if (items != null && items.Any())
+                {
+                    categoriesList = items;
+                }
+            }
+            catch (Exception ex)
+            {
+                //collectedItems = $"Fehler: {ex.Message}"; 
+            }
+
         }
     }
 }

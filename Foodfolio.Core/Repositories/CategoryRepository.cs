@@ -1,5 +1,6 @@
-﻿using SQLite;
-using Foodfolio.Core.Models;
+﻿using Foodfolio.Core.Models;
+using SQLite;
+using System.Diagnostics;
 
 namespace Foodfolio.Core.Repositories
 {
@@ -47,9 +48,14 @@ namespace Foodfolio.Core.Repositories
             return 0;
         }
 
-        public async Task<List<CategoryModel>> GetAllCategoryAsync()
+        public async Task<List<CategoryModel>> GetAllCategoriesAsync()
         {
-            return await _database.Table<CategoryModel>().ToListAsync();
+            var data = _database.Table<CategoryModel>().ToListAsync();
+            foreach (var i in data.Result)
+            {
+                Debug.WriteLine($"Die gespeicherten Lebensmittel sind: Name: {i.Name}, Farbe: {i.ColorHex}");
+            }
+            return await data;
         }
     }
 }

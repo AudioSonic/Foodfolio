@@ -58,7 +58,7 @@ namespace Foodfolio.MAUI.Services
         //Liest alle Elemente aus der Tabelle
         public Task<List<CategoryModel>> GetAllCategoryAsync()
         {
-            return _repository.GetAllCategoryAsync();
+            return _repository.GetAllCategoriesAsync();
         }
     }
 }

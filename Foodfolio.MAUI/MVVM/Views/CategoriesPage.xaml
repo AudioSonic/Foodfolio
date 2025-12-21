@@ -5,37 +5,92 @@
              x:Class="Foodfolio.MAUI.MVVM.Views.CategoriesPage"
              Title="Kategorien">
 
-    <VerticalStackLayout Padding="10">
-
-        <!-- Button zum Hinzufügen neuer Kategorien -->
-        <Button Text="Neue Kategorie hinzufügen"
-                Clicked="AddCategoryButton_Clicked"
-                BackgroundColor="LimeGreen"
-                TextColor="White"
-                Margin="0,0,0,10" />
-
-        <CollectionView ItemsSource="{Binding AllCategories}">
+    <AbsoluteLayout>
+        <CollectionView x:Name ="collectionView" SelectionMode="Single" EmptyView="Keine Lebensmittel verfügbar" ItemsLayout="VerticalList" Margin="0,45,29,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Horizontal" Padding="5" Spacing="10">
-                        <Label Text="{Binding Name}" VerticalOptions="Center" WidthRequest="150" />
-                        <BoxView Color="{Binding ColorHex}" WidthRequest="30" HeightRequest="30" CornerRadius="5" />
+                    <Frame
+                    Margin="45,5,25,5"
+                    Padding="10"
+                    BackgroundColor="#FFFFFF"
+                    CornerRadius="10"
+                    HasShadow="True">
 
-                        <Button Text="✎"
-                                Command="{Binding EditCategoryCommand}"
-                                CommandParameter="{Binding}" WidthRequest="40" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnItemTapped"/>
+                        </Frame.GestureRecognizers>
 
-                        <Button Text="⧉"
-                                Command="{Binding CopyCategoryCommand}"
-                                CommandParameter="{Binding}" WidthRequest="40" />
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <!-- Icon -->
+                            <Image
+                            Source="paprika.jpg"
+                            WidthRequest="20"
+                            Aspect="AspectFill"
+                            HeightRequest="20"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            />
 
-                        <Button Text="🗑"
-                                Command="{Binding DeleteCategoryCommand}"
-                                CommandParameter="{Binding}" WidthRequest="40" />
-                    </StackLayout>
+                            <!--Name & Kategorien-->
+                            <VerticalStackLayout HeightRequest="20" WidthRequest="130" VerticalOptions="Start">
+                                <Label
+                                Text="{Binding Name}"
+                                FontSize="15"
+                                />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-    </VerticalStackLayout>
+        <!-- Suchleiste -->
+        <Frame
+        AbsoluteLayout.LayoutFlags="PositionProportional"
+        AbsoluteLayout.LayoutBounds="0.35,0,270,35" 
+        Padding="-3"
+        BackgroundColor="#F0F0F0"
+        CornerRadius="7"
+        HasShadow="True">
+
+            <SearchBar
+            Placeholder="Search"/>
+        </Frame>
+
+        <!-- Filter-Button -->
+        <Frame
+        AbsoluteLayout.LayoutFlags="PositionProportional"
+        AbsoluteLayout.LayoutBounds="0.88,0,35,35"  
+        Padding="0"
+        CornerRadius="17"
+        BackgroundColor="#F0F0F0"
+        HasShadow="False">
+
+            <ImageButton
+        WidthRequest="20"
+        HeightRequest="20"
+        BackgroundColor="#F0F0F0"
+        Source="icon_filter.svg"
+        Aspect="AspectFit"
+        Clicked="FilterButton_Clicked"/>
+        </Frame>
+
+        <!-- Floating Action Button unten rechts -->
+        <Frame
+        AbsoluteLayout.LayoutFlags="PositionProportional"
+        AbsoluteLayout.LayoutBounds="0.9,0.96,85,85"  
+        Padding="0"
+        BackgroundColor="#F0F0F0"
+        CornerRadius="45"
+        HasShadow="True">
+
+            <Button
+            WidthRequest="85"
+            HeightRequest="85"
+            CornerRadius="45"
+            BackgroundColor="{StaticResource  MainColor}"
+            ImageSource="icon_additem.svg"
+            Clicked="AddCategoryButton_Clicked"/>
+        </Frame>
+    </AbsoluteLayout>
 </ContentPage>
