@@ -32,19 +32,19 @@ namespace Foodfolio.MAUI.Services
             }
         }
 
-        public async Task<int> CreateItemAsync(Category cat)
+        public async Task<int> CreateItemAsync(CategoryModel cat)
         {
             await EnsureInitializedAsync();
             return await _repository.CreateItemAsync(cat);
         }
 
         //Liest ein Element anhand der ID
-        public Task<Category?> ReadItemAsync(Guid id)
+        public Task<CategoryModel?> ReadItemAsync(Guid id)
         {
             return _repository.ReadItemAsync(id);
         }
         //Aktualisiert ein vorhandenes Element
-        public Task<int> UpdateItemAsync(Category cat)
+        public Task<int> UpdateItemAsync(CategoryModel cat)
         {
             return _repository.UpdateItemAsync(cat);
         }
@@ -56,7 +56,7 @@ namespace Foodfolio.MAUI.Services
         }
 
         //Liest alle Elemente aus der Tabelle
-        public Task<List<Category>> GetAllCategoryAsync()
+        public Task<List<CategoryModel>> GetAllCategoryAsync()
         {
             return _repository.GetAllCategoryAsync();
         }

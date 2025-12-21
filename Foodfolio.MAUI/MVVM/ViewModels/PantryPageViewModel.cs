@@ -11,15 +11,14 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         public PantryPageViewModel(PantryService pantryService)
         {
             _pantryService = pantryService;
-            LoadLastPantryItemAsync();
+            LoadPantryItemsAsync();
         }
 
-        // Observable Property für XAML Binding
         [ObservableProperty]
-        private string lastItemName = string.Empty; // Field-Name mit Kleinbuchstaben
+        private List<PantryItem> collectedItems;
+        public List<string> testListe = new List<string> { "abc", "def", "ghi","a","a","a","a" };
 
-        // Asynchrone Methode, um das letzte Item zu laden
-        private async Task LoadLastPantryItemAsync()
+        private async Task LoadPantryItemsAsync()
         {
             try
             {
@@ -27,16 +26,16 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
 
                 if (items != null && items.Any())
                 {
-                    LastItemName = items.Last().Name;
+                    collectedItems = items;
                 }
                 else
                 {
-                    LastItemName = "Keine Einträge vorhanden";
+                    //collectedItems = "Keine Einträge vorhanden";
                 }
             }
             catch (Exception ex)
             {
-                LastItemName = $"Fehler: {ex.Message}";
+                //collectedItems = $"Fehler: {ex.Message}";
             }
         }
     }

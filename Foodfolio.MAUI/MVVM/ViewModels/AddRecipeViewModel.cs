@@ -81,7 +81,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         [RelayCommand]
         private async Task AddRecipeAsync()
         {
-            var newRecipe = new Recipe
+            var newRecipe = new RecipeModel
             {
                 Id = Guid.NewGuid(),
                 Title = Title,

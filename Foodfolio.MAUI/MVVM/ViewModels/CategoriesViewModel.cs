@@ -10,15 +10,15 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
     public partial class CategoryViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<Category> allCategory = new();
+        private ObservableCollection<CategoryModel> allCategory = new();
 
         [ObservableProperty]
-        private ObservableCollection<Category> selectedCategory = new();
+        private ObservableCollection<CategoryModel> selectedCategory = new();
 
         public CategoryViewModel()
         {
-            allCategory.Add(new Category { Id = Guid.NewGuid(), Name = "Italienisch", ColorHex = "#ff6600" });
-            allCategory.Add(new Category { Id = Guid.NewGuid(), Name = "Mexikanisch", ColorHex = "#00cc66" });
+            allCategory.Add(new CategoryModel { Id = Guid.NewGuid(), Name = "Italienisch", ColorHex = "#ff6600" });
+            allCategory.Add(new CategoryModel { Id = Guid.NewGuid(), Name = "Mexikanisch", ColorHex = "#00cc66" });
         }
 
         [RelayCommand]
@@ -29,15 +29,15 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         }
 
         [RelayCommand]
-        private async Task EditCategoryAsync(Category category)
+        private async Task EditCategoryAsync(CategoryModel category)
         {
             await Application.Current.MainPage.DisplayAlert("Bearbeiten", $"Kategorie: {category.Name}", "OK");
         }
 
         [RelayCommand]
-        private async Task CopyCategoryAsync(Category category)
+        private async Task CopyCategoryAsync(CategoryModel category)
         {
-            var copy = new Category
+            var copy = new CategoryModel
             {
                 Id = Guid.NewGuid(),
                 Name = $"{category.Name} (Kopie)",
@@ -47,7 +47,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         }
 
         [RelayCommand]
-        private async Task DeleteCategoryAsync(Category category)
+        private async Task DeleteCategoryAsync(CategoryModel category)
         {
             bool confirm = await Application.Current.MainPage.DisplayAlert("Löschen", $"Möchtest du {category.Name} löschen?", "Ja", "Nein");
             if (confirm)

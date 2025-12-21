@@ -11,6 +11,7 @@ public partial class PantryPage : ContentPage
     {
         InitializeComponent();
         BindingContext = viewModel;
+        collectionView.ItemsSource = viewModel.testListe;
     }
 
     private async void AddItemButton_Clicked(object sender, EventArgs e)

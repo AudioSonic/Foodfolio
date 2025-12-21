@@ -6,7 +6,7 @@ using Foodfolio.MAUI.Services;
 
 namespace Foodfolio.MAUI.MVVM.ViewModels
 {
-    public partial class AddCategoryViewModel : ObservableObject, IResultProvider<Category>
+    public partial class AddCategoryViewModel : ObservableObject, IResultProvider<CategoryModel>
     {
         [ObservableProperty]
         private string name;
@@ -14,7 +14,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         [ObservableProperty]
         private string colorHex = "#cccccc";
 
-        public Category Result { get; private set; }
+        public CategoryModel Result { get; private set; }
 
         private readonly CategoryService _categoryService;
 
@@ -32,7 +32,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
                 return;
             }
 
-            var newItem = new Category
+            var newItem = new CategoryModel
             {
                 Id = Guid.NewGuid(),
                 Name = Name,

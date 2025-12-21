@@ -3,6 +3,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,7 +62,8 @@ namespace Foodfolio.Core.Repositories
         //Liest alle Elemente aus der Tabelle
         public async Task<List<PantryItem>> GetAllItemsAsync()
         {
-            return await _database.Table<PantryItem>().ToListAsync();
+            var x = _database.Table<PantryItem>().ToListAsync();
+            return await x;
         }
     }
 }

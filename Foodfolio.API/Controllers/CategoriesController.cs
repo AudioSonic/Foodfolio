@@ -18,14 +18,14 @@ namespace Foodfolio.API.Controllers
 
             // GET: api/Category
             [HttpGet]
-            public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+            public async Task<ActionResult<IEnumerable<CategoryModel>>> GetCategories()
             {
                 return await _context.Categories.ToListAsync();
             }
 
             // GET: api/Category/5
             [HttpGet("{id}")]
-            public async Task<ActionResult<Category>> GetCategory(int id)
+            public async Task<ActionResult<CategoryModel>> GetCategory(int id)
             {
                 var category = await _context.Categories.FindAsync(id);
 
@@ -37,7 +37,7 @@ namespace Foodfolio.API.Controllers
 
             // POST: api/Category
             [HttpPost]
-            public async Task<ActionResult<Category>> PostCategory(Category Category)
+            public async Task<ActionResult<CategoryModel>> PostCategory(CategoryModel Category)
             {
                 _context.Categories.Add(Category);
                 await _context.SaveChangesAsync();
@@ -47,7 +47,7 @@ namespace Foodfolio.API.Controllers
 
             // PUT: api/Category/5
             [HttpPut("{id}")]
-            public async Task<IActionResult> PutCategory(Guid id, Category Category)
+            public async Task<IActionResult> PutCategory(Guid id, CategoryModel Category)
             {
                 if (id != Category.Id)
                     return BadRequest();

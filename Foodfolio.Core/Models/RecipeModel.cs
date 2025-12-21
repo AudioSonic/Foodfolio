@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foodfolio.Core.Models
 {
-    public class Recipe
+    public class RecipeModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = "";
