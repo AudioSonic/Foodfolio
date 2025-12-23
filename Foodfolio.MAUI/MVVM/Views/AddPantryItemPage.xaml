@@ -117,7 +117,7 @@
             <Button 
                 Text="Icon" 
                 FontSize="22"
-                BackgroundColor="LimeGreen"
+                BackgroundColor="{StaticResource SubColor}"
                 WidthRequest="100" 
                 HeightRequest="100"
                 Grid.Column="0"
@@ -140,7 +140,7 @@
                 Grid.Row="9"
                 WidthRequest="120"
                 HeightRequest="40"
-                BackgroundColor="LimeGreen"
+                BackgroundColor="{StaticResource SubColor}"
                 Command="{Binding ChooseCategoryCommand}"
                 
             />
@@ -170,7 +170,7 @@
                 HorizontalOptions="Start"
                 WidthRequest="30" 
                 HeightRequest="30"
-                BackgroundColor="LimeGreen"
+                BackgroundColor="{StaticResource SubColor}"
                 Grid.Column="1"
                 Grid.Row="11"
                 Margin="10,7,0,30"
@@ -191,7 +191,7 @@
                 Text="Optional" 
                 WidthRequest="120" 
                 HeightRequest="40"
-                BackgroundColor="LimeGreen"
+                BackgroundColor="{StaticResource SubColor}"
                 Grid.Column="2"
                 Grid.Row="11"
                 Command="{Binding AddExtraUnitsCommand}"
@@ -202,7 +202,7 @@
                 Text="ESSEN ERSTELLEN" 
                 WidthRequest="170" 
                 HeightRequest="50" 
-                BackgroundColor="LimeGreen" 
+                BackgroundColor="{StaticResource SubColor}"
                 HorizontalOptions="Center"
                 Command="{Binding AddPantryItemCommand}"
         />
