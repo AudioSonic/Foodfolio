@@ -19,7 +19,7 @@
         <Grid ColumnDefinitions="Auto,Auto">
             <Button 
                 Text="Pick Icon" 
-                BackgroundColor="LightGrey" 
+                BackgroundColor="{StaticResource MainColor}" 
                 WidthRequest="160" 
                 HeightRequest="40"
                 Grid.Column="0"
@@ -27,7 +27,7 @@
                 Command="{Binding PickIconPopupCommand}"/>
 
             <Button Text="Pick Color" 
-                BackgroundColor="LightGrey" 
+                BackgroundColor="{StaticResource MainColor}"
                 WidthRequest="160" 
                 HeightRequest="40"
                 Grid.Column="1"
@@ -37,13 +37,8 @@
 
         <Button Text="Save Category"
                 Command="{Binding SaveCategoryCommand}"
-                BackgroundColor="{StaticResource MainColor}"
+                BackgroundColor="{StaticResource SubColor}"
                 TextColor="White" 
                 Margin="0,50,0,0"/>
-
-        <Button Text="Return"
-                Command="{Binding CancelCommand}"
-                BackgroundColor="Gray"
-                TextColor="White" />
     </VerticalStackLayout>
 </ContentPage>

@@ -29,8 +29,9 @@
     <Color x:Key="Gray950">#141414</Color>
     <Color x:Key="LimeGreen">#32CD32</Color>
     <Color x:Key="ForestGreen">#228B22</Color>
-    <Color x:Key="MainColor">#A3E9AB</Color>
-    <Color x:Key="SubColor">#FF69B4</Color>
+    <!--<Color x:Key="MainColor">#A3E9AB</Color>-->
+    <Color x:Key="MainColor">#BAB591</Color>
+    <Color x:Key="SubColor">#4B4722</Color>
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
