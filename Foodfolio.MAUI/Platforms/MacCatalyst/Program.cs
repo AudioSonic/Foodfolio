@@ -1,5 +1,6 @@
 ﻿using ObjCRuntime;
 using UIKit;
+using Foodfolio.MAUI;
 
 namespace Foodfolio
 {

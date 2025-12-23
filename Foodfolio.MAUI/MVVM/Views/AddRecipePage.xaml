@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Foodfolio.Views.AddRecipePage"
+             xmlns:viewmodels="clr-namespace:Foodfolio.MAUI.MVVM.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+             x:Class="Foodfolio.MAUI.MVVM.Views.AddRecipePage"
              Title="AddRecipePage">
 
     <ScrollView>
@@ -16,56 +18,101 @@
                     HorizontalOptions="Center"/>
 
 <!-- Name -->
-            <Label Text="Name" FontSize="15"/>
-            <Entry MaxLength="20"/>
+            <Label Text="Title" FontSize="15" />
+            <Entry MaxLength="20" Text="{Binding Title}" Placeholder="Title"/>
 
 <!-- Beschreibung -->
             <Label Text="Beschreibung" FontSize="15"/>
-            <Entry MaxLength="20"/>
+            <Entry MaxLength="20" Text="{Binding Description}" Placeholder="Description"/>
 
 <!-- Portionen -->
             <Label Text="Portionen" FontSize="15"/>
-            <Entry MaxLength="20"/>
+            <Entry MaxLength="20" Text="{Binding PortionSize}" Placeholder="Portions" Keyboard="Numeric"/>
 
 <!-- Aktivzeit -->
             <Label Text="Aktivzeit" FontSize="15"/>
-            <Entry MaxLength="20"/>
+            <Entry MaxLength="20" Text="{Binding PrepTimeMinutes}" Placeholder="Prep Time" Keyboard="Numeric"/>
 
 <!-- Gesamtzeit -->
             <Label Text="Gesamtzeit" FontSize="15"/>
-            <Entry MaxLength="20"/>
+            <Entry MaxLength="20" Text="{Binding CookTimeMinutes}" Placeholder="Cooking Time" Keyboard="Numeric"/>
 
 <!-- Quelle -->
             <Label Text="Quelle" FontSize="15"/>
-            <Entry MaxLength="20"/>
+            <Entry MaxLength="20" Text="{Binding Source}" Placeholder="Source"/>
 
 <!-- Bewertung -->
             <Label Text="Bewertung" FontSize="15"/>
-            <Entry MaxLength="20"/>
+            <Entry MaxLength="20" Text="{Binding Rating}" Placeholder="Rating" Keyboard="Numeric"/>
 
 <!-- Zutaten -->
             <Label Text="Zutaten" FontSize="15"/>
-            <Entry MaxLength="20"/>
+            <CollectionView ItemsSource="{Binding AvailablePantryItems}"
+                SelectionMode="Multiple"
+                SelectedItems="{Binding SelectedIngredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="5">
+                            <Label Text="{Binding Name}" WidthRequest="80"/>
+                            <Label Text="{Binding Quantity}" WidthRequest="50"/>
+                            <Label Text="{Binding Unit}" WidthRequest="50"/>
+                            <Label Text="{Binding Calories}" WidthRequest="50"/>
+                            <Label Text="{Binding Proteins}" WidthRequest="50"/>
+                            <Label Text="{Binding Carbs}" WidthRequest="50"/>
+                            <Label Text="{Binding Fats}" WidthRequest="50"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
 <!-- Anleitung -->
             <Label Text="Anleitung" FontSize="15"/>
-            <Entry MaxLength="20"/>
+            <Entry MaxLength="20" Text="{Binding Instructions}" Placeholder="Instructions"/>
 
 <!-- Notizen -->
             <Label Text="Notizen" FontSize="15"/>
-            <Entry MaxLength="20"/>
+            <Entry MaxLength="20" Text="{Binding Notes}" Placeholder="Notes"/>
 
+            <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
 <!-- Kategorien -->
             <Label Text="Kategorien" FontSize="15"/>
-            <Picker WidthRequest="120" HeightRequest="40" BackgroundColor="LimeGreen"/>
+            <CollectionView ItemsSource="{Binding AvailableCategories}"
+                SelectionMode="Multiple"
+                SelectedItems="{Binding SelectedCategories}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Label Text="{Binding .}" WidthRequest="80"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+<!-- Kalorien -->
+                <Label Text="Calories:" FontSize="15" Grid.Column="0" Grid.Row="1"/>
+                <Label Text="{Binding TotalCalories}" Grid.Column="1" Grid.Row="1"/>
+
+<!-- Proteine -->
+                <Label Text="Proteins:" FontSize="15" Grid.Column="0" Grid.Row="2"/>
+                <Label Text="{Binding TotalProteins}" Grid.Column="1" Grid.Row="2"/>
+
+<!-- Kohlenhydrate -->
+                <Label Text="Carbs:" FontSize="15" Grid.Column="0" Grid.Row="3"/>
+                <Label Text="{Binding TotalCarbs}" Grid.Column="1" Grid.Row="3"/>
+
+<!-- Fette -->
+                <Label Text="Fats:" FontSize="15" Grid.Column="0" Grid.Row="4"/>
+                <Label Text="{Binding TotalFats}" Grid.Column="1" Grid.Row="4"/>
+            </Grid>
 
 <!-- Speichern Button -->
-            <Button Text="REZEPT SPEICHERN" 
-                    WidthRequest="170" 
-                    HeightRequest="50"
-                    BackgroundColor="LimeGreen"
-                    HorizontalOptions="Center"/>
-
+            <Button 
+                Text="REZEPT SPEICHERN" 
+                Command="{Binding AddRecipeCommand}"
+                WidthRequest="170" 
+                HeightRequest="50"
+                BackgroundColor="LimeGreen"
+                HorizontalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

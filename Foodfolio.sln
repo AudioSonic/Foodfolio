@@ -5,7 +5,9 @@ VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodfolio.API", "Foodfolio.API\Foodfolio.API.csproj", "{82847A2B-651E-B250-1D09-9CBBAD0FDEDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodfolio", "Foodfolio.MAUI\Foodfolio.csproj", "{D182583E-146F-489E-B725-C90717391B46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodfolio.MAUI", "Foodfolio.MAUI\Foodfolio.MAUI.csproj", "{D182583E-146F-489E-B725-C90717391B46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodfolio.Core", "Foodfolio.Core\Foodfolio.Core.csproj", "{E81E4154-FE6D-4D17-A5F1-B863F45560DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{D182583E-146F-489E-B725-C90717391B46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D182583E-146F-489E-B725-C90717391B46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D182583E-146F-489E-B725-C90717391B46}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E81E4154-FE6D-4D17-A5F1-B863F45560DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E81E4154-FE6D-4D17-A5F1-B863F45560DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E81E4154-FE6D-4D17-A5F1-B863F45560DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E81E4154-FE6D-4D17-A5F1-B863F45560DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

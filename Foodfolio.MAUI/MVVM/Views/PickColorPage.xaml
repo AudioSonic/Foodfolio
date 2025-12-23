@@ -1,0 +1,33 @@
+<toolkit:Popup 
+    x:Name="ColorPickerPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Foodfolio.MVVM.Views.PickColorPage"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:Foodfolio.MAUI.MVVM.ViewModels">
+
+    <VerticalStackLayout Padding="20" Spacing="16" Margin="200,0,0,200" WidthRequest="350">
+
+        <BoxView
+            HeightRequest="140"
+            CornerRadius="12"
+            BackgroundColor="{Binding SelectedColor}" />
+
+        <Label Text="Farbe" />
+        <Slider Minimum="0" Maximum="360" Value="{Binding Hue}" />
+
+        <Label Text="Transparenz" />
+        <Slider Minimum="0" Maximum="1" Value="{Binding Alpha}" />
+
+        <Label Text="{Binding ColorHex}" HorizontalOptions="Center" FontAttributes="Bold" />
+
+        <Button 
+            Text="Farbe speichern"
+            Command="{Binding SaveSelectedColorCommand}" />
+
+        <Button 
+            Text="Schließen"
+            Command="{Binding ClosePopupCommand}" />
+
+    </VerticalStackLayout>
+</toolkit:Popup>

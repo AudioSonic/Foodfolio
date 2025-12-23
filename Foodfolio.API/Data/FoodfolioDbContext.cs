@@ -1,6 +1,5 @@
-﻿using Foodfolio.API.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using Foodfolio.Core.Models;
 
 namespace Foodfolio.API.Data
 {
@@ -11,7 +10,21 @@ namespace Foodfolio.API.Data
         {
         }
 
-        // Tabelle für PantryItems
+        //Erzeugt automatisch Tabellen in SQLite
         public DbSet<PantryItem> PantryItems { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
+
+        //Legt fest, wo die lokale SQLite-Datenbank gespeichert wird
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Falls noch keine Optionen über Dependency Injection übergeben wurden
+            if (!optionsBuilder.IsConfigured)
+            {
+                var dbPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "foodfolio.db");
+                optionsBuilder.UseSqlite($"Filename={dbPath}");
+            }
+        }
     }
 }

@@ -57,12 +57,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+	  <None Remove="Resources\Images\Placeholder\paprika.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="8.0.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="9.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Foodfolio.Core\Foodfolio.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="MVVM\Views\AddPantryItemPage.xaml.cs">
+	    <DependentUpon>AddPantryItemPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="MVVM\Views\MealPlannerPage.xaml.cs">
 	    <DependentUpon>MealPlannerPage.xaml</DependentUpon>
 	  </Compile>
@@ -75,7 +92,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="MVVM\Views\AddGroceriesPage.xaml">
+	  <MauiXaml Update="MVVM\Views\AddCategoryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\AddPantryItemPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\AddRecipePage.xaml">
@@ -87,15 +107,19 @@
 	  <MauiXaml Update="MVVM\Views\PantryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\PickColorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\PickIconPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\RecipesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="MVVM\ViewModels\" />
-	  <Folder Include="Repositories\" />
-	  <Folder Include="Services\" />
+	  <MauiImage Include="Resources\Images\Placeholder\paprika.jpg" />
 	</ItemGroup>
 
 </Project>

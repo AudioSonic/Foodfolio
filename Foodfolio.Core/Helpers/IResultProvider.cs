@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodfolio.MVVM.ViewModels
+namespace Foodfolio.Core.Helpers
 {
-    internal class AddGroceriesViewModel
+    public interface IResultProvider<T>
     {
+        T Result { get; }
     }
 }

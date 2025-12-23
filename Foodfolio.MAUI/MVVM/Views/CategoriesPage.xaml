@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Foodfolio.MAUI.MVVM.ViewModels"
+             x:Class="Foodfolio.MAUI.MVVM.Views.CategoriesPage"
+             Title="Categories">
+
+    <AbsoluteLayout>
+        <CollectionView x:Name ="collectionView" SelectionMode="Single" EmptyView="No categories available" ItemsLayout="VerticalList" Margin="0,45,29,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                    Margin="45,5,25,5"
+                    Padding="10"
+                    BackgroundColor="#FFFFFF"
+                    CornerRadius="10"
+                    HasShadow="True">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnItemTapped"/>
+                        </Frame.GestureRecognizers>
+
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <!-- Icon -->
+                            <BoxView
+                            BackgroundColor="{Binding ColorHex}"
+                            CornerRadius="45"
+                            WidthRequest="20"
+                            HeightRequest="20"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            />
+
+                            <!--Name & Kategorien-->
+                            <VerticalStackLayout HeightRequest="20" WidthRequest="130" VerticalOptions="Start">
+                                <Label
+                                Text="{Binding Name}"
+                                FontSize="15"
+                                />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Suchleiste -->
+        <Frame
+        AbsoluteLayout.LayoutFlags="PositionProportional"
+        AbsoluteLayout.LayoutBounds="0.45,0,350,35" 
+        Padding="-3"
+        BackgroundColor="#F0F0F0"
+        CornerRadius="7"
+        HasShadow="True">
+
+            <SearchBar
+            Placeholder="Search"/>
+        </Frame>
+
+        <!-- Floating Action Button unten rechts -->
+        <Frame
+        AbsoluteLayout.LayoutFlags="PositionProportional"
+        AbsoluteLayout.LayoutBounds="0.9,0.96,85,85"  
+        Padding="0"
+        BackgroundColor="#F0F0F0"
+        CornerRadius="45"
+        HasShadow="True">
+
+            <Button
+            WidthRequest="85"
+            HeightRequest="85"
+            CornerRadius="45"
+            BackgroundColor="{StaticResource  MainColor}"
+            ImageSource="icon_additem.svg"
+            Clicked="AddCategoryButton_Clicked"/>
+        </Frame>
+    </AbsoluteLayout>
+</ContentPage>
