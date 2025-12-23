@@ -1,18 +1,26 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Foodfolio.Core.Helpers;
 using Foodfolio.Core.Models;
-using Foodfolio.MAUI.Services;   
+using Foodfolio.Helpers;
+using Foodfolio.MAUI.Services;
+using Foodfolio.MVVM.Views;
+using Microsoft.Maui.Controls;
+using System.Net.Sockets;
 
 namespace Foodfolio.MAUI.MVVM.ViewModels
 {
     public partial class AddCategoryViewModel : ObservableObject, IResultProvider<CategoryModel>
     {
         [ObservableProperty]
+        private ColorPicker colorPicker = new ColorPicker();
+
+        [ObservableProperty]
         private string name;
 
         [ObservableProperty]
-        private string colorHex = "#cccccc";
+        private string colorHex;
 
         public CategoryModel Result { get; private set; }
 
@@ -21,6 +29,13 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         public AddCategoryViewModel(CategoryService categoryService)
         {
             _categoryService = categoryService;
+            colorHex = colorPicker.SelectedColor;
+        }
+
+        [RelayCommand]
+        public void GetCategoryColor(string color)
+        {
+            colorHex = color;
         }
 
         [RelayCommand]
@@ -28,7 +43,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                await Application.Current.MainPage.DisplayAlert("Fehler", "Bitte gib einen Namen ein.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Warning", "Please enter a name for the category.", "OK");
                 return;
             }
 
@@ -46,21 +61,33 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
 
                 if (result > 0)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Hinweis", "Die Kategorie wurde erfolgreich gespeichert.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Success", "Category created", "OK");
                     await Shell.Current.Navigation.PopModalAsync();
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Fehler", "Die Kategorie konnte nicht gespeichert werden.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Warning", "Couldn't save the category", "OK");
                 }
             }
             catch (Exception ex)
             {
                 // Hier kannst du optional auch Logging einbauen
-                await Application.Current.MainPage.DisplayAlert("Fehler", $"Beim Speichern ist ein Fehler aufgetreten: {ex.Message}", "OK");
+                await Application.Current.MainPage.DisplayAlert("Warning", $"An error occured: {ex.Message}", "OK");
             }
         }
-        
+
+        [RelayCommand]
+        public async Task PickIconPopupAsync()
+        {
+            await Application.Current.MainPage.ShowPopupAsync(new PickIconPage());
+        }
+
+        [RelayCommand]
+        public async Task PickColorPopupAsync()
+        {
+            var pickColorVM = new PickColorViewModel(colorPicker);
+            await Application.Current.MainPage.ShowPopupAsync(new PickColorPage(pickColorVM));
+        }
 
         [RelayCommand]
         private async Task CancelAsync()

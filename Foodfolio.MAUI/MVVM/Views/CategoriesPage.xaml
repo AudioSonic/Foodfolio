@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Foodfolio.MAUI.MVVM.ViewModels"
              x:Class="Foodfolio.MAUI.MVVM.Views.CategoriesPage"
-             Title="Kategorien">
+             Title="Categories">
 
     <AbsoluteLayout>
-        <CollectionView x:Name ="collectionView" SelectionMode="Single" EmptyView="Keine Lebensmittel verfügbar" ItemsLayout="VerticalList" Margin="0,45,29,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+        <CollectionView x:Name ="collectionView" SelectionMode="Single" EmptyView="No categories available" ItemsLayout="VerticalList" Margin="0,45,29,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame
@@ -22,10 +22,10 @@
 
                         <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                             <!-- Icon -->
-                            <Image
-                            Source="paprika.jpg"
+                            <BoxView
+                            BackgroundColor="{Binding ColorHex}"
+                            CornerRadius="45"
                             WidthRequest="20"
-                            Aspect="AspectFill"
                             HeightRequest="20"
                             VerticalOptions="Center"
                             HorizontalOptions="Center"
@@ -47,7 +47,7 @@
         <!-- Suchleiste -->
         <Frame
         AbsoluteLayout.LayoutFlags="PositionProportional"
-        AbsoluteLayout.LayoutBounds="0.35,0,270,35" 
+        AbsoluteLayout.LayoutBounds="0.45,0,350,35" 
         Padding="-3"
         BackgroundColor="#F0F0F0"
         CornerRadius="7"
@@ -55,24 +55,6 @@
 
             <SearchBar
             Placeholder="Search"/>
-        </Frame>
-
-        <!-- Filter-Button -->
-        <Frame
-        AbsoluteLayout.LayoutFlags="PositionProportional"
-        AbsoluteLayout.LayoutBounds="0.88,0,35,35"  
-        Padding="0"
-        CornerRadius="17"
-        BackgroundColor="#F0F0F0"
-        HasShadow="False">
-
-            <ImageButton
-        WidthRequest="20"
-        HeightRequest="20"
-        BackgroundColor="#F0F0F0"
-        Source="icon_filter.svg"
-        Aspect="AspectFit"
-        Clicked="FilterButton_Clicked"/>
         </Frame>
 
         <!-- Floating Action Button unten rechts -->

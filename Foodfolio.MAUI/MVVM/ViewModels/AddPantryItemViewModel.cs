@@ -101,7 +101,8 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         [RelayCommand]
         private async Task EditAvailableAmountAsync()
         {
-            await Application.Current.MainPage.DisplayAlert("Achtung", "Die vorhandene Menge kann noch nicht editiert werden", "OK");
+            await Application.Current.MainPage.DisplayPromptAsync("Vorhandene Menge", "Wähle die vorhandene Menge aus", "OK", "Abbruch",
+                "0",1,Keyboard.Numeric,"0");
         }
 
         [RelayCommand]

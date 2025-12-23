@@ -5,19 +5,43 @@
              x:Class="Foodfolio.MAUI.MVVM.Views.AddCategoryPage"
              Title="Neue Kategorie">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
-        <Label Text="Kategoriename:" />
-        <Entry Placeholder="z. B. Italienisch" Text="{Binding Name}" />
+    <VerticalStackLayout Margin="20,0,20,0" Padding="20" Spacing="15">
+        <BoxView 
+            BackgroundColor="{Binding ColorHex}"
+            WidthRequest="50"
+            HeightRequest="50"
+            CornerRadius="45"
+            Margin="0,0,0,20"/>
 
-        <Label Text="Farbe (HEX-Wert):" />
-        <Entry Placeholder="#FF6600" Text="{Binding ColorHex}" />
+        <Label Text="Category name:" />
+        <Entry Placeholder="e.g. italian" Text="{Binding Name}" />
 
-        <Button Text="Speichern"
+        <Grid ColumnDefinitions="Auto,Auto">
+            <Button 
+                Text="Pick Icon" 
+                BackgroundColor="LightGrey" 
+                WidthRequest="160" 
+                HeightRequest="40"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                Command="{Binding PickIconPopupCommand}"/>
+
+            <Button Text="Pick Color" 
+                BackgroundColor="LightGrey" 
+                WidthRequest="160" 
+                HeightRequest="40"
+                Grid.Column="1"
+                Margin="5,0,0,0"
+                    Command="{Binding PickColorPopupCommand}"/>
+        </Grid>
+
+        <Button Text="Save Category"
                 Command="{Binding SaveCategoryCommand}"
-                BackgroundColor="LimeGreen"
-                TextColor="White" />
+                BackgroundColor="{StaticResource MainColor}"
+                TextColor="White" 
+                Margin="0,50,0,0"/>
 
-        <Button Text="Abbrechen"
+        <Button Text="Return"
                 Command="{Binding CancelCommand}"
                 BackgroundColor="Gray"
                 TextColor="White" />

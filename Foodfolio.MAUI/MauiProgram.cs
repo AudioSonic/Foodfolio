@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
 using Foodfolio.Core.Repositories;
-using Foodfolio.MAUI.Services;
 using Foodfolio.MAUI.MVVM.ViewModels;
 using Foodfolio.MAUI.MVVM.Views;
-using Microsoft.Maui.Controls;
+using Foodfolio.MAUI.Services;
+using Microsoft.Extensions.Logging;
 
 namespace Foodfolio.MAUI
 {
@@ -21,17 +21,20 @@ namespace Foodfolio.MAUI
                     fonts.AddFont("Inter-Italic.ttf", "Inter");
                     fonts.AddFont("Inter-Variable.ttf", "InterVariable");
 
+                }).UseMauiCommunityToolkit().ConfigureFonts(fonts =>
+                {
+                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
             // Datenbankpfad
             string dbPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "foodfolio.db3");
-
-
-            #region  Categories  
-            // Categories Service und Pages registrieren
-            builder.Services.AddSingleton(new CategoryRepository(dbPath));
+      
+        #region  Categories  
+        // Categories Service und Pages registrieren
+        builder.Services.AddSingleton(new CategoryRepository(dbPath));
             builder.Services.AddSingleton(sp =>
             {
                 var repo = sp.GetRequiredService<CategoryRepository>();

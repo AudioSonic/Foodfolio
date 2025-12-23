@@ -14,8 +14,6 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         public CategoryViewModel(CategoryService categoryService)
         {
             _categoryService = categoryService;
-            allCategory.Add(new CategoryModel { Id = Guid.NewGuid(), Name = "Italienisch", ColorHex = "#ff6600" });
-            allCategory.Add(new CategoryModel { Id = Guid.NewGuid(), Name = "Mexikanisch", ColorHex = "#00cc66" });
             LoadAllCategoriesAsync();
         }
 
@@ -38,7 +36,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         [RelayCommand]
         private async Task EditCategoryAsync(CategoryModel category)
         {
-            await Application.Current.MainPage.DisplayAlert("Bearbeiten", $"Kategorie: {category.Name}", "OK");
+            await Application.Current.MainPage.DisplayAlert("Edit", $"Category: {category.Name}", "OK");
         }
 
         [RelayCommand]
@@ -47,7 +45,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
             var copy = new CategoryModel
             {
                 Id = Guid.NewGuid(),
-                Name = $"{category.Name} (Kopie)",
+                Name = $"{category.Name} (Copy)",
                 ColorHex = category.ColorHex
             };
             allCategory.Add(copy);
@@ -56,7 +54,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         [RelayCommand]
         private async Task DeleteCategoryAsync(CategoryModel category)
         {
-            bool confirm = await Application.Current.MainPage.DisplayAlert("Löschen", $"Möchtest du {category.Name} löschen?", "Ja", "Nein");
+            bool confirm = await Application.Current.MainPage.DisplayAlert("Delete Category", $"Do you really want to delete {category.Name}?", "Yes", "No");
             if (confirm)
                 allCategory.Remove(category);
         }
