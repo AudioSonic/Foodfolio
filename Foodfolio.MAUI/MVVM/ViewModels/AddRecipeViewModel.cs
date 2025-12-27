@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Foodfolio.Core.Models;
+using Foodfolio.MAUI.Services;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 
@@ -8,6 +9,13 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
 {
     public partial class AddRecipeViewModel : ObservableObject
     {
+        private readonly RecipeService _service;
+        public AddRecipeViewModel(RecipeService service)
+        {
+            _service = service;
+        }
+
+
         [ObservableProperty]
         private string source = string.Empty;
 
@@ -71,13 +79,6 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
         [ObservableProperty]
         private string? photo;
 
-        public AddRecipeViewModel()
-        {
-            // TODO: Lade PantryItems aus Repository
-            availablePantryItems.Add(new PantryItem { Name = "Apfel", Quantity = 200, Calories = 52 });
-            availablePantryItems.Add(new PantryItem { Name = "Banane", Quantity = 150, Calories = 89 });
-        }
-
         [RelayCommand]
         private async Task AddRecipeAsync()
         {
@@ -88,10 +89,10 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
                 Description = Description,
                 Ingredients = SelectedIngredients.ToList(), // hier die Auswahl übernehmen
                 Categories = new List<string> { SelectedCategory },
-                PrepTimeMinutes = PrepTimeMinutes,
-                CookTimeMinutes = CookTimeMinutes,
+                PrepTimeMinutes = prepTimeMinutes,
+                CookTimeMinutes = cookTimeMinutes,
                 PhotoUrl = Photo,
-                Source = Source,
+                //Source = Source,
                 Instructions = Instructions,
                 Notes = Notes,
                 Rating = Rating
@@ -111,7 +112,7 @@ namespace Foodfolio.MAUI.MVVM.ViewModels
             PrepTimeMinutes = 0;
             CookTimeMinutes = 0;
             Photo = null;
-            Source = string.Empty;
+            //Source = string.Empty;
             Instructions = string.Empty;
             Notes = string.Empty;
             Rating = 0;

@@ -4,9 +4,9 @@ namespace Foodfolio.MAUI.MVVM.Views;
 
 public partial class AddRecipePage : ContentPage
 {
-	public AddRecipePage()
+	public AddRecipePage(AddRecipeViewModel viewModel)
 	{
 		InitializeComponent();
-        BindingContext = new AddRecipeViewModel();
+		BindingContext = viewModel;
     }
 }
