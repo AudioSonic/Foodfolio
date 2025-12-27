@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Foodfolio.MAUI.MVVM.ViewModels
 {
-    internal class RecipesPageViewModel
+    public class RecipesPageViewModel
     {
+        public RecipesPageViewModel()
+        {
+        }
     }
 }

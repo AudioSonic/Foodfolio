@@ -1,16 +1,29 @@
+using Foodfolio.MAUI.Helpers;
 using Foodfolio.MAUI.MVVM.ViewModels;
 
 namespace Foodfolio.MAUI.MVVM.Views;
 
 public partial class RecipesPage : ContentPage
 {
-	public RecipesPage()
+	public RecipesPage(RecipesPageViewModel viewModel)
 	{
 		InitializeComponent();
+        BindingContext = viewModel;
 	}
 
-    private async void AddRecipeButton_Clicked(object sender, EventArgs e)
+    private async void AddItemButton_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("AddRecipePage");
+        var addPage = ServiceHelper.GetService<AddRecipePage>();
+        await Navigation.PushAsync(addPage);
+    }
+
+    private async void FilterButton_Clicked(object sender, EventArgs e)
+    {
+        await this.DisplayAlert("Achtung", "Es kann noch nicht gefiltert werden", "OK");
+    }
+
+    private async void OnItemTapped(object sender, TappedEventArgs e)
+    {
+        await DisplayAlert("Item tapped", "You tapped the Bell Pepper card!", "OK");
     }
 }

@@ -19,47 +19,47 @@
 
 <!-- Name -->
             <Label Text="Title" FontSize="15" />
-            <Entry MaxLength="20" Text="{Binding Title}" Placeholder="Title"/>
+            <Entry MaxLength="20" Text="{Binding title}" Placeholder="Title"/>
 
 <!-- Beschreibung -->
             <Label Text="Beschreibung" FontSize="15"/>
-            <Entry MaxLength="20" Text="{Binding Description}" Placeholder="Description"/>
+            <Entry MaxLength="20" Text="{Binding description}" Placeholder="Description"/>
 
 <!-- Portionen -->
             <Label Text="Portionen" FontSize="15"/>
-            <Entry MaxLength="20" Text="{Binding PortionSize}" Placeholder="Portions" Keyboard="Numeric"/>
+            <Entry MaxLength="20" Text="{Binding portionSize}" Placeholder="Portions" Keyboard="Numeric"/>
 
 <!-- Aktivzeit -->
             <Label Text="Aktivzeit" FontSize="15"/>
-            <Entry MaxLength="20" Text="{Binding PrepTimeMinutes}" Placeholder="Prep Time" Keyboard="Numeric"/>
+            <Entry MaxLength="20" Text="{Binding prepTimeMinutes}" Placeholder="Prep Time" Keyboard="Numeric"/>
 
 <!-- Gesamtzeit -->
             <Label Text="Gesamtzeit" FontSize="15"/>
-            <Entry MaxLength="20" Text="{Binding CookTimeMinutes}" Placeholder="Cooking Time" Keyboard="Numeric"/>
+            <Entry MaxLength="20" Text="{Binding cookTimeMinutes}" Placeholder="Cooking Time" Keyboard="Numeric"/>
 
 <!-- Quelle -->
             <Label Text="Quelle" FontSize="15"/>
-            <Entry MaxLength="20" Text="{Binding Source}" Placeholder="Source"/>
+            <Entry MaxLength="20" Text="{Binding source}" Placeholder="Source"/>
 
 <!-- Bewertung -->
             <Label Text="Bewertung" FontSize="15"/>
-            <Entry MaxLength="20" Text="{Binding Rating}" Placeholder="Rating" Keyboard="Numeric"/>
+            <Entry MaxLength="20" Text="{Binding rating}" Placeholder="Rating" Keyboard="Numeric"/>
 
 <!-- Zutaten -->
             <Label Text="Zutaten" FontSize="15"/>
-            <CollectionView ItemsSource="{Binding AvailablePantryItems}"
+            <CollectionView ItemsSource="{Binding availablePantryItems}"
                 SelectionMode="Multiple"
-                SelectedItems="{Binding SelectedIngredients}">
+                SelectedItems="{Binding selectedIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal" Padding="5">
-                            <Label Text="{Binding Name}" WidthRequest="80"/>
-                            <Label Text="{Binding Quantity}" WidthRequest="50"/>
-                            <Label Text="{Binding Unit}" WidthRequest="50"/>
-                            <Label Text="{Binding Calories}" WidthRequest="50"/>
-                            <Label Text="{Binding Proteins}" WidthRequest="50"/>
-                            <Label Text="{Binding Carbs}" WidthRequest="50"/>
-                            <Label Text="{Binding Fats}" WidthRequest="50"/>
+                            <Label Text="{Binding name}" WidthRequest="80"/>
+                            <Label Text="{Binding quantity}" WidthRequest="50"/>
+                            <Label Text="{Binding unit}" WidthRequest="50"/>
+                            <Label Text="{Binding calories}" WidthRequest="50"/>
+                            <Label Text="{Binding proteins}" WidthRequest="50"/>
+                            <Label Text="{Binding carbs}" WidthRequest="50"/>
+                            <Label Text="{Binding fats}" WidthRequest="50"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

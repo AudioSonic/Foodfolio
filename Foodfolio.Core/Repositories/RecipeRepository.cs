@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace Foodfolio.Core.Repositories
 {
-    public class PantryRepository
+    public class RecipeRepository
     {
         private readonly SQLiteAsyncConnection _database;
 
-        public PantryRepository(string dbPath)
+        public RecipeRepository(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
         }
@@ -22,7 +22,7 @@ namespace Foodfolio.Core.Repositories
         //Fügt ein neues Element hinzu
         public async Task<int> CreateItemAsync(PantryItem item)
         {
-            if(item.Id == Guid.Empty)
+            if (item.Id == Guid.Empty)
             {
                 item.Id = Guid.NewGuid();
             }
@@ -58,8 +58,8 @@ namespace Foodfolio.Core.Repositories
         public async Task<List<PantryItem>> GetAllItemsAsync()
         {
             var data = _database.Table<PantryItem>().ToListAsync();
-            
-            foreach(var i in data.Result)
+
+            foreach (var i in data.Result)
             {
                 Debug.WriteLine($"Die gespeicherten Lebensmittel sind:  Name: {i.Name}, Kalorien: {i.Calories}, Proteine: {i.Proteins}, Kohlenhydrate: {i.Carbs}, Fette: {i.Fats}");
             }

@@ -57,11 +57,26 @@ namespace Foodfolio.MAUI
                 service.InitializeAsync(); // oder async Factory Variante
                 return service;
             });
+
+            builder.Services.AddSingleton(new RecipeRepository(dbPath));
+            builder.Services.AddSingleton(sp =>
+            {
+                var repo = sp.GetRequiredService<RecipeRepository>();
+                var service = new RecipeService(repo);
+                service.InitializeAsync(); // oder async Factory Variante
+                return service;
+            });
             builder.Services.AddTransient<AddPantryItemViewModel>();
             builder.Services.AddTransient<AddPantryItemPage>();
 
             builder.Services.AddTransient<PantryPageViewModel>();
             builder.Services.AddTransient<PantryPage>();
+
+            builder.Services.AddTransient<RecipesPageViewModel>();
+            builder.Services.AddTransient<RecipesPage>();
+
+            builder.Services.AddTransient<AddRecipeViewModel>();
+            builder.Services.AddTransient<AddRecipePage>();
 
             builder.Services.AddTransient<CategoryViewModel>();
             builder.Services.AddTransient<CategoriesPage>();
