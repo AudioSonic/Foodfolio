@@ -1,10 +1,14 @@
-﻿namespace Foodfolio.Server.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace Foodfolio.Server.Entities
 {
     public class Food
     {
         public int Id { get; set; }
 
         public string Name { get; set; } = string.Empty;
+
+        public string? BrandName { get; set; }
 
         public decimal Calories { get; set; }
         public decimal Protein { get; set; }
@@ -14,6 +18,7 @@
         public decimal ReferenceAmount { get; set; }
         public string ReferenceUnit { get; set; } = "g";
 
+        [JsonIgnore]
         public ICollection<RecipeIngredient> RecipeIngredients { get; set; }
             = new List<RecipeIngredient>();
     }

@@ -1,14 +1,18 @@
-﻿namespace Foodfolio.Server.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace Foodfolio.Server.Entities
 {
     public class RecipeIngredient
     {
         public int Id { get; set; }
 
         public int RecipeId { get; set; }
-        public Recipe Recipe { get; set; } = null!;
+
+        [JsonIgnore]
+        public Recipe? Recipe { get; set; }
 
         public int FoodId { get; set; }
-        public Food Food { get; set; } = null!;
+        public Food? Food { get; set; }
 
         public decimal Quantity { get; set; }
     }
