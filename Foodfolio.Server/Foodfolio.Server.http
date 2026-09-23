@@ -1,0 +1,6 @@
+@Foodfolio.Server_HostAddress = http://localhost:5020
+
+GET {{Foodfolio.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

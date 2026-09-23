@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="foodfolio.client/foodfolio.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="Foodfolio.Server/Foodfolio.Server.csproj" />
+</Solution>
