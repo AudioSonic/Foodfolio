@@ -12,6 +12,8 @@
 
         public int Servings { get; set; }
 
+        public string Category { get; set; } = "Mittagessen";
+
         public ICollection<RecipeIngredient> Ingredients { get; set; }
             = new List<RecipeIngredient>();
     }

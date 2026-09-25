@@ -1,0 +1,14 @@
+:root {
+    --color-background: #0C2026;
+    --color-foreground: #fbfaf781; 
+    --color-primary:#8AAF3E;
+    --color-secondary:#B47941;
+    --color-tertiary: #365B3A; 
+    --color-highlight: #EFF7E0;
+    --color-sidebar: #F9F7F0;
+
+    --font-color: #2A2B2B; 
+    --font-color-secondary: #7A7B7B;
+
+    --progress: 92%;
+}

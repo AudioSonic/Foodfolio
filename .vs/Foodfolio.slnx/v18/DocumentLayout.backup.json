@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\GitHub\\Foodfolio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Controllers\\RecipesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Foodfolio.Server\\Controllers\\RecipesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|d:\\github\\foodfolio\\foodfolio.client\\src\\components\\layout\\sidebar.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|solutionrelative:foodfolio.client\\src\\components\\layout\\sidebar.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|d:\\github\\foodfolio\\foodfolio.server\\entities\\food.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|solutionrelative:foodfolio.server\\entities\\food.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|d:\\github\\foodfolio\\foodfolio.client\\src\\app.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|solutionrelative:foodfolio.client\\src\\app.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|d:\\github\\foodfolio\\foodfolio.server\\entities\\recipeingredient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|solutionrelative:foodfolio.server\\entities\\recipeingredient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|d:\\github\\foodfolio\\foodfolio.client\\src\\components\\layout\\sidebar.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|solutionrelative:foodfolio.client\\src\\components\\layout\\sidebar.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|d:\\github\\foodfolio\\foodfolio.client\\src\\components\\layout\\header.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|solutionrelative:foodfolio.client\\src\\components\\layout\\header.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,46 +26,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Food.cs",
-              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Entities\\Food.cs",
-              "RelativeDocumentMoniker": "Foodfolio.Server\\Entities\\Food.cs",
-              "ToolTip": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Entities\\Food.cs",
-              "RelativeToolTip": "Foodfolio.Server\\Entities\\Food.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-23T17:09:29.273Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RecipeIngredient.cs",
-              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Entities\\RecipeIngredient.cs",
-              "RelativeDocumentMoniker": "Foodfolio.Server\\Entities\\RecipeIngredient.cs",
-              "ToolTip": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Entities\\RecipeIngredient.cs",
-              "RelativeToolTip": "Foodfolio.Server\\Entities\\RecipeIngredient.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-23T16:59:30.58Z",
+              "Title": "App.tsx",
+              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\App.tsx",
+              "RelativeDocumentMoniker": "foodfolio.client\\src\\App.tsx",
+              "ToolTip": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\App.tsx",
+              "RelativeToolTip": "foodfolio.client\\src\\App.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-09-25T08:03:19.488Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RecipesController.cs",
-              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Controllers\\RecipesController.cs",
-              "RelativeDocumentMoniker": "Foodfolio.Server\\Controllers\\RecipesController.cs",
-              "ToolTip": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Controllers\\RecipesController.cs",
-              "RelativeToolTip": "Foodfolio.Server\\Controllers\\RecipesController.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAmwFQAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-23T14:45:56.85Z",
+              "Title": "Sidebar.tsx",
+              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\components\\layout\\Sidebar.tsx",
+              "RelativeDocumentMoniker": "foodfolio.client\\src\\components\\layout\\Sidebar.tsx",
+              "ToolTip": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\components\\layout\\Sidebar.tsx",
+              "RelativeToolTip": "foodfolio.client\\src\\components\\layout\\Sidebar.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-09-25T07:46:03.456Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Sidebar.css",
+              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\components\\layout\\Sidebar.css",
+              "RelativeDocumentMoniker": "foodfolio.client\\src\\components\\layout\\Sidebar.css",
+              "ToolTip": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\components\\layout\\Sidebar.css",
+              "RelativeToolTip": "foodfolio.client\\src\\components\\layout\\Sidebar.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-09-25T07:46:19.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Header.css",
+              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\components\\layout\\Header.css",
+              "RelativeDocumentMoniker": "foodfolio.client\\src\\components\\layout\\Header.css",
+              "ToolTip": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\components\\layout\\Header.css",
+              "RelativeToolTip": "foodfolio.client\\src\\components\\layout\\Header.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-09-25T07:46:12.21Z"
             }
           ]
         }
