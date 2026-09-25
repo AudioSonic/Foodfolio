@@ -1,0 +1,16 @@
+#active-date-select{
+    display: flex;
+    align-items: center;
+}
+
+.change-date-button{
+    width: 30px;
+    height: 30px;
+}
+
+#active-date{
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

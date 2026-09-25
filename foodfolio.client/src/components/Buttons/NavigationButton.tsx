@@ -9,7 +9,7 @@ function NavigationButton(prop: NavigationButton){
 
     
     return(
-        <button className="navigation-button">
+        <button className="btn navigation-button">
             <img src={prop.iconSrc}/>
             <span>{prop.title}</span>
         </button>

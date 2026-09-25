@@ -11,4 +11,6 @@
     --font-color-secondary: #7A7B7B;
 
     --progress: 92%;
+    --border-radius-default: 7px;
+    --border-color: rgba(0,0,0,0.15);
 }

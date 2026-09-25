@@ -1,0 +1,38 @@
+#header{
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#day-view{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#new-recipe-and-profile{
+    display: flex;
+    gap: 13px;
+}
+
+#user-tag{
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+
+    padding: 10px;
+    border-radius: 999px;
+    color: white;
+}
+
+#profile{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 220px;
+}
+
