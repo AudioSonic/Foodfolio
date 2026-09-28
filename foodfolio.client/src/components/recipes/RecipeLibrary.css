@@ -1,0 +1,23 @@
+.food-selector{
+    background-color: var(--color-foreground);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    padding: 20px;
+    margin: 10px;
+    border-radius: var(--border-radius-default);
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.food-selector-button{
+    height: 35px;
+    width: auto;
+    padding: 10px;
+    border-radius: 20px;
+}
+.category-selection{
+    display: flex;
+    gap: 5px;
+}

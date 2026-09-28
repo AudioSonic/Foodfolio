@@ -1,3 +1,8 @@
-﻿#main-content{
+﻿#app {
+    display: flex;
+    min-height: 100vh;
+}
+
+#main-content{
     width: 100%;
 }

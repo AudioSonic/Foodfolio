@@ -1,7 +1,11 @@
-function Foods() {
-  return (
-    <p>Hello world!</p>
-  );
+import "./Foods.css"
+
+function Foods(){
+    return(
+        <>
+        <h1>Lebensmittel</h1>
+        </>
+    )
 }
 
-export default Foods;
+export default Foods

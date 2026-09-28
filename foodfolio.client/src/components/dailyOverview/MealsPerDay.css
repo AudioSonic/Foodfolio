@@ -1,0 +1,10 @@
+#meals-per-day{
+    background-color: var(--color-foreground);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    margin: 10px;
+    border-radius: var(--border-radius-default);
+}

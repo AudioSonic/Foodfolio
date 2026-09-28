@@ -1,6 +1,6 @@
 :root {
-    --color-background: #0C2026;
-    --color-foreground: #fbfaf781; 
+    --color-background: #FBFBFB;
+    --color-foreground: #FEFDFE; 
     --color-primary:#8AAF3E;
     --color-secondary:#B47941;
     --color-tertiary: #365B3A; 
@@ -13,4 +13,5 @@
     --progress: 92%;
     --border-radius-default: 7px;
     --border-color: rgba(0,0,0,0.15);
+    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }

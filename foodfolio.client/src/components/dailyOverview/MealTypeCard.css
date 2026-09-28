@@ -1,0 +1,88 @@
+.meal-type-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 80px;
+    width: 100%;
+    padding: 10px 15px;
+    border-style: solid;
+    border-width: 0.1px;
+    border-radius: 7px;
+    border-color: var(--border-color);
+    font-weight: bold;
+}
+
+.meal-type-card img{
+    background-color: var(--color-highlight);
+    border-radius: 999px;
+}
+
+.recipe-placeholder{
+    border-style: dashed;
+    border-radius: 7px;
+    border-width: 1.5px;
+    padding: 24px;
+
+    font-weight: normal;
+    color: darkgray;
+    background-color: #FAFAFA;
+    display: flex;
+    justify-content: center;
+    min-width: 200px;
+}
+
+.meal-desc{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-right: 32px;
+}
+
+.recipe-card {
+    cursor: grab;
+}
+
+.recipe-card:active {
+    cursor: grabbing;
+}
+
+.meal-recipe {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 14px;
+}
+
+.meal-recipe img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.meal-recipe-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.meal-recipe-name {
+    font-weight: 600;
+}
+
+.meal-recipe-amount {
+    color: #666;
+    font-weight: normal;
+}
+
+.meal-recipe button {
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+    padding: 5px;
+}

@@ -3,10 +3,12 @@
     font-size: 13px; 
 }
 
-#app {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
+
+
+#main-content {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
 }
 
 main {
@@ -15,6 +17,10 @@ main {
 
 h1{
     font-size: 20px;
+}
+
+h2{
+    font-size: 17px;
 }
 
 nav{ 

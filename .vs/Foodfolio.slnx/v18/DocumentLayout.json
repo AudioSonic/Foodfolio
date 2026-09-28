@@ -13,10 +13,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|d:\\github\\foodfolio\\foodfolio.client\\src\\components\\layout\\sidebar.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|solutionrelative:foodfolio.client\\src\\components\\layout\\sidebar.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|d:\\github\\foodfolio\\foodfolio.client\\src\\components\\layout\\header.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{FCEBA555-99EE-E2B7-AF27-F71E7E731928}|foodfolio.client\\foodfolio.client.esproj|solutionrelative:foodfolio.client\\src\\components\\layout\\header.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -48,7 +44,7 @@
               "RelativeDocumentMoniker": "foodfolio.client\\src\\components\\layout\\Sidebar.tsx",
               "ToolTip": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\components\\layout\\Sidebar.tsx",
               "RelativeToolTip": "foodfolio.client\\src\\components\\layout\\Sidebar.tsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
               "WhenOpened": "2026-09-25T07:46:03.456Z",
               "EditorCaption": ""
@@ -64,18 +60,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2026-09-25T07:46:19.839Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Header.css",
-              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\components\\layout\\Header.css",
-              "RelativeDocumentMoniker": "foodfolio.client\\src\\components\\layout\\Header.css",
-              "ToolTip": "D:\\GitHub\\Foodfolio\\foodfolio.client\\src\\components\\layout\\Header.css",
-              "RelativeToolTip": "foodfolio.client\\src\\components\\layout\\Header.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-09-25T07:46:12.21Z"
             }
           ]
         }
