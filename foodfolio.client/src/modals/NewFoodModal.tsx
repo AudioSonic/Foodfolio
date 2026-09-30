@@ -47,15 +47,26 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
             referenceUnit
         };
 
-        const response = await fetch("https://localhost:7077/api/foods",{
-            method: "POST",
-            headers: {"content-type": "application/json"},
-            body: JSON.stringify(newFood)
-        })
+        try{
+            const response = await fetch("https://localhost:7077/api/foods",{
+                method: "POST",
+                headers: {"content-type": "application/json"},
+                body: JSON.stringify(newFood)
+            })
 
-        const savedFood = await response.json();
+            if(!response.ok){
+                console.error("Fehler beim Speichern des Lebensmittels");
+                return;
+            }
 
-        onCreateFood(savedFood);
+            const savedFood = await response.json();
+
+            onCreateFood(savedFood);
+        }
+
+        catch(error){
+            console.error("Fehler beim Speichern des Lebensmittels", error);
+        }
     }
 
     return (

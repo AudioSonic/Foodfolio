@@ -45,12 +45,26 @@ function RecipeLibrary() {
       {isRecipeModalOpen && (
     <RecipeModal
         onClose={() => setIsRecipeModalOpen(false)}
-        onSave={(recipe) => 
-          {setIsRecipeModalOpen(false)
-          fetch("https://localhost:7077/api/recipes", {
-          method: "POST", 
-          headers: {"Content-Type": "application/json"}, 
-          body: JSON.stringify(recipe)})
+        onSave={async (recipe) => 
+          {
+
+              try{
+                const response = await fetch("https://localhost:7077/api/recipes", {
+                  method: "POST", 
+                  headers: {"Content-Type": "application/json"}, 
+                  body: JSON.stringify(recipe)})
+
+                if(!response.ok){
+                  console.error("Fehler beim Speichern des Rezepts.");
+                  return;
+                }
+
+                setIsRecipeModalOpen(false)
+              }
+
+              catch(error){
+                console.error("Fehler beim speichern des Rezepts", error);
+              }
         }}
     />
   )}
