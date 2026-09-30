@@ -21,3 +21,31 @@
     display: flex;
     gap: 5px;
 }
+
+.new-recipe-button {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+
+    width: 64px;
+    height: 64px;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: var(--color-primary);
+    color: white;
+
+    font-size: 32px;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow: var(--box-shadow);
+
+    z-index: 1000;
+}

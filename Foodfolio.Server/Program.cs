@@ -9,6 +9,15 @@ builder.Services.AddDbContext<FoodfolioDbContext>(options =>
     options.UseSqlite(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FoodfolioFrontend", policy =>
+    {
+        policy.WithOrigins("https://localhost:51142")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -26,6 +35,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("FoodfolioFrontend");
 
 app.UseAuthorization();
 

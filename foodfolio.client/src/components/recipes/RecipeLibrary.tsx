@@ -2,6 +2,8 @@ import "./RecipeLibrary.css"
 import RecipeCard from "./RecipeCard";
 import TestImage from "../../assets/bolognese.jpg"
 import type { Recipe } from "../../types/Recipe";
+import { useState } from "react";
+import RecipeModal from "../../modals/RecipeModal";
 
 const testRecipe: Recipe = {
     id: 1,
@@ -17,6 +19,8 @@ const testRecipe: Recipe = {
 };
 
 function RecipeLibrary() {
+  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
+
   return (
     <section className="food-selector">
       <h2>Rezeptbibliothek</h2>
@@ -30,8 +34,30 @@ function RecipeLibrary() {
       <div>
         <RecipeCard recipe={testRecipe}/>
       </div>
+
+      <button
+      type="button"
+      className="new-recipe-button"
+      onClick={() => setIsRecipeModalOpen(true)}
+      >
+          +
+      </button>
+      {isRecipeModalOpen && (
+    <RecipeModal
+        onClose={() => setIsRecipeModalOpen(false)}
+        onSave={(recipe) => 
+          {setIsRecipeModalOpen(false)
+          fetch("https://localhost:7077/api/recipes", {
+          method: "POST", 
+          headers: {"Content-Type": "application/json"}, 
+          body: JSON.stringify(recipe)})
+        }}
+    />
+  )}
     </section>
   );
 }
+
+
 
 export default RecipeLibrary;
