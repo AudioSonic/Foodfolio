@@ -13,6 +13,7 @@ namespace Foodfolio.Server.Data
         public DbSet<Food> Foods { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+        public DbSet<OptionalUnit> OptionalUnits { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

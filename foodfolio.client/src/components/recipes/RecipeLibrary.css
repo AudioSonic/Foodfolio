@@ -17,6 +17,11 @@
     padding: 10px;
     border-radius: 20px;
 }
+
+.food-selector-button.active{
+    background-color: var(--color-highlight);
+}
+
 .category-selection{
     display: flex;
     gap: 5px;
@@ -48,4 +53,14 @@
     box-shadow: var(--box-shadow);
 
     z-index: 1000;
+}
+
+.recipe-overview{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.recipe-overview img{
+    height: 120px;
 }

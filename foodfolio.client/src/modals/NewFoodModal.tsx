@@ -7,11 +7,17 @@ type NewFoodModalProps = {
     onCreateFood: (food: Food) => void;
 };
 
+export type OptionalUnit = {
+    name: string;
+    value: number;
+};
+
 function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
     const [name, setName] = useState("");
     const [brandName, setBrandName] = useState("");
     const [referenceAmount, setReferenceAmount] = useState(100);
     const [referenceUnit, setReferenceUnit] = useState("g");
+    const [optionalUnits, setOptionalUnits] = useState<OptionalUnit[]>([]);
 
     const [calories, setCalories] = useState(0);
     const [protein, setProtein] = useState(0);
@@ -49,8 +55,10 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
             carbohydrates: carbs || 0,
             fat: fats || 0,
             referenceAmount,
-            referenceUnit
+            referenceUnit,
+            optionalUnits: optionalUnits
         };
+        console.log(newFood);
 
         try{
             const response = await fetch("https://localhost:7077/api/foods",{
@@ -155,7 +163,6 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                                 >
                                     <option value="g">g</option>
                                     <option value="ml">ml</option>
-                                    <option value="Stück">Stück</option>
                                 </select>
                             </div>
 
@@ -166,8 +173,7 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
 
                             <input
                                 id="food-calories"
-                                type="number"
-                                value={calories}
+                                type="number"                         
                                 onChange={(event) => setCalories(Number(event.target.value))}
                                 placeholder="z. B. 200"
                             />
@@ -181,7 +187,6 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                             <input
                                 id="food-protein"
                                 type="number"
-                                value={protein}
                                 onChange={(event) => setProtein(Number(event.target.value))}
                                 placeholder="z. B. 30g"
                             />
@@ -195,7 +200,6 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                             <input
                                 id="food-carbs"
                                 type="number"
-                                value={carbs}
                                 onChange={(event) => setCarbs(Number(event.target.value))}
                                 placeholder="z. B. 30g"
                             />
@@ -209,15 +213,53 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                             <input
                                 id="food-fats"
                                 type="number"
-                                value={fats}
                                 onChange={(event) => setFats(Number(event.target.value))}
                                 placeholder="z. B. 30g"
                             />
                         </div>
 
-
+                        <button 
+                            type="button"
+                            className="btn btn-optional-units"
+                            onClick={() => {if(optionalUnits.length < 3) setOptionalUnits([...optionalUnits, {name: "", value: 0}])}}
+                        >+ Optionale Einheiten</button>
                         </div>
 
+                        {
+                            optionalUnits.map((unit, index) => 
+                                <div key={index}>
+                                    <input
+                                        className="optional-unit-name"
+                                        placeholder="z.B. 1 Stück"
+                                        value={unit.name}
+                                        onChange={(event) =>
+                                            setOptionalUnits(
+                                                optionalUnits.map((currentUnit, currentIndex) =>
+                                                    currentIndex === index
+                                                        ? { ...currentUnit, name: event.target.value }
+                                                        : currentUnit
+                                                )
+                                            )
+                                        }
+                                    />
+                                    
+                                    <input
+                                        className="optional-unit-value"
+                                        placeholder="z.B. 30g"
+                                        value={unit.value}
+                                        onChange={(event) =>
+                                            setOptionalUnits(
+                                                optionalUnits.map((currentUnit, currentIndex) =>
+                                                    currentIndex === index
+                                                        ? { ...currentUnit, value: Number(event.target.value) }
+                                                        : currentUnit
+                                                )
+                                            )
+                                        }
+                                    />
+                                </div>
+                            )
+                        }
                     </div>
  
                 </div>

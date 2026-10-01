@@ -19,7 +19,9 @@ namespace Foodfolio.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Food>>> GetAllFoods()
         {
-            return await _context.Foods.ToListAsync();
+            return await _context.Foods
+                .Include(o => o.OptionalUnits)
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]
@@ -40,6 +42,8 @@ namespace Foodfolio.Server.Controllers
         {
             _context.Foods.Add(food);
             await _context.SaveChangesAsync();
+
+            var units = await _context.OptionalUnits.ToListAsync();
 
             return CreatedAtAction(
                 nameof(GetFood),

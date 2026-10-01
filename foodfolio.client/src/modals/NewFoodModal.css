@@ -20,3 +20,9 @@
     position: relative;
     z-index: 2001;
 }
+
+.btn-optional-units{
+    background-color: var(--color-highlight);
+    height: 40px;
+    margin: 20px 0px
+}

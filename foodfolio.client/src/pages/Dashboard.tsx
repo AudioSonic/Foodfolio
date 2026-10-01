@@ -13,7 +13,6 @@ import type { MealPlanRecipe } from "../types/MealPlanRecipe";
 import PortionSelector from "../modals/PortionSelector";
 
 function Dashboard() {
-
     const [dailyPlan, setDailyPlan] = useState<MealPlanEntry[]>([
         {
             mealType: "breakfast",

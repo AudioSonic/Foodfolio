@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./FoodSelector.css";
 import NewFoodModal from "./NewFoodModal";
 import type { Food } from "../types/Food";

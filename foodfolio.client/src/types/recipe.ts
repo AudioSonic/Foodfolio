@@ -10,4 +10,5 @@ export type Recipe = {
     protein: number;
     carbohydrates: number;
     fat: number;
+    ingredients: Food[];
 }

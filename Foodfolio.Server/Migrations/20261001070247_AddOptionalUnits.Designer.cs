@@ -2,6 +2,7 @@
 using Foodfolio.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foodfolio.Server.Migrations
 {
     [DbContext(typeof(FoodfolioDbContext))]
-    partial class FoodfolioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261001070247_AddOptionalUnits")]
+    partial class AddOptionalUnits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
@@ -73,7 +76,7 @@ namespace Foodfolio.Server.Migrations
 
                     b.HasIndex("FoodId");
 
-                    b.ToTable("OptionalUnits");
+                    b.ToTable("OptionalUnit");
                 });
 
             modelBuilder.Entity("Foodfolio.Server.Entities.Recipe", b =>
