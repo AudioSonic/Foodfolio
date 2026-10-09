@@ -13,7 +13,6 @@ function RecipeCard({recipe}: RecipeCardProps) {
         JSON.stringify(recipe)
     );
 
-    const calories = recipe.ingredients
   }
 
   return (

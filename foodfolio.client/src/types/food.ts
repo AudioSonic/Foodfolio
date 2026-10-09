@@ -1,4 +1,4 @@
-import type { OptionalUnit } from "../modals/NewFoodModal";
+import type { Unit } from "./Unit";
 
 export type Food = {
     id: number;
@@ -10,7 +10,7 @@ export type Food = {
     fat: number;
     referenceAmount: number;
     referenceUnit: string;
-    optionalUnits: OptionalUnit[];
+    units: Unit[];
 };
 
 export type CreateFoodData = {
@@ -22,5 +22,5 @@ export type CreateFoodData = {
     fat: number;
     referenceAmount: number;
     referenceUnit: string;
-    optionalUnits: OptionalUnit[];
+    units: Unit[];
 }

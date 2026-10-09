@@ -1,4 +1,5 @@
 using Foodfolio.Server.Data;
+using Foodfolio.Server.DTOs;
 using Foodfolio.Server.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,50 @@ namespace Foodfolio.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Recipe>>> GetAllRecipes()
+        public async Task<ActionResult<IEnumerable<RecipeDto>>> GetAllRecipes()
         {
-            return await _context.Recipes
+            var recipes = _context.Recipes
                 .Include(r => r.Ingredients)
                     .ThenInclude(i => i.Food)
+                .Include(r => r.Ingredients)
+                    .ThenInclude(i => i.Unit)
                 .ToListAsync();
+
+            var recipeDtos = (await recipes).Select(recipe => new RecipeDto
+            {
+                Id = recipe.Id,
+                Name = recipe.Name,
+                Description = recipe.Description,
+                ImageUrl = recipe.ImageUrl,
+                Servings = recipe.Servings,
+                Category = recipe.Category,
+
+                Ingredients = recipe.Ingredients.Select(ingredient => new RecipeIngredientDto
+                {
+                    Food = ingredient.Food,
+                    Quantity = ingredient.Quantity,
+                    UnitId = ingredient.UnitId,
+                    Unit = ingredient.Unit,
+                    NormalizedQuantity = ingredient.Quantity * (ingredient.Unit?.Value ?? 0),
+                    Calories = CalculateNutrient(ingredient, food => food.Calories),
+                    Protein = CalculateNutrient(ingredient, food => food.Protein),
+                    Carbohydrates = CalculateNutrient(ingredient, food => food.Carbohydrates),
+                    Fat = CalculateNutrient(ingredient, food => food.Fat)
+                }).ToList()
+            }).ToList();
+
+            return recipeDtos;
+        }
+
+        private static decimal CalculateNutrient(
+            RecipeIngredient ingredient,
+            Func<Food, decimal> nutrientSelector)
+        {
+            if (ingredient.Food == null || ingredient.Unit == null || ingredient.Food.ReferenceAmount <= 0)
+                return 0;
+
+            var normalizedQuantity = ingredient.Quantity * ingredient.Unit.Value;
+            return normalizedQuantity / ingredient.Food.ReferenceAmount * nutrientSelector(ingredient.Food);
         }
 
         [HttpGet("{id}")]
@@ -31,6 +70,8 @@ namespace Foodfolio.Server.Controllers
             var recipe = await _context.Recipes
                 .Include(r => r.Ingredients)
                     .ThenInclude(i => i.Food)
+                .Include(r => r.Ingredients)
+                    .ThenInclude(i => i.Unit)
                 .FirstOrDefaultAsync(r => r.Id == id);
 
             if (recipe == null)
@@ -44,6 +85,24 @@ namespace Foodfolio.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Recipe>> CreateRecipe(Recipe recipe)
         {
+            var unitIds = recipe.Ingredients.Select(i => i.UnitId).Distinct().ToList();
+            var units = await _context.Units
+                .Where(u => unitIds.Contains(u.Id))
+                .ToListAsync();
+
+            if (units.Count != unitIds.Count || recipe.Ingredients.Any(i => i.Quantity < 0))
+                return BadRequest("Ungültige Zutat oder Menge.");
+
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                var unit = units.Single(u => u.Id == ingredient.UnitId);
+                var food = await _context.Foods.FindAsync(ingredient.FoodId);
+                if (food == null || (unit.FoodId != null && unit.FoodId != food.Id) ||
+                    (unit.FoodId == null && ((food.ReferenceUnit == "g" && unit.Name is "ml" or "l") ||
+                                             (food.ReferenceUnit == "ml" && unit.Name is "g" or "kg"))))
+                    return BadRequest("Die Unit ist für dieses Lebensmittel nicht zulässig.");
+            }
+
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
 

@@ -1,4 +1,5 @@
 import type { CreateFoodData, Food } from "../types/Food";
+import type { Unit } from "../types/Unit";
 import "./NewFoodModal.css";
 import { useEffect, useState } from "react";
 
@@ -7,17 +8,13 @@ type NewFoodModalProps = {
     onCreateFood: (food: Food) => void;
 };
 
-export type OptionalUnit = {
-    name: string;
-    value: number;
-};
 
 function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
     const [name, setName] = useState("");
     const [brandName, setBrandName] = useState("");
     const [referenceAmount, setReferenceAmount] = useState(100);
     const [referenceUnit, setReferenceUnit] = useState("g");
-    const [optionalUnits, setOptionalUnits] = useState<OptionalUnit[]>([]);
+    const [units, setUnits] = useState<Unit[]>([]);
 
     const [calories, setCalories] = useState(0);
     const [protein, setProtein] = useState(0);
@@ -56,12 +53,12 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
             fat: fats || 0,
             referenceAmount,
             referenceUnit,
-            optionalUnits: optionalUnits
+            units: units
         };
         console.log(newFood);
 
         try{
-            const response = await fetch("https://localhost:7077/api/foods",{
+            const response = await fetch("/api/foods",{
                 method: "POST",
                 headers: {"content-type": "application/json"},
                 body: JSON.stringify(newFood)
@@ -221,20 +218,20 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                         <button 
                             type="button"
                             className="btn btn-optional-units"
-                            onClick={() => {if(optionalUnits.length < 3) setOptionalUnits([...optionalUnits, {name: "", value: 0}])}}
+                            onClick={() => {if(units.length < 3) setUnits([...units, {name: "", value: 0, foodId: 0, id: 0}])}}
                         >+ Optionale Einheiten</button>
                         </div>
 
                         {
-                            optionalUnits.map((unit, index) => 
+                            units.map((unit, index) => 
                                 <div key={index}>
                                     <input
                                         className="optional-unit-name"
                                         placeholder="z.B. 1 Stück"
                                         value={unit.name}
                                         onChange={(event) =>
-                                            setOptionalUnits(
-                                                optionalUnits.map((currentUnit, currentIndex) =>
+                                            setUnits(
+                                                units.map((currentUnit, currentIndex) =>
                                                     currentIndex === index
                                                         ? { ...currentUnit, name: event.target.value }
                                                         : currentUnit
@@ -248,8 +245,8 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                                         placeholder="z.B. 30g"
                                         value={unit.value}
                                         onChange={(event) =>
-                                            setOptionalUnits(
-                                                optionalUnits.map((currentUnit, currentIndex) =>
+                                            setUnits(
+                                                units.map((currentUnit, currentIndex) =>
                                                     currentIndex === index
                                                         ? { ...currentUnit, value: Number(event.target.value) }
                                                         : currentUnit

@@ -17,7 +17,7 @@ namespace Foodfolio.Server.Entities
 
         public decimal ReferenceAmount { get; set; }
         public string ReferenceUnit { get; set; } = "g";
-        public ICollection<OptionalUnit> OptionalUnits { get; set; } = new List<OptionalUnit>();
+        public ICollection<Unit> Units { get; set; } = new List<Unit>();
 
         [JsonIgnore]
         public ICollection<RecipeIngredient> RecipeIngredients { get; set; }

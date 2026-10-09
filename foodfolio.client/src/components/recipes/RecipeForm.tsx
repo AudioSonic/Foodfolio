@@ -1,18 +1,16 @@
 import FoodSelector from "../../modals/FoodSelector";
 import type { Food } from "../../types/Food";
+import type { RecipeFormData } from "../../types/RecipeFormData";
+import type { Unit } from "../../types/Unit";
 import "./RecipeForm.css";
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
-export type RecipeFormData = {
-    name: string;
-    description: string;
-    category: string;
-    servings: number;
-    imageUrl: string;
-    ingredients: {
-        foodId: number;
-        quantity: number;
-    }[];
+
+
+type SelectedIngredient = {
+    food: Food;
+    quantity: number;
+    unitId: number;
 };
 
 export type RecipeFormHandle = {
@@ -25,12 +23,13 @@ type RecipeFormProps = {
 
 const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function RecipeForm({ onSave }, ref) {
     const [isFoodSelectorOpen, setIsFoodSelectorOpen] = useState(false);
-    const [selectedFoods, setSelectedFoods] = useState<Food[]>([]);
+    const [selectedFoods, setSelectedFoods] = useState<SelectedIngredient[]>([]);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("Mittagessen");
     const [servings, setServings] = useState(1);
     const [imageUrl, setImageUrl] = useState("");
+    const [units, setUnits] = useState<Unit[]>([]);
 
     function handleSave() {
         const recipe = {
@@ -39,17 +38,46 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
             category,
             servings,
             imageUrl,
-            ingredients: selectedFoods.map(food => ({
-                foodId: food.id,
-                quantity: 0
+            ingredients: selectedFoods.map(ingredient => ({
+                foodId: ingredient.food.id,
+                quantity: ingredient.quantity,
+                unitId: ingredient.unitId
             }))
         };
 
-        console.log(recipe);
         onSave(recipe);
     }
 
-    useImperativeHandle(ref, () => ({ save: handleSave }), [name, description, category, servings, imageUrl, selectedFoods, onSave]);
+    function getAvailableUnits(food: Food){
+        const baseUnits = food.referenceUnit === "g" ? ["g", "kg"] : ["ml", "l"];
+        return units.filter(unit =>
+            (unit.foodId === null && baseUnits.includes(unit.name)) ||
+            unit.foodId === food.id
+        );
+    }
+
+    useEffect(() => {
+        async function getUnits(){
+            try{
+                const response = await fetch("/api/units");
+                if(!response.ok){
+                    console.error("Fehler beim Laden der Einheiten");
+                    return;
+                }
+
+                const data = await response.json();
+                setUnits(data);
+            }
+            catch(error){
+                console.error("Die Einheiten konnten nicht geladen werden", error)
+            }
+        }
+        getUnits();
+    },[]
+    )
+
+
+    useImperativeHandle(ref, () => ({ save: handleSave }), [name, description, category, servings, imageUrl,selectedFoods, onSave]);
 
     return (
         <div className="recipe-form">
@@ -122,37 +150,76 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
                     </div>
                 ) : (
                     <div className="ingredients-list">
-                        {selectedFoods.map((food, index) => (
-                            <div
-                                key={food.id}
-                                className="ingredient-item"
-                            >
-                                <div className="ingredient-information">
-                                    <span className="ingredient-name">
-                                        {food.name}
-                                    </span>
+    {selectedFoods.map((ingredient, index) => {
+        return (
+            <div
+                key={ingredient.food.id}
+                className="ingredient-item"
+                >
+                <div className="ingredient-information">
+                    <span className="ingredient-name">
+                        {ingredient.food.name}
+                    </span>
 
-                                    {food.brandName && (
-                                        <span className="ingredient-brand">
-                                            {food.brandName}
-                                        </span>
-                                    )}
-                                </div>
+                    {ingredient.food.brandName && (
+                        <span className="ingredient-brand">
+                            {ingredient.food.brandName}
+                        </span>
+                    )}
+                </div>
 
-                                <button
-                                    type="button"
-                                    className="remove-ingredient-button"
-                                    onClick={() => {
-                                        setSelectedFoods(current =>
-                                            current.filter((_, currentIndex) => currentIndex !== index)
-                                        );
-                                    }}
-                                >
-                                    ×
-                                </button>
-                            </div>
-                        ))}
-                    </div>
+               <input
+                    type="number"
+                    value={ingredient.quantity}
+                    onChange={(event) => {
+                        const quantity = Number(event.target.value);
+
+                        setSelectedFoods(current =>
+                            current.map((item, currentIndex) =>
+                                currentIndex === index
+                                    ? { ...item, quantity }
+                                    : item
+                            )
+                        );
+                    }}
+                />
+
+                <select
+                    value={ingredient.unitId}
+                    onChange={(event) => {
+                        const unitId = Number(event.target.value);
+
+                        setSelectedFoods(current =>
+                            current.map((item, currentIndex) =>
+                                currentIndex === index
+                                    ? { ...item, unitId }
+                                    : item
+                            )
+                        );
+                    }}
+                >
+                    {getAvailableUnits(ingredient.food).map(unit => (
+                        <option key={unit.id} value={unit.id}>
+                            {unit.name}
+                        </option>
+                    ))}
+                </select>
+
+                <button
+                    type="button"
+                    className="remove-ingredient-button"
+                    onClick={() => {
+                        setSelectedFoods(current =>
+                            current.filter((_, currentIndex) => currentIndex !== index)
+                        );
+                    }}
+                    >
+                    ×
+                </button>
+            </div>
+                    );
+                })}
+                </div>
                 )}
                             
                 <button
@@ -167,9 +234,20 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
               <FoodSelector
                   onClose={() => setIsFoodSelectorOpen(false)}
                   onSelectFood={(food) => {
-                    setSelectedFoods(current => [...current, food]);
+                    setSelectedFoods(current => [
+                        ...current,
+                        {
+                            food: food,
+                            quantity: 0,
+                            unitId: units.find(unit =>
+                                unit.foodId === null &&
+                                unit.name === food.referenceUnit
+                            )?.id ?? 1
+                        }
+                    ]);
+
                     setIsFoodSelectorOpen(false);
-    }}
+                }}
               />
           )}
         </div>

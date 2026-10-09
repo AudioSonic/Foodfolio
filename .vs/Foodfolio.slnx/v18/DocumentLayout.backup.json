@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "D:\\GitHub\\Foodfolio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|d:\\github\\foodfolio\\foodfolio.server\\controllers\\foodscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|solutionrelative:foodfolio.server\\controllers\\foodscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|d:\\github\\foodfolio\\foodfolio.server\\controllers\\recipescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|solutionrelative:foodfolio.server\\controllers\\recipescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|d:\\github\\foodfolio\\foodfolio.server\\entities\\food.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|solutionrelative:foodfolio.server\\entities\\food.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|d:\\github\\foodfolio\\foodfolio.server\\entities\\unit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|solutionrelative:foodfolio.server\\entities\\unit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|d:\\github\\foodfolio\\foodfolio.server\\entities\\optionalunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|solutionrelative:foodfolio.server\\entities\\optionalunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|d:\\github\\foodfolio\\foodfolio.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|solutionrelative:foodfolio.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|d:\\github\\foodfolio\\foodfolio.server\\controllers\\unitscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0099D500-23B6-2312-8D86-9D29FA648C58}|Foodfolio.Server\\Foodfolio.Server.csproj|solutionrelative:foodfolio.server\\controllers\\unitscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,54 +27,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FoodsController.cs",
-              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Controllers\\FoodsController.cs",
-              "RelativeDocumentMoniker": "Foodfolio.Server\\Controllers\\FoodsController.cs",
-              "ToolTip": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Controllers\\FoodsController.cs",
-              "RelativeToolTip": "Foodfolio.Server\\Controllers\\FoodsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAfAAAAAAAAAA==",
+              "Title": "RecipesController.cs",
+              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Controllers\\RecipesController.cs",
+              "RelativeDocumentMoniker": "Foodfolio.Server\\Controllers\\RecipesController.cs",
+              "ToolTip": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Controllers\\RecipesController.cs",
+              "RelativeToolTip": "Foodfolio.Server\\Controllers\\RecipesController.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAowIIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-01T07:18:28.63Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Food.cs",
-              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Entities\\Food.cs",
-              "RelativeDocumentMoniker": "Foodfolio.Server\\Entities\\Food.cs",
-              "ToolTip": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Entities\\Food.cs",
-              "RelativeToolTip": "Foodfolio.Server\\Entities\\Food.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-01T06:56:51.467Z",
+              "WhenOpened": "2026-10-07T07:43:01.563Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "OptionalUnit.cs",
-              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Entities\\OptionalUnit.cs",
-              "RelativeDocumentMoniker": "Foodfolio.Server\\Entities\\OptionalUnit.cs",
-              "ToolTip": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Entities\\OptionalUnit.cs",
-              "RelativeToolTip": "Foodfolio.Server\\Entities\\OptionalUnit.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Title": "UnitsController.cs",
+              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Controllers\\UnitsController.cs",
+              "RelativeDocumentMoniker": "Foodfolio.Server\\Controllers\\UnitsController.cs",
+              "ToolTip": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Controllers\\UnitsController.cs",
+              "RelativeToolTip": "Foodfolio.Server\\Controllers\\UnitsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-01T06:54:31.158Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-02T10:04:42.231Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Program.cs",
-              "RelativeDocumentMoniker": "Foodfolio.Server\\Program.cs",
-              "ToolTip": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Program.cs",
-              "RelativeToolTip": "Foodfolio.Server\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAowBMAAAADAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Unit.cs",
+              "DocumentMoniker": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Entities\\Unit.cs",
+              "RelativeDocumentMoniker": "Foodfolio.Server\\Entities\\Unit.cs",
+              "ToolTip": "D:\\GitHub\\Foodfolio\\Foodfolio.Server\\Entities\\Unit.cs",
+              "RelativeToolTip": "Foodfolio.Server\\Entities\\Unit.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-30T08:43:10.96Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-02T08:22:59.599Z"
             }
           ]
         }

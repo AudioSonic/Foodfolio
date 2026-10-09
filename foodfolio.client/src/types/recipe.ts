@@ -1,3 +1,5 @@
+import type { RecipeIngredient } from "./RecipeIngredient";
+
 export type Recipe = {
     id: number;
     name: string;
@@ -10,5 +12,5 @@ export type Recipe = {
     protein: number;
     carbohydrates: number;
     fat: number;
-    ingredients: Food[];
+    ingredients: RecipeIngredient[];
 }

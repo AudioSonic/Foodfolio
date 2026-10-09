@@ -15,5 +15,7 @@ namespace Foodfolio.Server.Entities
         public Food? Food { get; set; }
 
         public decimal Quantity { get; set; }
+        public int UnitId { get; set; }
+        public Unit? Unit { get; set; }
     }
 }

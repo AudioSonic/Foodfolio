@@ -1,5 +1,6 @@
 import RecipeForm from "../components/recipes/RecipeForm";
-import type { RecipeFormData, RecipeFormHandle } from "../components/recipes/RecipeForm";
+import type { RecipeFormHandle } from "../components/recipes/RecipeForm";
+import type { RecipeFormData } from "../types/RecipeFormData";
 import "./RecipeModal.css";
 import { useEffect, useRef } from "react";
 

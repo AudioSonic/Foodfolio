@@ -12,7 +12,7 @@ function RecipeLibrary() {
   useEffect(() => {
       async function LoadRecipes(){
         try{
-          const response = await fetch("https://localhost:7077/api/recipes");
+          const response = await fetch("/api/recipes");
 
           if(!response.ok){
             console.error("Fehler beim Laden der Rezepte");
@@ -91,7 +91,7 @@ function RecipeLibrary() {
           {
 
               try{
-                const response = await fetch("https://localhost:7077/api/recipes", {
+                const response = await fetch("/api/recipes", {
                   method: "POST", 
                   headers: {"Content-Type": "application/json"}, 
                   body: JSON.stringify(recipe)})

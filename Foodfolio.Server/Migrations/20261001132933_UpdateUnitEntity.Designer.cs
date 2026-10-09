@@ -2,6 +2,7 @@
 using Foodfolio.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foodfolio.Server.Migrations
 {
     [DbContext(typeof(FoodfolioDbContext))]
-    partial class FoodfolioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261001132933_UpdateUnitEntity")]
+    partial class UpdateUnitEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
@@ -131,32 +134,6 @@ namespace Foodfolio.Server.Migrations
                     b.HasIndex("FoodId");
 
                     b.ToTable("Units");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "g",
-                            Value = 1m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "kg",
-                            Value = 1000m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "ml",
-                            Value = 1m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "l",
-                            Value = 1000m
-                        });
                 });
 
             modelBuilder.Entity("Foodfolio.Server.Entities.RecipeIngredient", b =>
@@ -190,8 +167,7 @@ namespace Foodfolio.Server.Migrations
                 {
                     b.HasOne("Foodfolio.Server.Entities.Food", "Food")
                         .WithMany("Units")
-                        .HasForeignKey("FoodId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("FoodId");
 
                     b.Navigation("Food");
                 });

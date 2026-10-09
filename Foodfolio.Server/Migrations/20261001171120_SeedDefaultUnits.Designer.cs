@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foodfolio.Server.Migrations
 {
     [DbContext(typeof(FoodfolioDbContext))]
-    [Migration("20261001071433_FixOptionalUnits")]
-    partial class FixOptionalUnits
+    [Migration("20261001171120_SeedDefaultUnits")]
+    partial class SeedDefaultUnits
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,29 +54,6 @@ namespace Foodfolio.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Foods");
-                });
-
-            modelBuilder.Entity("Foodfolio.Server.Entities.OptionalUnit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("FoodId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FoodId");
-
-                    b.ToTable("OptionalUnits");
                 });
 
             modelBuilder.Entity("Foodfolio.Server.Entities.Recipe", b =>
@@ -122,22 +99,67 @@ namespace Foodfolio.Server.Migrations
                     b.Property<int>("RecipeId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("UnitId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FoodId");
 
                     b.HasIndex("RecipeId");
 
+                    b.HasIndex("UnitId");
+
                     b.ToTable("RecipeIngredients");
                 });
 
-            modelBuilder.Entity("Foodfolio.Server.Entities.OptionalUnit", b =>
+            modelBuilder.Entity("Foodfolio.Server.Entities.Unit", b =>
                 {
-                    b.HasOne("Foodfolio.Server.Entities.Food", null)
-                        .WithMany("OptionalUnits")
-                        .HasForeignKey("FoodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("FoodId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FoodId");
+
+                    b.ToTable("Units");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "g",
+                            Value = 1m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "kg",
+                            Value = 1000m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "ml",
+                            Value = 1m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "l",
+                            Value = 1000m
+                        });
                 });
 
             modelBuilder.Entity("Foodfolio.Server.Entities.RecipeIngredient", b =>
@@ -154,16 +176,33 @@ namespace Foodfolio.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Foodfolio.Server.Entities.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Food");
 
                     b.Navigation("Recipe");
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("Foodfolio.Server.Entities.Unit", b =>
+                {
+                    b.HasOne("Foodfolio.Server.Entities.Food", "Food")
+                        .WithMany("Units")
+                        .HasForeignKey("FoodId");
+
+                    b.Navigation("Food");
                 });
 
             modelBuilder.Entity("Foodfolio.Server.Entities.Food", b =>
                 {
-                    b.Navigation("OptionalUnits");
-
                     b.Navigation("RecipeIngredients");
+
+                    b.Navigation("Units");
                 });
 
             modelBuilder.Entity("Foodfolio.Server.Entities.Recipe", b =>

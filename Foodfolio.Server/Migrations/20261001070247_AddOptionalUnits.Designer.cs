@@ -134,7 +134,7 @@ namespace Foodfolio.Server.Migrations
             modelBuilder.Entity("Foodfolio.Server.Entities.OptionalUnit", b =>
                 {
                     b.HasOne("Foodfolio.Server.Entities.Food", null)
-                        .WithMany("OptionalUnits")
+                        .WithMany("Units")
                         .HasForeignKey("FoodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -161,7 +161,7 @@ namespace Foodfolio.Server.Migrations
 
             modelBuilder.Entity("Foodfolio.Server.Entities.Food", b =>
                 {
-                    b.Navigation("OptionalUnits");
+                    b.Navigation("Units");
 
                     b.Navigation("RecipeIngredients");
                 });

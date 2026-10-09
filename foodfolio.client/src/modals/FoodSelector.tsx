@@ -20,7 +20,7 @@ function FoodSelector({ onClose, onSelectFood }: FoodSelectorProps) {
     useEffect(() => {
         async function loadFoods() {
         try{
-            const response = await fetch("https://localhost:7077/api/foods");
+            const response = await fetch("/api/foods");
 
             if(!response.ok){
                 console.error("Fehler beim Laden der Lebensmittel");
