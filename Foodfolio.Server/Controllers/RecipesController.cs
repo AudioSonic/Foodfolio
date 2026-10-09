@@ -27,28 +27,7 @@ namespace Foodfolio.Server.Controllers
                     .ThenInclude(i => i.Unit)
                 .ToListAsync();
 
-            var recipeDtos = (await recipes).Select(recipe => new RecipeDto
-            {
-                Id = recipe.Id,
-                Name = recipe.Name,
-                Description = recipe.Description,
-                ImageUrl = recipe.ImageUrl,
-                Servings = recipe.Servings,
-                Category = recipe.Category,
-
-                Ingredients = recipe.Ingredients.Select(ingredient => new RecipeIngredientDto
-                {
-                    Food = ingredient.Food,
-                    Quantity = ingredient.Quantity,
-                    UnitId = ingredient.UnitId,
-                    Unit = ingredient.Unit,
-                    NormalizedQuantity = ingredient.Quantity * (ingredient.Unit?.Value ?? 0),
-                    Calories = CalculateNutrient(ingredient, food => food.Calories),
-                    Protein = CalculateNutrient(ingredient, food => food.Protein),
-                    Carbohydrates = CalculateNutrient(ingredient, food => food.Carbohydrates),
-                    Fat = CalculateNutrient(ingredient, food => food.Fat)
-                }).ToList()
-            }).ToList();
+            var recipeDtos = (await recipes).Select(ToDto).ToList();
 
             return recipeDtos;
         }
@@ -64,8 +43,49 @@ namespace Foodfolio.Server.Controllers
             return normalizedQuantity / ingredient.Food.ReferenceAmount * nutrientSelector(ingredient.Food);
         }
 
+        private static RecipeDto ToDto(Recipe recipe)
+        {
+            var ingredients = recipe.Ingredients.Select(ingredient => new RecipeIngredientDto
+            {
+                Food = ingredient.Food,
+                Quantity = ingredient.Quantity,
+                UnitId = ingredient.UnitId,
+                Unit = ingredient.Unit,
+                NormalizedQuantity = ingredient.Quantity * (ingredient.Unit?.Value ?? 0),
+                Calories = CalculateNutrient(ingredient, food => food.Calories),
+                Protein = CalculateNutrient(ingredient, food => food.Protein),
+                Carbohydrates = CalculateNutrient(ingredient, food => food.Carbohydrates),
+                Fat = CalculateNutrient(ingredient, food => food.Fat)
+            }).ToList();
+
+            var servings = recipe.Servings > 0 ? recipe.Servings : 1;
+            var calories = ingredients.Sum(i => i.Calories);
+            var protein = ingredients.Sum(i => i.Protein);
+            var carbohydrates = ingredients.Sum(i => i.Carbohydrates);
+            var fat = ingredients.Sum(i => i.Fat);
+
+            return new RecipeDto
+            {
+                Id = recipe.Id,
+                Name = recipe.Name,
+                Description = recipe.Description,
+                ImageUrl = recipe.ImageUrl,
+                Servings = recipe.Servings,
+                Category = recipe.Category,
+                Calories = calories,
+                Protein = protein,
+                Carbohydrates = carbohydrates,
+                Fat = fat,
+                CaloriesPerServing = calories / servings,
+                ProteinPerServing = protein / servings,
+                CarbohydratesPerServing = carbohydrates / servings,
+                FatPerServing = fat / servings,
+                Ingredients = ingredients
+            };
+        }
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recipe>> GetRecipe(int id)
+        public async Task<ActionResult<RecipeDto>> GetRecipe(int id)
         {
             var recipe = await _context.Recipes
                 .Include(r => r.Ingredients)
@@ -79,7 +99,7 @@ namespace Foodfolio.Server.Controllers
                 return NotFound();
             }
 
-            return recipe;
+            return ToDto(recipe);
         }
 
         [HttpPost]

@@ -169,6 +169,7 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
                 </div>
 
                <input
+                    className="ingredient-quantity"
                     type="number"
                     value={ingredient.quantity}
                     onChange={(event) => {

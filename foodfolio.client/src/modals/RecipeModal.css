@@ -12,8 +12,9 @@
 }
 
 .recipe-modal {
-    width: min(900px, 90vw);
-    max-height: 90vh;
+    width: min(1400px, calc(100vw - 32px));
+    height: 95vh;
+    max-height: 95vh;
 
     background-color: var(--color-foreground);
     border-radius: var(--border-radius-default);
@@ -47,6 +48,7 @@
 
 .recipe-modal-content {
     padding: 24px;
+    overflow-y: auto;
 }
 
 .create-recipe-button{

@@ -74,7 +74,7 @@
 .ingredients-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 12px;
 }
 
 .ingredients-header h3 {
@@ -135,6 +135,9 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 6px;
 }
 
 .ingredient-item {
@@ -146,12 +149,15 @@
 
     border: 1px solid var(--border-color);
     border-radius: 8px;
+    gap: 7px;
 }
 
 .ingredient-information {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    min-width: 0;
+    flex: 1;
 }
 
 .ingredient-name {
@@ -163,11 +169,44 @@
     color: #888;
 }
 
+.ingredient-quantity {
+    width: 200px;
+    flex: 0 0 150px;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    background-color: white;
+    -moz-appearance: textfield;
+}
+
+.ingredient-item select {
+    width: 130px;
+    flex: 0 0 110px;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    background-color: rgb(243, 243, 243);
+}
+
+.ingredient-quantity::-webkit-outer-spin-button,
+.ingredient-quantity::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+.ingredient-quantity:focus,
+.ingredient-item select:focus {
+    outline: none;
+    border-color: var(--color-highlight);
+}
+
 .remove-ingredient-button {
     border: none;
     background: none;
 
     font-size: 22px;
+    width: 28px;
+    flex: 0 0 28px;
     color: #777;
 
     cursor: pointer;
