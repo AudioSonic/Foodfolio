@@ -13,6 +13,8 @@
         public int Servings { get; set; }
 
         public string Category { get; set; } = "Mittagessen";
+        public string? Source { get; set; }
+        public string? SourceUrl { get; set; }
         public decimal Calories { get; set; }
         public decimal Protein { get; set; }
         public decimal Carbohydrates { get; set; }
@@ -24,5 +26,8 @@
 
         public ICollection<RecipeIngredientDto> Ingredients { get; set; }
             = new List<RecipeIngredientDto>();
+
+        public ICollection<Foodfolio.Server.Entities.RecipeStep> Steps { get; set; }
+            = new List<Foodfolio.Server.Entities.RecipeStep>();
     }
 }

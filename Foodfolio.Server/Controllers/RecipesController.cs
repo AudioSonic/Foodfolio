@@ -25,6 +25,7 @@ namespace Foodfolio.Server.Controllers
                     .ThenInclude(i => i.Food)
                 .Include(r => r.Ingredients)
                     .ThenInclude(i => i.Unit)
+                .Include(r => r.Steps)
                 .ToListAsync();
 
             var recipeDtos = (await recipes).Select(ToDto).ToList();
@@ -72,6 +73,8 @@ namespace Foodfolio.Server.Controllers
                 ImageUrl = recipe.ImageUrl,
                 Servings = recipe.Servings,
                 Category = recipe.Category,
+                Source = recipe.Source,
+                SourceUrl = recipe.SourceUrl,
                 Calories = calories,
                 Protein = protein,
                 Carbohydrates = carbohydrates,
@@ -81,6 +84,7 @@ namespace Foodfolio.Server.Controllers
                 CarbohydratesPerServing = carbohydrates / servings,
                 FatPerServing = fat / servings,
                 Ingredients = ingredients
+                ,Steps = recipe.Steps.OrderBy(step => step.Order).ToList()
             };
         }
 
@@ -92,6 +96,7 @@ namespace Foodfolio.Server.Controllers
                     .ThenInclude(i => i.Food)
                 .Include(r => r.Ingredients)
                     .ThenInclude(i => i.Unit)
+                .Include(r => r.Steps)
                 .FirstOrDefaultAsync(r => r.Id == id);
 
             if (recipe == null)
@@ -105,6 +110,7 @@ namespace Foodfolio.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Recipe>> CreateRecipe(Recipe recipe)
         {
+            recipe.Steps = CleanAndOrderSteps(recipe.Steps);
             var unitIds = recipe.Ingredients.Select(i => i.UnitId).Distinct().ToList();
             var units = await _context.Units
                 .Where(u => unitIds.Contains(u.Id))
@@ -142,6 +148,7 @@ namespace Foodfolio.Server.Controllers
 
             var existingRecipe = await _context.Recipes
                 .Include(r => r.Ingredients)
+                .Include(r => r.Steps)
                 .FirstOrDefaultAsync(r => r.Id == id);
 
             if (existingRecipe == null)
@@ -153,6 +160,11 @@ namespace Foodfolio.Server.Controllers
             existingRecipe.Description = recipe.Description;
             existingRecipe.ImageUrl = recipe.ImageUrl;
             existingRecipe.Servings = recipe.Servings;
+            existingRecipe.Source = recipe.Source;
+            existingRecipe.SourceUrl = recipe.SourceUrl;
+
+            _context.RecipeSteps.RemoveRange(existingRecipe.Steps);
+            existingRecipe.Steps = CleanAndOrderSteps(recipe.Steps);
 
             _context.RecipeIngredients.RemoveRange(existingRecipe.Ingredients);
 
@@ -161,6 +173,21 @@ namespace Foodfolio.Server.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        private static List<RecipeStep> CleanAndOrderSteps(IEnumerable<RecipeStep>? steps)
+        {
+            return (steps ?? Enumerable.Empty<RecipeStep>())
+                .Where(step => !string.IsNullOrWhiteSpace(step.Instruction))
+                .Select((step, index) => new RecipeStep
+                {
+                    // Steps werden bei einem Update vollständig ersetzt; die Datenbank vergibt neue IDs.
+                    Id = 0,
+                    RecipeId = step.RecipeId,
+                    Order = index + 1,
+                    Instruction = step.Instruction.Trim()
+                })
+                .ToList();
         }
 
         [HttpDelete("{id}")]

@@ -9,8 +9,14 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
 type SelectedIngredient = {
     food: Food;
-    quantity: number;
+    quantity: string;
     unitId: number;
+};
+
+type RecipeStep = {
+    id: number;
+    order: number;
+    instruction: string;
 };
 
 export type RecipeFormHandle = {
@@ -29,7 +35,12 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
     const [category, setCategory] = useState("Mittagessen");
     const [servings, setServings] = useState(1);
     const [imageUrl, setImageUrl] = useState("");
+    const [imagePreviewError, setImagePreviewError] = useState(false);
+    const [source, setSource] = useState("");
+    const [sourceUrl, setSourceUrl] = useState("");
     const [units, setUnits] = useState<Unit[]>([]);
+    const [steps, setSteps] = useState<RecipeStep[]>([]);
+    const [draggedStepIndex, setDraggedStepIndex] = useState<number | null>(null);
 
     function handleSave() {
         const recipe = {
@@ -38,9 +49,15 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
             category,
             servings,
             imageUrl,
+            source: source || undefined,
+            sourceUrl: sourceUrl || undefined,
+            steps: steps.map((step, index) => ({
+                order: index + 1,
+                instruction: step.instruction
+            })),
             ingredients: selectedFoods.map(ingredient => ({
                 foodId: ingredient.food.id,
-                quantity: ingredient.quantity,
+                quantity: Number.parseFloat(ingredient.quantity) || 0,
                 unitId: ingredient.unitId
             }))
         };
@@ -77,7 +94,7 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
     )
 
 
-    useImperativeHandle(ref, () => ({ save: handleSave }), [name, description, category, servings, imageUrl,selectedFoods, onSave]);
+    useImperativeHandle(ref, () => ({ save: handleSave }), [name, description, category, servings, imageUrl, source, sourceUrl, selectedFoods, steps, onSave]);
 
     return (
         <div className="recipe-form">
@@ -116,26 +133,53 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
                     </select>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="recipe-servings">Portionen</label>
-                    <input
-                        id="recipe-servings"
-                        type="number"
-                        min="1"
-                        value={servings}
-                        onChange={(event) => setServings(Number(event.target.value))}
-                    />
+                <div className="recipe-source-fields">
+                    <div className="form-group">
+                        <label htmlFor="recipe-source">Quelle</label>
+                        <input id="recipe-source" type="text" value={source} onChange={(event) => setSource(event.target.value)} placeholder="z. B. YouTube" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="recipe-source-url">Quellen-URL</label>
+                        <input id="recipe-source-url" type="url" value={sourceUrl} onChange={(event) => setSourceUrl(event.target.value)} placeholder="https://..." />
+                    </div>
                 </div>
+            </div>
 
+            <div className="servings-panel">
+                <span className="servings-label">Portionen</span>
+                <div className="servings-control">
+                    <button type="button" onClick={() => setServings(current => Math.max(1, current - 1))}>−</button>
+                    <output aria-live="polite">{servings}</output>
+                    <button type="button" onClick={() => setServings(current => current + 1)}>+</button>
+                </div>
+            </div>
+
+            <div className="image-panel">
                 <div className="form-group">
                     <label htmlFor="recipe-image">Bild</label>
                     <input
                         id="recipe-image"
                         type="text"
                         value={imageUrl}
-                        onChange={(event) => setImageUrl(event.target.value)}
+                        onChange={(event) => {
+                            setImageUrl(event.target.value);
+                            setImagePreviewError(false);
+                        }}
                         placeholder="Bild-URL"
                     />
+                    {imageUrl.trim() && !imagePreviewError && (
+                        <img
+                            className="recipe-image-preview"
+                            src={imageUrl.trim()}
+                            alt="Rezeptvorschau"
+                            onError={() => setImagePreviewError(true)}
+                        />
+                    )}
+                    {imageUrl.trim() && imagePreviewError && (
+                        <span className="recipe-image-preview-error">
+                            Das Bild konnte unter dieser URL nicht geladen werden.
+                        </span>
+                    )}
                 </div>
             </div>
 
@@ -173,7 +217,7 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
                     type="number"
                     value={ingredient.quantity}
                     onChange={(event) => {
-                        const quantity = Number(event.target.value);
+                        const quantity = event.target.value;
 
                         setSelectedFoods(current =>
                             current.map((item, currentIndex) =>
@@ -218,6 +262,7 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
                     ×
                 </button>
             </div>
+
                     );
                 })}
                 </div>
@@ -231,6 +276,38 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
                     + Zutat hinzufügen
                 </button>
             </div>
+            <div className="recipe-steps-panel">
+                <div className="ingredients-header"><h3>Zubereitung</h3></div>
+                {steps.length === 0 && (
+                    <div className="ingredients-empty">
+                        <span>Noch keine Zubereitungsschritte hinzugefügt.</span>
+                    </div>
+                )}
+                {steps.length > 0 && <div className="steps-list">
+                    {steps.map((step, index) => <div className="recipe-step-item" key={step.id} draggable
+                        onDragStart={() => setDraggedStepIndex(index)}
+                        onDragOver={(event) => event.preventDefault()}
+                        onDrop={() => {
+                            if (draggedStepIndex === null || draggedStepIndex === index) return;
+                            setSteps(current => {
+                                const next = [...current];
+                                const [moved] = next.splice(draggedStepIndex, 1);
+                                next.splice(index, 0, moved);
+                                return next.map((item, itemIndex) => ({ ...item, order: itemIndex + 1 }));
+                            });
+                            setDraggedStepIndex(null);
+                        }}
+                        onDragEnd={() => setDraggedStepIndex(null)}>
+                        <span className="step-drag-handle" aria-label="Schritt verschieben">⋮⋮</span>
+                        <span className="step-number">{index + 1}</span>
+                        <textarea value={step.instruction} rows={1} placeholder="Zubereitungsschritt"
+                            onChange={(event) => setSteps(current => current.map((item, itemIndex) => itemIndex === index ? { ...item, instruction: event.target.value } : item))}
+                            onInput={(event) => { event.currentTarget.style.height = "auto"; event.currentTarget.style.height = `${event.currentTarget.scrollHeight}px`; }} />
+                        <button type="button" className="remove-step-button" onClick={() => setSteps(current => current.filter((_, itemIndex) => itemIndex !== index))}>×</button>
+                    </div>)}
+                </div>}
+                <button type="button" className="btn add-ingredient-button" onClick={() => setSteps(current => [...current, { id: Date.now(), order: current.length + 1, instruction: "" }])}>+ Schritt hinzufügen</button>
+            </div>
           {isFoodSelectorOpen && (
               <FoodSelector
                   onClose={() => setIsFoodSelectorOpen(false)}
@@ -239,7 +316,7 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
                         ...current,
                         {
                             food: food,
-                            quantity: 0,
+                            quantity: "",
                             unitId: units.find(unit =>
                                 unit.foodId === null &&
                                 unit.name === food.referenceUnit

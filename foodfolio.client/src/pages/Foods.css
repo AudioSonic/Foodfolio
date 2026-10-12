@@ -1,0 +1,13 @@
+.foods-page { padding: 28px; }
+.foods-page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.foods-page-header h1 { margin: 0; }
+.foods-add-button { background: var(--color-primary); color: white; padding: 10px 16px; border-radius: 8px; }
+.foods-list { display: flex; flex-direction: column; gap: 10px; }
+.food-list-item { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 20px; padding: 16px 20px; border: 1px solid var(--border-color); border-radius: 10px; background: var(--color-foreground); }
+.food-list-item h2, .food-list-item p { margin: 0; }
+.food-list-item p { color: #888; font-size: 13px; margin-top: 4px; }
+.food-list-nutrition { color: #666; font-size: 14px; }
+.food-list-actions { display: flex; gap: 8px; }
+.food-list-actions button { padding: 8px 10px; border-radius: 6px; background: #eef4e5; color: #416d20; }
+.food-list-actions .delete-food-button { background: #fbeaea; color: #b22; }
+.foods-empty { color: #888; }

@@ -14,7 +14,14 @@
 
         public string Category { get; set; } = "Mittagessen";
 
+        public string? Source { get; set; }
+
+        public string? SourceUrl { get; set; }
+
         public ICollection<RecipeIngredient> Ingredients { get; set; }
             = new List<RecipeIngredient>();
+
+        public ICollection<RecipeStep> Steps { get; set; }
+            = new List<RecipeStep>();
     }
 }

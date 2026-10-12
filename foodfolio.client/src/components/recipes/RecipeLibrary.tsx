@@ -1,36 +1,33 @@
 import "./RecipeLibrary.css"
 import RecipeCard from "./RecipeCard";
 import type { Recipe } from "../../types/Recipe";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import RecipeModal from "../../modals/RecipeModal";
 
 function RecipeLibrary() {
     const [recipeList, setRecipeList] = useState<Recipe[]>([]);
-    const [filteredList, setFilteredList] = useState<Recipe[]>([]);
-    const [selectedCategory, setSelectedCategory] = useState("Alle");
+  const [filteredList, setFilteredList] = useState<Recipe[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("Alle");
+
+  const loadRecipes = useCallback(async () => {
+    try {
+      const response = await fetch("/api/recipes");
+      if (!response.ok) {
+        console.error("Fehler beim Laden der Rezepte");
+        return;
+      }
+
+      const recipes = await response.json();
+      setRecipeList(recipes);
+      setFilteredList(recipes);
+    } catch (error) {
+      console.error("Fehler beim Laden der Rezepte", error);
+    }
+  }, []);
 
   useEffect(() => {
-      async function LoadRecipes(){
-        try{
-          const response = await fetch("/api/recipes");
-
-          if(!response.ok){
-            console.error("Fehler beim Laden der Rezepte");
-            return;
-          }
-
-          const recipes = await response.json();
-          setRecipeList(recipes);
-
-          setFilteredList(recipes);
-      }
-
-      catch(error){
-        console.error("Fehler beim Laden der Rezepte", error);
-        }
-      }
-        LoadRecipes();
-  },[]);
+      loadRecipes();
+  }, [loadRecipes]);
 
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
 
@@ -97,11 +94,13 @@ function RecipeLibrary() {
                   body: JSON.stringify(recipe)})
 
                 if(!response.ok){
-                  console.error("Fehler beim Speichern des Rezepts.");
+                  const errorDetails = await response.text();
+                  console.error("Fehler beim Speichern des Rezepts.", response.status, errorDetails);
                   return;
                 }
 
-                setIsRecipeModalOpen(false)
+                await loadRecipes();
+                setIsRecipeModalOpen(false);
               }
 
               catch(error){

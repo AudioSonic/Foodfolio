@@ -6,20 +6,23 @@ import { useEffect, useState } from "react";
 type NewFoodModalProps = {
     onClose: () => void;
     onCreateFood: (food: Food) => void;
+    food?: Food;
+    onUpdateFood?: (food: Food) => void;
 };
 
 
-function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
-    const [name, setName] = useState("");
-    const [brandName, setBrandName] = useState("");
-    const [referenceAmount, setReferenceAmount] = useState(100);
-    const [referenceUnit, setReferenceUnit] = useState("g");
-    const [units, setUnits] = useState<Unit[]>([]);
+function NewFoodModal({ onClose, onCreateFood, food, onUpdateFood }: NewFoodModalProps) {
+    const [name, setName] = useState(food?.name ?? "");
+    const [brandName, setBrandName] = useState(food?.brandName ?? "");
+    const [referenceAmount, setReferenceAmount] = useState(food?.referenceAmount ?? 100);
+    const [referenceUnit, setReferenceUnit] = useState(food?.referenceUnit ?? "g");
+    const [units, setUnits] = useState<Unit[]>(food?.units ?? []);
+    const [unitValueInputs, setUnitValueInputs] = useState<Record<number, string>>({});
 
-    const [calories, setCalories] = useState(0);
-    const [protein, setProtein] = useState(0);
-    const [carbs, setCarbs] = useState(0);
-    const [fats, setFats] = useState(0);
+    const [calories, setCalories] = useState(food ? String(food.calories) : "");
+    const [protein, setProtein] = useState(food ? String(food.protein) : "");
+    const [carbs, setCarbs] = useState(food ? String(food.carbohydrates) : "");
+    const [fats, setFats] = useState(food ? String(food.fat) : "");
     
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent) {
@@ -44,24 +47,25 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
     }
 
     async function handleSave() {
-        const newFood: CreateFoodData = {
+        const foodData: CreateFoodData = {
             name,
             brandName: brandName || undefined,
-            calories: calories || 0,
-            protein: protein || 0,
-            carbohydrates: carbs || 0,
-            fat: fats || 0,
+            calories: Number.parseFloat(calories) || 0,
+            protein: Number.parseFloat(protein) || 0,
+            carbohydrates: Number.parseFloat(carbs) || 0,
+            fat: Number.parseFloat(fats) || 0,
             referenceAmount,
             referenceUnit,
-            units: units
+            units: units.map((unit, index) => ({
+                ...unit,
+                value: Number.parseFloat((unitValueInputs[index] ?? String(unit.value)).replace(",", ".")) || 0
+            }))
         };
-        console.log(newFood);
-
         try{
-            const response = await fetch("/api/foods",{
-                method: "POST",
+            const response = await fetch(food ? `/api/foods/${food.id}` : "/api/foods",{
+                method: food ? "PUT" : "POST",
                 headers: {"content-type": "application/json"},
-                body: JSON.stringify(newFood)
+                body: JSON.stringify(food ? { ...foodData, id: food.id } : foodData)
             })
 
             if(!response.ok){
@@ -69,9 +73,12 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                 return;
             }
 
-            const savedFood = await response.json();
-
-            onCreateFood(savedFood);
+            if (food) {
+                onUpdateFood?.({ ...food, ...foodData });
+            } else {
+                const savedFood = await response.json();
+                onCreateFood(savedFood);
+            }
         }
 
         catch(error){
@@ -87,7 +94,7 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
             <div className="new-food-modal">
 
                 <div className="new-food-modal-header">
-                    <h2>Neues Lebensmittel erstellen</h2>
+                    <h2>{food ? "Lebensmittel bearbeiten" : "Neues Lebensmittel erstellen"}</h2>
 
                     <button
                         type="button"
@@ -171,7 +178,8 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                             <input
                                 id="food-calories"
                                 type="number"                         
-                                onChange={(event) => setCalories(Number(event.target.value))}
+                                value={calories}
+                                onChange={(event) => setCalories(event.target.value)}
                                 placeholder="z. B. 200"
                             />
                         </div>
@@ -184,7 +192,8 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                             <input
                                 id="food-protein"
                                 type="number"
-                                onChange={(event) => setProtein(Number(event.target.value))}
+                                value={protein}
+                                onChange={(event) => setProtein(event.target.value)}
                                 placeholder="z. B. 30g"
                             />
                         </div>
@@ -197,7 +206,8 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                             <input
                                 id="food-carbs"
                                 type="number"
-                                onChange={(event) => setCarbs(Number(event.target.value))}
+                                value={carbs}
+                                onChange={(event) => setCarbs(event.target.value)}
                                 placeholder="z. B. 30g"
                             />
                         </div>
@@ -210,7 +220,8 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                             <input
                                 id="food-fats"
                                 type="number"
-                                onChange={(event) => setFats(Number(event.target.value))}
+                                value={fats}
+                                onChange={(event) => setFats(event.target.value)}
                                 placeholder="z. B. 30g"
                             />
                         </div>
@@ -243,16 +254,18 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                                     <input
                                         className="optional-unit-value"
                                         placeholder="z.B. 30g"
-                                        value={unit.value}
-                                        onChange={(event) =>
-                                            setUnits(
-                                                units.map((currentUnit, currentIndex) =>
-                                                    currentIndex === index
-                                                        ? { ...currentUnit, value: Number(event.target.value) }
-                                                        : currentUnit
-                                                )
-                                            )
-                                        }
+                                        type="text"
+                                        inputMode="decimal"
+                                        value={unitValueInputs[index] ?? (unit.value ? String(unit.value).replace(".", ",") : "")}
+                                        onChange={(event) => setUnitValueInputs(current => ({ ...current, [index]: event.target.value }))}
+                                        onBlur={() => {
+                                            const parsedValue = Number.parseFloat((unitValueInputs[index] ?? "").replace(",", "."));
+                                            setUnits(current => current.map((currentUnit, currentIndex) =>
+                                                currentIndex === index && !Number.isNaN(parsedValue)
+                                                    ? { ...currentUnit, value: parsedValue }
+                                                    : currentUnit
+                                            ));
+                                        }}
                                     />
                                 </div>
                             )
@@ -275,7 +288,7 @@ function NewFoodModal({ onClose, onCreateFood }: NewFoodModalProps) {
                             className="btn btn-primary"
                             onClick={handleSave}
                         >
-                            Lebensmittel speichern
+                            {food ? "Änderungen speichern" : "Lebensmittel speichern"}
                         </button>
 
                     </div>

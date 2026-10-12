@@ -4,6 +4,13 @@ export type RecipeFormData = {
     category: string;
     servings: number;
     imageUrl: string;
+    source?: string;
+    sourceUrl?: string;
+    steps: {
+        id?: number;
+        order: number;
+        instruction: string;
+    }[];
     ingredients: {
         foodId: number;
         quantity: number;

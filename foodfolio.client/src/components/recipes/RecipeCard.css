@@ -6,8 +6,8 @@
     background-color: var(--color-foreground);
     box-shadow: var(--box-shadow);
     border-radius: 12px;
-    height: 225px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
     overflow: hidden;
 }
 

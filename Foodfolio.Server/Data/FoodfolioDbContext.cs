@@ -13,6 +13,7 @@ namespace Foodfolio.Server.Data
         public DbSet<Food> Foods { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+        public DbSet<RecipeStep> RecipeSteps { get; set; }
         public DbSet<Unit> Units { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,6 +32,12 @@ namespace Foodfolio.Server.Data
                 .HasOne(ri => ri.Unit)
                 .WithMany()
                 .HasForeignKey(ri => ri.UnitId);
+
+            modelBuilder.Entity<RecipeStep>()
+                .HasOne(step => step.Recipe)
+                .WithMany(recipe => recipe.Steps)
+                .HasForeignKey(step => step.RecipeId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Unit>()
                 .HasOne(u => u.Food)
