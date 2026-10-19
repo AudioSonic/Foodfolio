@@ -2,10 +2,11 @@ import "./RecipeCard.css"
 import type { Recipe } from "../../types/Recipe";
 
 type RecipeCardProps = {
-  recipe: Recipe
+  recipe: Recipe;
+  onSelect?: (recipe: Recipe) => void;
 }
 
-function RecipeCard({recipe}: RecipeCardProps) {
+function RecipeCard({recipe, onSelect}: RecipeCardProps) {
   
   function handleDragStart(event: React.DragEvent<HTMLDivElement>) {
     event.dataTransfer.setData(
@@ -16,8 +17,8 @@ function RecipeCard({recipe}: RecipeCardProps) {
   }
 
   return (
-    <div className="recipe-card" draggable onDragStart={handleDragStart}>
-      <img src={recipe.imageUrl}/>
+    <div className="recipe-card" draggable onDragStart={handleDragStart} onClick={() => onSelect?.(recipe)} role={onSelect ? "button" : undefined} tabIndex={onSelect ? 0 : undefined} onKeyDown={event => { if (onSelect && (event.key === "Enter" || event.key === " ")) onSelect(recipe); }}>
+      <img src={recipe.imageUrl} alt="" />
       <div className="recipe-card-information">
         <div className="recipe-card-header">
           <span className="recipe-card-title">{recipe.name}</span>

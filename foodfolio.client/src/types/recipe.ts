@@ -6,7 +6,7 @@ export type Recipe = {
     description?: string;
     imageUrl?: string;
     servings: number;
-    category: string;
+    category?: string;
 
     calories: number;
     protein: number;
@@ -17,4 +17,7 @@ export type Recipe = {
     carbohydratesPerServing: number;
     fatPerServing: number;
     ingredients: RecipeIngredient[];
+    steps: { id: number; order: number; instruction: string }[];
+    source?: string;
+    sourceUrl?: string;
 }

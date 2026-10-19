@@ -1,6 +1,7 @@
 import FoodSelector from "../../modals/FoodSelector";
 import type { Food } from "../../types/Food";
 import type { RecipeFormData } from "../../types/RecipeFormData";
+import type { Recipe } from "../../types/Recipe";
 import type { Unit } from "../../types/Unit";
 import "./RecipeForm.css";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
@@ -31,22 +32,23 @@ export type RecipeFormHandle = {
 
 type RecipeFormProps = {
     onSave: (recipe: RecipeFormData) => void;
+    initialRecipe?: Recipe;
 };
 
-const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function RecipeForm({ onSave }, ref) {
+const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function RecipeForm({ onSave, initialRecipe }, ref) {
     const [isFoodSelectorOpen, setIsFoodSelectorOpen] = useState(false);
-    const [selectedFoods, setSelectedFoods] = useState<SelectedIngredient[]>([]);
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [category, setCategory] = useState("");
-    const [servings, setServings] = useState(1);
-    const [imageUrl, setImageUrl] = useState("");
+    const [selectedFoods, setSelectedFoods] = useState<SelectedIngredient[]>(() => initialRecipe?.ingredients.map(i => ({ food: i.food, quantity: String(i.quantity), unitId: i.unitId })) ?? []);
+    const [name, setName] = useState(initialRecipe?.name ?? "");
+    const [description, setDescription] = useState(initialRecipe?.description ?? "");
+    const [category, setCategory] = useState(initialRecipe?.category ?? "");
+    const [servings, setServings] = useState(initialRecipe?.servings || 1);
+    const [imageUrl, setImageUrl] = useState(initialRecipe?.imageUrl ?? "");
     const [imagePreviewError, setImagePreviewError] = useState(false);
-    const [source, setSource] = useState("");
-    const [sourceUrl, setSourceUrl] = useState("");
+    const [source, setSource] = useState(initialRecipe?.source ?? "");
+    const [sourceUrl, setSourceUrl] = useState(initialRecipe?.sourceUrl ?? "");
     const [units, setUnits] = useState<Unit[]>([]);
     const [categories, setCategories] = useState<RecipeCategory[]>([]);
-    const [steps, setSteps] = useState<RecipeStep[]>([]);
+    const [steps, setSteps] = useState<RecipeStep[]>(() => initialRecipe?.steps?.map(step => ({ ...step })) ?? []);
     const [draggedStepIndex, setDraggedStepIndex] = useState<number | null>(null);
 
     function handleSave() {

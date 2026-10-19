@@ -3,6 +3,7 @@ import RecipeCard from "./RecipeCard";
 import type { Recipe } from "../../types/Recipe";
 import { useCallback, useEffect, useState } from "react";
 import RecipeModal from "../../modals/RecipeModal";
+import RecipeDetailModal from "../../modals/RecipeDetailModal";
 
 type RecipeCategory = {
   id: number;
@@ -14,6 +15,7 @@ function RecipeLibrary() {
     const [recipeList, setRecipeList] = useState<Recipe[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("Alle");
   const [categories, setCategories] = useState<RecipeCategory[]>([]);
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
 
   const loadRecipes = useCallback(async () => {
     try {
@@ -82,8 +84,9 @@ function RecipeLibrary() {
 
       <div className="recipe-overview">
         {filteredList.map(recipe => 
-          <RecipeCard key={recipe.id} recipe={recipe}/>
+          <RecipeCard key={recipe.id} recipe={recipe} onSelect={setSelectedRecipe}/>
         )}
+      {selectedRecipe && <RecipeDetailModal recipe={selectedRecipe} onClose={() => setSelectedRecipe(null)} onSaved={updated => { setRecipeList(current => current.map(item => item.id === updated.id ? updated : item)); setSelectedRecipe(updated); }} onDeleted={() => { setRecipeList(current => current.filter(item => item.id !== selectedRecipe.id)); setSelectedRecipe(null); }} />}
 
       </div>
 

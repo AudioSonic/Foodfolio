@@ -160,6 +160,7 @@ namespace Foodfolio.Server.Controllers
             existingRecipe.Description = recipe.Description;
             existingRecipe.ImageUrl = recipe.ImageUrl;
             existingRecipe.Servings = recipe.Servings;
+            existingRecipe.Category = recipe.Category;
             existingRecipe.Source = recipe.Source;
             existingRecipe.SourceUrl = recipe.SourceUrl;
 
