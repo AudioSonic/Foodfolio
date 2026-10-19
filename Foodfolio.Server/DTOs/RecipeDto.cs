@@ -12,7 +12,7 @@
 
         public int Servings { get; set; }
 
-        public string Category { get; set; } = "Mittagessen";
+        public string? Category { get; set; }
         public string? Source { get; set; }
         public string? SourceUrl { get; set; }
         public decimal Calories { get; set; }

@@ -19,6 +19,12 @@ type RecipeStep = {
     instruction: string;
 };
 
+type RecipeCategory = {
+    id: number;
+    name: string;
+    sortOrder: number;
+};
+
 export type RecipeFormHandle = {
     save: () => void;
 };
@@ -32,13 +38,14 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
     const [selectedFoods, setSelectedFoods] = useState<SelectedIngredient[]>([]);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [category, setCategory] = useState("Mittagessen");
+    const [category, setCategory] = useState("");
     const [servings, setServings] = useState(1);
     const [imageUrl, setImageUrl] = useState("");
     const [imagePreviewError, setImagePreviewError] = useState(false);
     const [source, setSource] = useState("");
     const [sourceUrl, setSourceUrl] = useState("");
     const [units, setUnits] = useState<Unit[]>([]);
+    const [categories, setCategories] = useState<RecipeCategory[]>([]);
     const [steps, setSteps] = useState<RecipeStep[]>([]);
     const [draggedStepIndex, setDraggedStepIndex] = useState<number | null>(null);
 
@@ -90,6 +97,24 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
             }
         }
         getUnits();
+
+        async function getCategories(){
+            try{
+                const response = await fetch("/api/categories");
+                if(!response.ok){
+                    console.error("Fehler beim Laden der Kategorien");
+                    return;
+                }
+
+                const data: RecipeCategory[] = await response.json();
+                setCategories(data);
+                setCategory(current => current || data[0]?.name || "");
+            }
+            catch(error){
+                console.error("Die Kategorien konnten nicht geladen werden", error);
+            }
+        }
+        getCategories();
     },[]
     )
 
@@ -125,11 +150,13 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
 
                 <div className="form-group">
                     <label htmlFor="recipe-category">Kategorie</label>
-                    <select id="recipe-category" value={category} onChange={(event) => setCategory(event.target.value)}>
-                        <option value="Frühstück">Frühstück</option>
-                        <option value="Mittagessen">Mittagessen</option>
-                        <option value="Abendessen">Abendessen</option>
-                        <option value="Snack">Snack</option>
+                    <select id="recipe-category" value={category} onChange={(event) => setCategory(event.target.value)} disabled={categories.length === 0}>
+                        {categories.length === 0 && <option value="">Kategorien werden geladen …</option>}
+                        {categories.map(recipeCategory => (
+                            <option key={recipeCategory.id} value={recipeCategory.name}>
+                                {recipeCategory.name}
+                            </option>
+                        ))}
                     </select>
                 </div>
 

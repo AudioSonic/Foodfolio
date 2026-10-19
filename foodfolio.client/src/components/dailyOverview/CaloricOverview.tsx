@@ -1,20 +1,30 @@
 import "./CaloricOverview.css"
+import type { DailyGoals } from "../../modals/DailyGoalsModal";
 
-function CaloricOverview(){
+type ConsumedNutrition = Pick<DailyGoals, "calories" | "protein" | "carbohydrates" | "fat">;
+type CaloricOverviewProps = { goals: DailyGoals; consumed: ConsumedNutrition; onEditGoals: () => void };
+
+function CaloricOverview({ goals, consumed, onEditGoals }: CaloricOverviewProps){
+    const progress = (value: number, goal: number) => goal > 0 ? Math.min(100, value / goal * 100) : 0;
+    const formatCalories = (value: number) => Math.round(value).toLocaleString("de-DE");
+    const formatMacro = (value: number) => (Math.round(value * 10) / 10).toLocaleString("de-DE", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 1
+    });
     return(
         <div className="nutrition-card">
             <div className="card-header">
                 <h2>Tagesübersicht</h2>
-                <a href="#">Ziele bearbeiten</a>
+                <button className="edit-goals-button" type="button" onClick={onEditGoals}>Ziele bearbeiten</button>
             </div>
 
             <div className="card-content">
 
                 <div className="calorie-section">
-                    <div className="calorie-chart">
+                    <div className="calorie-chart" style={{ background: `conic-gradient(var(--color-primary) 0deg ${progress(consumed.calories, goals.calories) * 3.6}deg, #e9e9e9 ${progress(consumed.calories, goals.calories) * 3.6}deg 360deg)` }}>
                         <div className="calorie-center">
-                            <strong>1.566</strong>
-                            <span>/ 1.850 kcal</span>
+                            <strong>{formatCalories(consumed.calories)}</strong>
+                            <span>/ {formatCalories(goals.calories)} kcal</span>
                         </div>
                     </div>
                 </div>
@@ -23,39 +33,39 @@ function CaloricOverview(){
 
                     <div className="remaining">
                         <span>Verbleibend</span>
-                        <strong>284 <small>kcal</small></strong>
+                        <strong>{formatCalories(Math.max(0, goals.calories - consumed.calories))} <small>kcal</small></strong>
                     </div>
 
                     <div className="nutrition-row">
                         <div className="nutrition-label">
                             <span>Protein</span>
-                            <span>108 / 130 g</span>
+                            <span>{formatMacro(consumed.protein)} / {formatMacro(goals.protein)} g</span>
                         </div>
 
                         <div className="progress-bar">
-                            <div className="progress protein"></div>
+                            <div className="progress protein" style={{ width: `${progress(consumed.protein, goals.protein)}%` }}></div>
                         </div>
                     </div>
 
                     <div className="nutrition-row">
                         <div className="nutrition-label">
                             <span>Kohlenhydrate</span>
-                            <span>188 / 220 g</span>
+                            <span>{formatMacro(consumed.carbohydrates)} / {formatMacro(goals.carbohydrates)} g</span>
                         </div>
 
                         <div className="progress-bar">
-                            <div className="progress carbs"></div>
+                            <div className="progress carbs" style={{ width: `${progress(consumed.carbohydrates, goals.carbohydrates)}%` }}></div>
                         </div>
                     </div>
 
                     <div className="nutrition-row">
                         <div className="nutrition-label">
                             <span>Fett</span>
-                            <span>54 / 70 g</span>
+                            <span>{formatMacro(consumed.fat)} / {formatMacro(goals.fat)} g</span>
                         </div>
 
                         <div className="progress-bar">
-                            <div className="progress fat"></div>
+                            <div className="progress fat" style={{ width: `${progress(consumed.fat, goals.fat)}%` }}></div>
                         </div>
                     </div>
 

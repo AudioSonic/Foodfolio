@@ -18,12 +18,18 @@ function PortionSelector({
     return (
         <div className="portion-selector-overlay">
             <div className="portion-selector">
-                <h2>{recipe.name}</h2>
+                <div className="portion-selector-header">
+                    <div>
+                        <span className="portion-selector-eyebrow">Rezept einplanen</span>
+                        <h2>{recipe.name}</h2>
+                    </div>
+                    <button className="portion-close-button" type="button" onClick={onCancel} aria-label="Modal schließen">×</button>
+                </div>
 
-                <p>Wie viele Portionen möchtest du einplanen?</p>
+                <p className="portion-selector-description">Wie viele Portionen möchtest du einplanen?</p>
 
                 <div className="portion-input">
-                    <button
+                    <button className="portion-stepper-button"
                         type="button"
                         onClick={() => setAmount(current => current - 1)}
                         disabled={amount <= 1}
@@ -31,9 +37,9 @@ function PortionSelector({
                         −
                     </button>
 
-                    <span>{amount}</span>
+                    <span className="portion-stepper-value">{amount}</span>
 
-                    <button
+                    <button className="portion-stepper-button"
                         type="button"
                         onClick={() => setAmount(current => current + 1)}
                     >
@@ -42,11 +48,11 @@ function PortionSelector({
                 </div>
 
                 <div className="portion-actions">
-                    <button type="button" onClick={onCancel}>
+                    <button className="portion-cancel-button" type="button" onClick={onCancel}>
                         Abbrechen
                     </button>
 
-                    <button
+                    <button className="portion-confirm-button"
                         type="button"
                         onClick={() => onConfirm(amount)}
                     >

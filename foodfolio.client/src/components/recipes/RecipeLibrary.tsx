@@ -4,10 +4,16 @@ import type { Recipe } from "../../types/Recipe";
 import { useCallback, useEffect, useState } from "react";
 import RecipeModal from "../../modals/RecipeModal";
 
+type RecipeCategory = {
+  id: number;
+  name: string;
+  sortOrder: number;
+};
+
 function RecipeLibrary() {
     const [recipeList, setRecipeList] = useState<Recipe[]>([]);
-  const [filteredList, setFilteredList] = useState<Recipe[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("Alle");
+  const [categories, setCategories] = useState<RecipeCategory[]>([]);
 
   const loadRecipes = useCallback(async () => {
     try {
@@ -19,7 +25,6 @@ function RecipeLibrary() {
 
       const recipes = await response.json();
       setRecipeList(recipes);
-      setFilteredList(recipes);
     } catch (error) {
       console.error("Fehler beim Laden der Rezepte", error);
     }
@@ -29,7 +34,28 @@ function RecipeLibrary() {
       loadRecipes();
   }, [loadRecipes]);
 
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const response = await fetch("/api/categories");
+        if (!response.ok) {
+          console.error("Fehler beim Laden der Kategorien");
+          return;
+        }
+
+        setCategories(await response.json());
+      } catch (error) {
+        console.error("Fehler beim Laden der Kategorien", error);
+      }
+    }
+
+    loadCategories();
+  }, []);
+
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
+  const filteredList = selectedCategory === "Alle"
+    ? recipeList
+    : recipeList.filter(recipe => recipe.category === selectedCategory);
 
   return (
     <section className="food-selector">
@@ -38,38 +64,25 @@ function RecipeLibrary() {
         <button 
           className={`btn food-selector-button ${selectedCategory === "Alle" ? "active" : ""}`} 
           onClick={() => {
-            setFilteredList(recipeList);
             setSelectedCategory("Alle");
           }}>Alle Rezepte</button>
         
-        <button 
-          className={`btn food-selector-button ${selectedCategory === "Frühstück" ? "active" : ""}`}
-          onClick={() => {
-            setFilteredList(recipeList.filter(recipe => recipe.category === "Frühstück"));
-            setSelectedCategory("Frühstück");}}>Frühstück</button>
-        
-        <button 
-          className={`btn food-selector-button ${selectedCategory === "Mittagessen" ? "active" : ""}`}
-          onClick={() => {
-            setFilteredList(recipeList.filter(recipe => recipe.category === "Mittagessen"));
-            setSelectedCategory("Mittagessen");}}>Mittagessen</button>
-        
-        <button 
-          className={`btn food-selector-button ${selectedCategory === "Abendessen" ? "active" : ""}`}
-          onClick={() => {
-            setFilteredList(recipeList.filter(recipe => recipe.category === "Abendessen"));
-            setSelectedCategory("Abendessen");}}>Abendessen</button>
-        
-        <button 
-          className={`btn food-selector-button ${selectedCategory === "Snack" ? "active" : ""}`}
-          onClick={() => {
-            setFilteredList(recipeList.filter(recipe => recipe.category === "Snack"));
-            setSelectedCategory("Snack");}}>Snack</button>
+        {categories.map(category => (
+          <button
+            key={category.id}
+            className={`btn food-selector-button ${selectedCategory === category.name ? "active" : ""}`}
+            onClick={() => {
+              setSelectedCategory(category.name);
+            }}
+          >
+            {category.name}
+          </button>
+        ))}
       </div>
 
       <div className="recipe-overview">
         {filteredList.map(recipe => 
-          <RecipeCard recipe={recipe}/>
+          <RecipeCard key={recipe.id} recipe={recipe}/>
         )}
 
       </div>

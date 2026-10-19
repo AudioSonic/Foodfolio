@@ -1,0 +1,13 @@
+.settings-page { padding: 20px; }
+.settings-card { max-width: 760px; padding: 24px; background: var(--color-foreground); border-radius: var(--border-radius-default); box-shadow: var(--box-shadow); }
+.settings-card h2 { margin-top: 0; }
+.settings-hint { color: #666; }
+.category-create, .category-row, .category-actions { display: flex; gap: 10px; align-items: center; }
+.category-create { margin: 22px 0; }
+.category-create input, .category-row input { flex: 1; min-width: 0; padding: 9px; border: 1px solid #ccc; border-radius: 7px; }
+.category-create button, .category-actions button { padding: 9px 12px; border: 0; border-radius: 7px; background: var(--color-primary); color: white; cursor: pointer; }
+.category-create button:disabled { opacity: .5; cursor: not-allowed; }
+.category-list { display: grid; gap: 8px; }
+.category-row { justify-content: space-between; padding: 10px 0; border-top: 1px solid #eee; }
+.category-actions .danger { background: #b64b4b; }
+.settings-error { color: #b64b4b; }

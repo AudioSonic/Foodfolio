@@ -1,6 +1,7 @@
 #active-date-select{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .change-date-button{

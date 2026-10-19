@@ -16,6 +16,50 @@ namespace Foodfolio.Server.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
 
+            modelBuilder.Entity("Foodfolio.Server.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Frühstück",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Mittagessen",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Abendessen",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Snack",
+                            SortOrder = 4
+                        });
+                });
+
             modelBuilder.Entity("Foodfolio.Server.Entities.Food", b =>
                 {
                     b.Property<int>("Id")
@@ -60,7 +104,6 @@ namespace Foodfolio.Server.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")

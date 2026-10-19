@@ -15,6 +15,7 @@ namespace Foodfolio.Server.Data
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
         public DbSet<RecipeStep> RecipeSteps { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -74,6 +75,13 @@ namespace Foodfolio.Server.Data
                     Name = "l",
                     Value = 1000
                 }
+            );
+
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "Frühstück", SortOrder = 1 },
+                new Category { Id = 2, Name = "Mittagessen", SortOrder = 2 },
+                new Category { Id = 3, Name = "Abendessen", SortOrder = 3 },
+                new Category { Id = 4, Name = "Snack", SortOrder = 4 }
             );
 
         }

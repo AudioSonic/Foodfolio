@@ -6,7 +6,7 @@ export type Recipe = {
     description?: string;
     imageUrl?: string;
     servings: number;
-    category: "Frühstück" | "Mittagessen" | "Abendessen" | "Snack";
+    category: string;
 
     calories: number;
     protein: number;

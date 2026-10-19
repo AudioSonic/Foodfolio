@@ -1,0 +1,70 @@
+.daily-goals-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0 0 0 / 45%);
+}
+
+.daily-goals-modal {
+    width: min(420px, calc(100% - 32px));
+    padding: 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow);
+}
+
+.daily-goals-header,
+.daily-goals-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.daily-goals-header button {
+    border: 0;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.daily-goals-fields {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.daily-goals-fields label {
+    display: grid;
+    gap: 5px;
+    font-weight: 600;
+}
+
+.daily-goals-fields input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+
+.daily-goals-actions {
+    gap: 10px;
+}
+
+.daily-goals-actions button {
+    flex: 1;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: white;
+    cursor: pointer;
+}
+
+.daily-goals-actions .primary {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: white;
+}
