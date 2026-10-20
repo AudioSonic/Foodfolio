@@ -4,7 +4,8 @@ import type { RecipeFormData } from "../../types/RecipeFormData";
 import type { Recipe } from "../../types/Recipe";
 import type { Unit } from "../../types/Unit";
 import "./RecipeForm.css";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from "react";
+import { apiRequest, ApiError } from "../../services/api";
 
 
 
@@ -50,8 +51,9 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
     const [categories, setCategories] = useState<RecipeCategory[]>([]);
     const [steps, setSteps] = useState<RecipeStep[]>(() => initialRecipe?.steps?.map(step => ({ ...step })) ?? []);
     const [draggedStepIndex, setDraggedStepIndex] = useState<number | null>(null);
+    const [loadError, setLoadError] = useState("");
 
-    function handleSave() {
+    const handleSave = useCallback(() => {
         const recipe = {
             name,
             description,
@@ -72,7 +74,7 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
         };
 
         onSave(recipe);
-    }
+    }, [name, description, category, servings, imageUrl, source, sourceUrl, selectedFoods, steps, onSave]);
 
     function getAvailableUnits(food: Food){
         const baseUnits = food.referenceUnit === "g" ? ["g", "kg"] : ["ml", "l"];
@@ -85,35 +87,22 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
     useEffect(() => {
         async function getUnits(){
             try{
-                const response = await fetch("/api/units");
-                if(!response.ok){
-                    console.error("Fehler beim Laden der Einheiten");
-                    return;
-                }
-
-                const data = await response.json();
-                setUnits(data);
+                setUnits(await apiRequest<Unit[]>("/api/units"));
             }
             catch(error){
-                console.error("Die Einheiten konnten nicht geladen werden", error)
+                setLoadError(error instanceof ApiError ? error.message : "Die Einheiten konnten nicht geladen werden.");
             }
         }
         getUnits();
 
         async function getCategories(){
             try{
-                const response = await fetch("/api/categories");
-                if(!response.ok){
-                    console.error("Fehler beim Laden der Kategorien");
-                    return;
-                }
-
-                const data: RecipeCategory[] = await response.json();
+                const data = await apiRequest<RecipeCategory[]>("/api/categories");
                 setCategories(data);
                 setCategory(current => current || data[0]?.name || "");
             }
             catch(error){
-                console.error("Die Kategorien konnten nicht geladen werden", error);
+                setLoadError(error instanceof ApiError ? error.message : "Die Kategorien konnten nicht geladen werden.");
             }
         }
         getCategories();
@@ -121,10 +110,12 @@ const RecipeForm = forwardRef<RecipeFormHandle, RecipeFormProps>(function Recipe
     )
 
 
-    useImperativeHandle(ref, () => ({ save: handleSave }), [name, description, category, servings, imageUrl, source, sourceUrl, selectedFoods, steps, onSave]);
+    useImperativeHandle(ref, () => ({ save: handleSave }), [handleSave]);
 
     return (
         <div className="recipe-form">
+
+            {loadError && <p role="alert" className="form-error">{loadError}</p>}
 
             <div className="recipe-basic-information">
                 <h3>Grundinformationen</h3>

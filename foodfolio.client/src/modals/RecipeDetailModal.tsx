@@ -3,6 +3,7 @@ import type { Recipe } from "../types/Recipe";
 import type { RecipeFormData } from "../types/RecipeFormData";
 import RecipeModal from "./RecipeModal";
 import "./RecipeDetailModal.css";
+import { apiRequest, ApiError } from "../services/api";
 
 type Props = { recipe: Recipe; onClose: () => void; onSaved: (recipe: Recipe) => void; onDeleted: () => void };
 
@@ -16,19 +17,17 @@ function RecipeDetailModal({ recipe, onClose, onSaved, onDeleted }: Props) {
     async function save(updated: RecipeFormData) {
         setBusy(true); setError("");
         try {
-            const response = await fetch(`/api/recipes/${recipe.id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...updated, id: recipe.id }) });
-            if (!response.ok) throw new Error(await response.text());
-            const refreshed = await fetch(`/api/recipes/${recipe.id}`);
-            if (!refreshed.ok) throw new Error("Das aktualisierte Rezept konnte nicht geladen werden.");
-            onSaved(await refreshed.json()); setEditing(false);
-        } catch (e) { setError(e instanceof Error ? e.message : "Das Rezept konnte nicht gespeichert werden."); }
+            await apiRequest<void>(`/api/recipes/${recipe.id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...updated, id: recipe.id }) });
+            const refreshed = await apiRequest<Recipe>(`/api/recipes/${recipe.id}`);
+            onSaved(refreshed); setEditing(false);
+        } catch (e) { setError(e instanceof ApiError ? e.message : "Das Rezept konnte nicht gespeichert werden."); }
         finally { setBusy(false); }
     }
     async function remove() {
         if (!window.confirm(`Rezept „${recipe.name}“ wirklich löschen?`)) return;
         setBusy(true); setError("");
-        try { const response = await fetch(`/api/recipes/${recipe.id}`, { method: "DELETE" }); if (!response.ok) throw new Error(await response.text()); onDeleted(); }
-        catch (e) { setError(e instanceof Error ? e.message : "Das Rezept konnte nicht gelöscht werden."); setBusy(false); }
+        try { await apiRequest<void>(`/api/recipes/${recipe.id}`, { method: "DELETE" }); onDeleted(); }
+        catch (e) { setError(e instanceof ApiError ? e.message : "Das Rezept konnte nicht gelöscht werden."); setBusy(false); }
     }
     if (editing) return <RecipeModal recipe={recipe} onClose={() => setEditing(false)} onSave={save} />;
     return <div className="recipe-detail-overlay" onClick={e => e.target === e.currentTarget && onClose()}><article className="recipe-detail-modal" role="dialog" aria-modal="true" aria-labelledby="recipe-detail-title">

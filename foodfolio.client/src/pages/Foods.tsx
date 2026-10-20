@@ -2,23 +2,35 @@ import { useEffect, useState } from "react";
 import NewFoodModal from "../modals/NewFoodModal";
 import type { Food } from "../types/Food";
 import "./Foods.css";
+import { apiRequest, ApiError } from "../services/api";
 
 function Foods(){
     const [foods, setFoods] = useState<Food[]>([]);
     const [selectedFood, setSelectedFood] = useState<Food | null>(null);
     const [isCreateOpen, setIsCreateOpen] = useState(false);
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [deletingId, setDeletingId] = useState<number | null>(null);
 
     useEffect(() => {
-        fetch("/api/foods")
-            .then(response => response.ok ? response.json() : Promise.reject())
+        apiRequest<Food[]>("/api/foods")
             .then(setFoods)
-            .catch(() => console.error("Lebensmittel konnten nicht geladen werden"));
+            .catch(error => setError(error instanceof ApiError ? error.message : "Lebensmittel konnten nicht geladen werden."))
+            .finally(() => setLoading(false));
     }, []);
 
     async function deleteFood(food: Food) {
         if (!window.confirm(`Möchtest du „${food.name}“ wirklich löschen?`)) return;
-        const response = await fetch(`/api/foods/${food.id}`, { method: "DELETE" });
-        if (response.ok) setFoods(current => current.filter(item => item.id !== food.id));
+        setError("");
+        setDeletingId(food.id);
+        try {
+            await apiRequest<void>(`/api/foods/${food.id}`, { method: "DELETE" });
+            setFoods(current => current.filter(item => item.id !== food.id));
+        } catch (error) {
+            setError(error instanceof ApiError ? error.message : "Das Lebensmittel konnte nicht gelöscht werden.");
+        } finally {
+            setDeletingId(null);
+        }
     }
 
     return(
@@ -27,7 +39,8 @@ function Foods(){
                 <h1>Lebensmittel</h1>
                 <button className="btn foods-add-button" onClick={() => setIsCreateOpen(true)}>+ Lebensmittel hinzufügen</button>
             </div>
-            {foods.length === 0 ? <p className="foods-empty">Noch keine Lebensmittel gespeichert.</p> : (
+            {error && <p role="alert" className="form-error">{error}</p>}
+            {loading ? <p className="foods-empty">Lebensmittel werden geladen …</p> : foods.length === 0 ? <p className="foods-empty">Noch keine Lebensmittel gespeichert.</p> : (
                 <div className="foods-list">
                     {foods.map(food => <article className="food-list-item" key={food.id}>
                         <div>
@@ -37,7 +50,7 @@ function Foods(){
                         <div className="food-list-nutrition">{food.referenceAmount} {food.referenceUnit} · {food.calories} kcal</div>
                         <div className="food-list-actions">
                             <button onClick={() => setSelectedFood(food)}>Bearbeiten</button>
-                            <button className="delete-food-button" onClick={() => deleteFood(food)}>Löschen</button>
+                            <button className="delete-food-button" disabled={deletingId === food.id} onClick={() => deleteFood(food)}>{deletingId === food.id ? "Wird gelöscht …" : "Löschen"}</button>
                         </div>
                     </article>)}
                 </div>

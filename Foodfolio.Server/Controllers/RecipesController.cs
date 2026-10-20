@@ -110,13 +110,15 @@ namespace Foodfolio.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Recipe>> CreateRecipe(Recipe recipe)
         {
+            var validationError = await ValidateRecipe(recipe);
+            if (validationError != null) return BadRequest(validationError);
             recipe.Steps = CleanAndOrderSteps(recipe.Steps);
             var unitIds = recipe.Ingredients.Select(i => i.UnitId).Distinct().ToList();
             var units = await _context.Units
                 .Where(u => unitIds.Contains(u.Id))
                 .ToListAsync();
 
-            if (units.Count != unitIds.Count || recipe.Ingredients.Any(i => i.Quantity < 0))
+            if (units.Count != unitIds.Count || recipe.Ingredients.Any(i => i.Quantity <= 0))
                 return BadRequest("Ungültige Zutat oder Menge.");
 
             foreach (var ingredient in recipe.Ingredients)
@@ -156,6 +158,9 @@ namespace Foodfolio.Server.Controllers
                 return NotFound();
             }
 
+            var validationError = await ValidateRecipe(recipe);
+            if (validationError != null) return BadRequest(validationError);
+
             existingRecipe.Name = recipe.Name;
             existingRecipe.Description = recipe.Description;
             existingRecipe.ImageUrl = recipe.ImageUrl;
@@ -169,11 +174,36 @@ namespace Foodfolio.Server.Controllers
 
             _context.RecipeIngredients.RemoveRange(existingRecipe.Ingredients);
 
-            existingRecipe.Ingredients = recipe.Ingredients;
+            existingRecipe.Ingredients = recipe.Ingredients.Select(ingredient => new RecipeIngredient
+            {
+                FoodId = ingredient.FoodId,
+                Quantity = ingredient.Quantity,
+                UnitId = ingredient.UnitId
+            }).ToList();
 
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        private async Task<string?> ValidateRecipe(Recipe recipe)
+        {
+            if (string.IsNullOrWhiteSpace(recipe.Name)) return "Der Rezeptname darf nicht leer sein.";
+            if (recipe.Servings <= 0) return "Die Portionsanzahl muss größer als null sein.";
+            if (recipe.Ingredients.Any(ingredient => ingredient.Quantity <= 0)) return "Zutatenmengen müssen größer als null sein.";
+            if (recipe.Steps.Any(step => string.IsNullOrWhiteSpace(step.Instruction))) return "Zubereitungsschritte dürfen nicht leer sein.";
+            var units = await _context.Units.Where(unit => recipe.Ingredients.Select(i => i.UnitId).Contains(unit.Id)).ToListAsync();
+            if (units.Count != recipe.Ingredients.Select(i => i.UnitId).Distinct().Count()) return "Eine verwendete Einheit wurde nicht gefunden.";
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                var food = await _context.Foods.FindAsync(ingredient.FoodId);
+                var unit = units.SingleOrDefault(item => item.Id == ingredient.UnitId);
+                if (food == null || unit == null || (unit.FoodId != null && unit.FoodId != food.Id) ||
+                    (unit.FoodId == null && ((food.ReferenceUnit == "g" && unit.Name is "ml" or "l") ||
+                                             (food.ReferenceUnit == "ml" && unit.Name is "g" or "kg"))))
+                    return "Eine Zutat oder Einheit ist ungültig.";
+            }
+            return null;
         }
 
         private static List<RecipeStep> CleanAndOrderSteps(IEnumerable<RecipeStep>? steps)

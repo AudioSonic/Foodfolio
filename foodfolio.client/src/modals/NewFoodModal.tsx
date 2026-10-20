@@ -2,6 +2,7 @@ import type { CreateFoodData, Food } from "../types/Food";
 import type { Unit } from "../types/Unit";
 import "./NewFoodModal.css";
 import { useEffect, useState } from "react";
+import { apiRequest, ApiError } from "../services/api";
 
 type NewFoodModalProps = {
     onClose: () => void;
@@ -23,6 +24,8 @@ function NewFoodModal({ onClose, onCreateFood, food, onUpdateFood }: NewFoodModa
     const [protein, setProtein] = useState(food ? String(food.protein) : "");
     const [carbs, setCarbs] = useState(food ? String(food.carbohydrates) : "");
     const [fats, setFats] = useState(food ? String(food.fat) : "");
+    const [error, setError] = useState("");
+    const [saving, setSaving] = useState(false);
     
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent) {
@@ -47,6 +50,12 @@ function NewFoodModal({ onClose, onCreateFood, food, onUpdateFood }: NewFoodModa
     }
 
     async function handleSave() {
+        const numericValues = [calories, protein, carbs, fats].map(value => Number.parseFloat(value.replace(",", ".")));
+        if (!name.trim()) { setError("Bitte gib einen Namen ein."); return; }
+        if (!Number.isFinite(referenceAmount) || referenceAmount <= 0) { setError("Die Referenzmenge muss größer als null sein."); return; }
+        if (numericValues.some(value => !Number.isFinite(value) || value < 0)) { setError("Nährwerte müssen gültige, nicht negative Zahlen sein."); return; }
+        setError("");
+        setSaving(true);
         const foodData: CreateFoodData = {
             name,
             brandName: brandName || undefined,
@@ -62,28 +71,21 @@ function NewFoodModal({ onClose, onCreateFood, food, onUpdateFood }: NewFoodModa
             }))
         };
         try{
-            const response = await fetch(food ? `/api/foods/${food.id}` : "/api/foods",{
+            const savedFood = await apiRequest<Food>(food ? `/api/foods/${food.id}` : "/api/foods",{
                 method: food ? "PUT" : "POST",
                 headers: {"content-type": "application/json"},
                 body: JSON.stringify(food ? { ...foodData, id: food.id } : foodData)
             })
 
-            if(!response.ok){
-                console.error("Fehler beim Speichern des Lebensmittels");
-                return;
-            }
-
             if (food) {
                 onUpdateFood?.({ ...food, ...foodData });
             } else {
-                const savedFood = await response.json();
                 onCreateFood(savedFood);
             }
         }
 
-        catch(error){
-            console.error("Fehler beim Speichern des Lebensmittels", error);
-        }
+        catch(error){ setError(error instanceof ApiError ? error.message : "Das Lebensmittel konnte nicht gespeichert werden."); }
+        finally { setSaving(false); }
     }
 
     return (
@@ -105,6 +107,7 @@ function NewFoodModal({ onClose, onCreateFood, food, onUpdateFood }: NewFoodModa
                 </div>
 
                 <div className="new-food-modal-content">
+                    {error && <p role="alert" className="form-error">{error}</p>}
                     <div className="new-food-form">
 
                         <div className="form-group">
@@ -287,8 +290,9 @@ function NewFoodModal({ onClose, onCreateFood, food, onUpdateFood }: NewFoodModa
                             type="button"
                             className="btn btn-primary"
                             onClick={handleSave}
+                            disabled={saving}
                         >
-                            {food ? "Änderungen speichern" : "Lebensmittel speichern"}
+                            {saving ? "Wird gespeichert …" : food ? "Änderungen speichern" : "Lebensmittel speichern"}
                         </button>
 
                     </div>

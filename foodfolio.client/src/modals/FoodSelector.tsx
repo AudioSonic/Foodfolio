@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./FoodSelector.css";
 import NewFoodModal from "./NewFoodModal";
 import type { Food } from "../types/Food";
+import { apiRequest } from "../services/api";
 
 type FoodSelectorProps = {
     onClose: () => void;
@@ -20,15 +21,7 @@ function FoodSelector({ onClose, onSelectFood }: FoodSelectorProps) {
     useEffect(() => {
         async function loadFoods() {
         try{
-            const response = await fetch("/api/foods");
-
-            if(!response.ok){
-                console.error("Fehler beim Laden der Lebensmittel");
-                return;
-            }
-
-            const foods = await response.json();
-            setFoods(foods);
+            setFoods(await apiRequest<Food[]>("/api/foods"));
         }
         
         catch(error){

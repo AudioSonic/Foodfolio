@@ -42,8 +42,8 @@ namespace Foodfolio.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Food>> CreateFood(Food food)
         {
-            if (food.ReferenceUnit != "g" && food.ReferenceUnit != "ml")
-                return BadRequest("ReferenceUnit muss g oder ml sein.");
+            var validationError = ValidateFood(food);
+            if (validationError != null) return BadRequest(validationError);
 
             foreach (var unit in food.Units)
             {
@@ -79,8 +79,8 @@ namespace Foodfolio.Server.Controllers
             if (existingFood == null)
                 return NotFound();
 
-            if (food.ReferenceUnit != "g" && food.ReferenceUnit != "ml")
-                return BadRequest("ReferenceUnit muss g oder ml sein.");
+            var validationError = ValidateFood(food);
+            if (validationError != null) return BadRequest(validationError);
 
             existingFood.Name = food.Name;
             existingFood.BrandName = food.BrandName;
@@ -103,6 +103,18 @@ namespace Foodfolio.Server.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        private static string? ValidateFood(Food food)
+        {
+            if (string.IsNullOrWhiteSpace(food.Name)) return "Der Lebensmittelname darf nicht leer sein.";
+            if (food.ReferenceAmount <= 0) return "Die Referenzmenge muss größer als null sein.";
+            if (food.ReferenceUnit is not ("g" or "ml")) return "Die Referenzeinheit muss g oder ml sein.";
+            if (food.Calories < 0 || food.Protein < 0 || food.Carbohydrates < 0 || food.Fat < 0)
+                return "Nährwerte dürfen nicht negativ sein.";
+            if (food.Units.Any(unit => string.IsNullOrWhiteSpace(unit.Name) || unit.Value <= 0))
+                return "Optionale Einheiten benötigen einen Namen und einen positiven Wert.";
+            return null;
         }
 
         [HttpDelete("{id}")]
