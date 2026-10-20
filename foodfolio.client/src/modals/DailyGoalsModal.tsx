@@ -27,11 +27,13 @@ function DailyGoalsModal({ goals, onSave, onClose }: DailyGoalsModalProps) {
     }
 
     function save() {
+        const parsed = Object.values(values).map(value => Number.parseFloat(value.replace(",", ".")));
+        if (parsed.some(value => !Number.isFinite(value) || value < 0)) return;
         onSave({
-            calories: Number.parseFloat(values.calories) || 0,
-            protein: Number.parseFloat(values.protein) || 0,
-            carbohydrates: Number.parseFloat(values.carbohydrates) || 0,
-            fat: Number.parseFloat(values.fat) || 0
+            calories: parsed[0],
+            protein: parsed[1],
+            carbohydrates: parsed[2],
+            fat: parsed[3]
         });
     }
 

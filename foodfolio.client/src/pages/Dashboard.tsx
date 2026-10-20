@@ -12,12 +12,17 @@ import type { MealPlanItem, MealType } from "../types/MealPlan";
 import PortionSelector from "../modals/PortionSelector";
 import DailyGoalsModal, { type DailyGoals } from "../modals/DailyGoalsModal";
 import FoodPlanModal from "../modals/FoodPlanModal";
+import { calculateDailyNutrition } from "../services/nutrition";
 function getDateKey(date: Date) {
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
 function Dashboard() {
-    const [dailyGoals, setDailyGoals] = useState<DailyGoals>({ calories: 1850, protein: 130, carbohydrates: 220, fat: 70 });
+    const [dailyGoals, setDailyGoals] = useState<DailyGoals>(() => {
+        const saved = localStorage.getItem("foodfolio.dailyGoals");
+        if (!saved) return { calories: 1850, protein: 130, carbohydrates: 220, fat: 70 };
+        try { return JSON.parse(saved) as DailyGoals; } catch { return { calories: 1850, protein: 130, carbohydrates: 220, fat: 70 }; }
+    });
     const [isGoalsModalOpen, setIsGoalsModalOpen] = useState(false);
     const [activeDate, setActiveDate] = useState(() => new Date());
     const [dailyPlan, setDailyPlan] = useState<MealPlanItem[]>([]);
@@ -73,12 +78,7 @@ function Dashboard() {
             .catch(error => setPlanError(error instanceof Error ? error.message : "Der Eintrag konnte nicht geändert werden."));
     }
 
-    const consumed = dailyPlan.reduce((total, item) => ({
-        calories: total.calories + item.calories,
-        protein: total.protein + item.protein,
-        carbohydrates: total.carbohydrates + item.carbohydrates,
-        fat: total.fat + item.fat
-    }), { calories: 0, protein: 0, carbohydrates: 0, fat: 0 });
+    const consumed = calculateDailyNutrition(dailyPlan);
 
     return (
     <section id="dashboard">
@@ -136,6 +136,7 @@ function Dashboard() {
                 onClose={() => setIsGoalsModalOpen(false)}
                 onSave={goals => {
                     setDailyGoals(goals);
+                    localStorage.setItem("foodfolio.dailyGoals", JSON.stringify(goals));
                     setIsGoalsModalOpen(false);
                 }}
             />
