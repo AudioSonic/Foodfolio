@@ -1,22 +1,24 @@
 import "./MealTypeCard.css"
 import type { Recipe } from "../../types/Recipe"
-import type { MealPlanRecipe } from "../../types/MealPlanRecipe"
+import type { MealPlanItem } from "../../types/MealPlan"
 import { useState } from "react";
 
 type MealTypeCardProps = {
     imgSrc: string;
     title: string;
-    recipes: MealPlanRecipe[];
+    items: MealPlanItem[];
     onRecipeDrop: (recipe: Recipe) => void;
-    onRemoveRecipe: (recipeIndex: number) => void;
+    onRemoveItem: (item: MealPlanItem) => void;
+    onEditItem: (item: MealPlanItem) => void;
+    onAddFood: () => void;
 }
 
 function MealTypeCard({
     imgSrc,
     title,
-    recipes,
+    items,
     onRecipeDrop,
-    onRemoveRecipe
+    onRemoveItem, onEditItem, onAddFood
 }: MealTypeCardProps) {
     const [isDragOver, setIsDragOver] = useState(false);
 
@@ -46,27 +48,27 @@ function MealTypeCard({
             </div>
 
             <div className="meal-recipes">
-    {recipes.map((mealRecipe, index) => (
-        <div className="meal-recipe" key={index}>
-            <img src={mealRecipe.recipe.imageUrl} />
+    {items.map(item => (
+        <div className="meal-recipe" key={item.id}>
+            {item.imageUrl && <img src={item.imageUrl} alt="" />}
 
             <div className="meal-recipe-info">
                 <span className="meal-recipe-name">
-                    {mealRecipe.recipe.name}
+                    {item.name}
                 </span>
 
                 <span className="meal-recipe-amount">
-                    {mealRecipe.amount}{" "}
-                    {mealRecipe.amount === 1 ? "Portion" : "Portionen"}
+                    {item.entryType === "recipe" ? String(item.portions) + (item.portions === 1 ? " Portion" : " Portionen") : String(item.quantity) + " " + (item.unitName ?? "")}
                 </span>
             </div>
 
-                <button
+                <button className="meal-recipe-remove"
                     type="button"
-                    onClick={() => onRemoveRecipe(index)}
+                    onClick={() => onRemoveItem(item)}
                 >
                     ×
                 </button>
+                <button className="meal-recipe-edit" type="button" onClick={() => onEditItem(item)}>Bearbeiten</button>
             </div>
                 ))}
 
@@ -78,6 +80,7 @@ function MealTypeCard({
                 >
                     <span>＋ Hier Rezept ablegen</span>
                 </div>
+                <button type="button" onClick={onAddFood}>+ Lebensmittel</button>
             </div>
         </div>
     )

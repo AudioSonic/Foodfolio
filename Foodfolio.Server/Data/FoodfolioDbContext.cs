@@ -16,6 +16,7 @@ namespace Foodfolio.Server.Data
         public DbSet<RecipeStep> RecipeSteps { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<MealPlanItem> MealPlanItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,6 +46,24 @@ namespace Foodfolio.Server.Data
                 .WithMany(f => f.Units)
                 .HasForeignKey(u => u.FoodId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<MealPlanItem>()
+                .HasOne(item => item.Recipe)
+                .WithMany()
+                .HasForeignKey(item => item.RecipeId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<MealPlanItem>()
+                .HasOne(item => item.Food)
+                .WithMany()
+                .HasForeignKey(item => item.FoodId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<MealPlanItem>()
+                .HasOne(item => item.Unit)
+                .WithMany()
+                .HasForeignKey(item => item.UnitId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<MealPlanItem>()
+                .HasIndex(item => new { item.Date, item.MealType });
 
             modelBuilder.Entity<Unit>().HasData(
                 new Unit

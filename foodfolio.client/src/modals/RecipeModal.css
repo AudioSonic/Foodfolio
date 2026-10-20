@@ -24,6 +24,10 @@
     overflow-y: auto;
 }
 
+.recipe-modal-overlay .recipe-modal:has(h2:first-child) {
+    max-width: 1000px;
+}
+
 .recipe-modal-header {
     display: flex;
     align-items: center;

@@ -1,0 +1,14 @@
+.food-plan-overlay { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 1rem; background: rgba(42, 43, 43, .48); }
+.food-plan-modal { width: min(520px, 100%); border-radius: var(--border-radius-default); background: var(--color-foreground); box-shadow: var(--box-shadow); color: var(--font-color); }
+.food-plan-header { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--border-color); }
+.food-plan-header h2 { margin: 0; color: var(--color-tertiary); font-size: 1.2rem; }
+.food-plan-close { border: 0; background: transparent; color: var(--font-color-secondary); font-size: 1.6rem; cursor: pointer; }
+.food-plan-form { display: grid; grid-template-columns: 1.4fr .8fr .7fr; gap: 1rem; padding: 1.25rem; }
+.food-plan-form label { display: flex; flex-direction: column; gap: .4rem; color: var(--font-color-secondary); font-size: .85rem; font-weight: 700; }
+.food-plan-form input, .food-plan-form select { width: 100%; min-height: 2.5rem; padding: .45rem .6rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-default); background: var(--color-foreground); color: var(--font-color); font: inherit; }
+.food-plan-actions { display: flex; justify-content: flex-end; gap: .7rem; padding: 0 1.25rem 1.25rem; }
+.food-plan-actions button { min-height: 2.5rem; padding: .55rem 1rem; border-radius: var(--border-radius-default); font: inherit; font-weight: 700; cursor: pointer; }
+.food-plan-cancel { border: 1px solid var(--border-color); background: var(--color-foreground); color: var(--font-color); }
+.food-plan-save { border: 0; background: var(--color-primary); color: white; }
+.food-plan-save:hover { filter: brightness(.95); }
+@media (max-width: 560px) { .food-plan-overlay { padding: .75rem; } .food-plan-form { grid-template-columns: 1fr; gap: .75rem; } .food-plan-actions { flex-direction: column-reverse; } .food-plan-actions button { width: 100%; } }

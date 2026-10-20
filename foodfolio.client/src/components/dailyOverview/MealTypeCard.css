@@ -4,7 +4,9 @@
     align-items: center;
     min-height: 80px;
     width: 100%;
-    padding: 10px 15px;
+    padding: 14px 16px;
+    background: var(--color-foreground);
+    box-shadow: var(--box-shadow);
     border-style: solid;
     border-width: 0.1px;
     border-radius: 7px;
@@ -85,4 +87,45 @@
     cursor: pointer;
     color: #555;
     padding: 5px;
+}
+
+.meal-recipe-remove {
+    font-size: 1.2rem !important;
+    color: var(--font-color-secondary) !important;
+}
+
+.meal-recipe-edit {
+    min-width: 92px;
+    padding: 7px 12px !important;
+    border: 1px solid var(--color-primary) !important;
+    border-radius: var(--border-radius-default);
+    background: var(--color-highlight) !important;
+    color: var(--color-tertiary) !important;
+    font-size: .85rem !important;
+    font-weight: 700;
+}
+
+.meal-recipes {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    max-width: 620px;
+}
+
+.meal-recipes > button {
+    align-self: flex-start;
+    border: 0;
+    background: transparent;
+    color: var(--color-tertiary);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .meal-type-card { align-items: flex-start; flex-direction: column; gap: 12px; }
+    .meal-desc { margin-right: 0; }
+    .meal-recipes { width: 100%; max-width: none; }
+    .meal-recipe-edit { min-width: auto; }
 }
