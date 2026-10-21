@@ -3,7 +3,7 @@ import type { RecipeFormHandle } from "../components/recipes/RecipeForm";
 import type { RecipeFormData } from "../types/RecipeFormData";
 import "./RecipeModal.css";
 import { useEffect, useRef } from "react";
-import type { Recipe } from "../types/Recipe";
+import type { Recipe } from "../types/recipe";
 
 type RecipeModalProps = {
     onClose: () => void;

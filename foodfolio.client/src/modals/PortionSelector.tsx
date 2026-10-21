@@ -1,5 +1,5 @@
 import "./PortionSelector.css";
-import type { Recipe } from "../types/Recipe";
+import type { Recipe } from "../types/recipe";
 import { useState } from "react";
 
 type PortionSelectorProps = {

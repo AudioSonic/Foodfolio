@@ -1,5 +1,3 @@
-import type { MealPlanRecipe } from "./MealPlanRecipe";
-
 export type MealType =
     | "breakfast"
     | "snack1"

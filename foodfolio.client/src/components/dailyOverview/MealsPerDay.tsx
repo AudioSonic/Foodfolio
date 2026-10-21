@@ -4,7 +4,7 @@ import IconBreakfast from "../../assets/icons/icon_breakfast.svg"
 import IconSnack from "../../assets/icons/icon_orange.svg"
 import IconLunch from "../../assets/icons/icon_lunch.svg"
 import IconDinner from "../../assets/icons/icon_dinner.svg"
-import type { Recipe } from "../../types/Recipe"
+import type { Recipe } from "../../types/recipe"
 import type { MealPlanItem, MealType } from "../../types/MealPlan";
 
 type MealsPerDayProps = {

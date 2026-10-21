@@ -1,4 +1,16 @@
-# React + TypeScript + Vite
+# Foodfolio Client
+
+## GitHub Pages
+
+The repository contains a ready-to-use workflow at `.github/workflows/deploy-pages.yml`.
+
+1. In the GitHub repository settings, open **Pages** and select **GitHub Actions** as the source.
+2. Add the repository variable `VITE_API_BASE_URL` under **Settings → Secrets and variables → Actions → Variables**. It must point to the publicly reachable Foodfolio API, for example `https://foodfolio-api.example.com`.
+3. Push to `main` or start the **Deploy frontend to GitHub Pages** workflow manually.
+
+GitHub Pages hosts only the static React frontend. The ASP.NET backend and its SQLite database must be deployed separately. The API must allow requests from the Pages origin via CORS and must be served over HTTPS.
+
+For local development, leave `VITE_API_BASE_URL` empty so Vite's `/api` proxy targets the local ASP.NET server.
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

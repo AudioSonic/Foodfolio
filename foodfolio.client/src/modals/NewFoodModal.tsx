@@ -1,4 +1,4 @@
-import type { CreateFoodData, Food } from "../types/Food";
+import type { CreateFoodData, Food } from "../types/food";
 import type { Unit } from "../types/Unit";
 import "./NewFoodModal.css";
 import { useEffect, useState } from "react";

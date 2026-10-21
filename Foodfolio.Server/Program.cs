@@ -13,7 +13,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("FoodfolioFrontend", policy =>
     {
-        policy.WithOrigins("https://localhost:51142")
+        policy.WithOrigins(
+                  "https://localhost:51142",
+                  "https://audiosonic.github.io")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });

@@ -1,5 +1,5 @@
 import "./MealTypeCard.css"
-import type { Recipe } from "../../types/Recipe"
+import type { Recipe } from "../../types/recipe"
 import type { MealPlanItem } from "../../types/MealPlan"
 import { useState } from "react";
 

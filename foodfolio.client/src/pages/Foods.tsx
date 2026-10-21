@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import NewFoodModal from "../modals/NewFoodModal";
-import type { Food } from "../types/Food";
+import type { Food } from "../types/food";
 import "./Foods.css";
 import { apiRequest, ApiError } from "../services/api";
 

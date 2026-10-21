@@ -6,13 +6,14 @@ import MealsPerDay from "../components/dailyOverview/MealsPerDay";
 import RecipeLibrary from "../components/recipes/RecipeLibrary";
 import ActiveDateSelect from "../components/ActiveDateSelect";
 
-import type { Recipe } from "../types/Recipe";
+import type { Recipe } from "../types/recipe";
 import type { MealPlanItem, MealType } from "../types/MealPlan";
 
 import PortionSelector from "../modals/PortionSelector";
 import DailyGoalsModal, { type DailyGoals } from "../modals/DailyGoalsModal";
 import FoodPlanModal from "../modals/FoodPlanModal";
 import { calculateDailyNutrition } from "../services/nutrition";
+import { apiUrl } from "../services/api";
 function getDateKey(date: Date) {
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
@@ -31,7 +32,7 @@ function Dashboard() {
 
     const dateKey = getDateKey(activeDate);
     useEffect(() => {
-        fetch("/api/meal-plan?date=" + dateKey)
+        fetch(apiUrl("/api/meal-plan?date=" + dateKey))
             .then(response => response.ok ? response.json() : Promise.reject(new Error("Der Tagesplan konnte nicht geladen werden.")))
             .then(setDailyPlan)
             .catch(error => setPlanError(error instanceof Error ? error.message : "Der Tagesplan konnte nicht geladen werden."))
@@ -51,9 +52,9 @@ function Dashboard() {
         }
 
         setPlanError("");
-        fetch("/api/meal-plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ date: dateKey, mealType: pendingMealType, entryType: "recipe", recipeId: pendingRecipe.id, portions: amount }) })
+        fetch(apiUrl("/api/meal-plan"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ date: dateKey, mealType: pendingMealType, entryType: "recipe", recipeId: pendingRecipe.id, portions: amount }) })
             .then(response => response.ok ? response.json() : response.text().then(message => Promise.reject(new Error(message))))
-            .then(() => fetch("/api/meal-plan?date=" + dateKey))
+            .then(() => fetch(apiUrl("/api/meal-plan?date=" + dateKey)))
             .then(response => response.json())
             .then(setDailyPlan)
             .catch(error => setPlanError(error instanceof Error ? error.message : "Das Rezept konnte nicht eingeplant werden."));
@@ -63,7 +64,7 @@ function Dashboard() {
     }
 
     function handleRemoveItem(item: MealPlanItem) {
-        fetch("/api/meal-plan/" + item.id, { method: "DELETE" })
+        fetch(apiUrl("/api/meal-plan/" + item.id), { method: "DELETE" })
             .then(response => { if (!response.ok) throw new Error("Der Eintrag konnte nicht entfernt werden."); setDailyPlan(current => current.filter(currentItem => currentItem.id !== item.id)); })
             .catch(error => setPlanError(error instanceof Error ? error.message : "Der Eintrag konnte nicht entfernt werden."));
     }
@@ -72,7 +73,7 @@ function Dashboard() {
         const value = Number(window.prompt(item.entryType === "recipe" ? "Portionsanzahl" : "Menge", String(item.entryType === "recipe" ? item.portions : item.quantity)));
         if (!Number.isFinite(value) || value <= 0) return;
         const body = item.entryType === "recipe" ? { ...item, portions: value } : { ...item, quantity: value };
-        fetch("/api/meal-plan/" + item.id, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+        fetch(apiUrl("/api/meal-plan/" + item.id), { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
             .then(response => response.ok ? response.json() : Promise.reject(new Error("Der Eintrag konnte nicht geändert werden.")))
             .then(updated => setDailyPlan(current => current.map(currentItem => currentItem.id === updated.id ? updated : currentItem)))
             .catch(error => setPlanError(error instanceof Error ? error.message : "Der Eintrag konnte nicht geändert werden."));
@@ -122,9 +123,9 @@ function Dashboard() {
             />
         )}
         {foodMealType && <FoodPlanModal onClose={() => setFoodMealType(null)} onSave={(foodId, quantity, unitId) => {
-            fetch("/api/meal-plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ date: dateKey, mealType: foodMealType, entryType: "food", foodId, quantity, unitId }) })
+            fetch(apiUrl("/api/meal-plan"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ date: dateKey, mealType: foodMealType, entryType: "food", foodId, quantity, unitId }) })
                 .then(response => response.ok ? response.json() : Promise.reject(new Error("Das Lebensmittel konnte nicht eingeplant werden.")))
-                .then(() => fetch("/api/meal-plan?date=" + dateKey))
+                .then(() => fetch(apiUrl("/api/meal-plan?date=" + dateKey)))
                 .then(response => response.json())
                 .then(items => { setDailyPlan(items); setFoodMealType(null); })
                 .catch(error => setPlanError(error instanceof Error ? error.message : "Das Lebensmittel konnte nicht eingeplant werden."));

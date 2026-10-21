@@ -1,4 +1,4 @@
-import type { Food } from "./Food";
+import type { Food } from "./food";
 import type { Unit } from "./Unit";
 
 export type RecipeIngredient = {

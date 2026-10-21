@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import type { Food } from "../types/Food";
+import type { Food } from "../types/food";
 import type { Unit } from "../types/Unit";
 import "./FoodPlanModal.css";
+import { apiUrl } from "../services/api";
 
 type Props = { onClose: () => void; onSave: (foodId: number, quantity: number, unitId: number) => void };
 
@@ -13,7 +14,7 @@ export default function FoodPlanModal({ onClose, onSave }: Props) {
   const [unitId, setUnitId] = useState(0);
 
   useEffect(() => {
-    Promise.all([fetch("/api/foods").then(response => response.json()), fetch("/api/units").then(response => response.json())])
+    Promise.all([fetch(apiUrl("/api/foods")).then(response => response.json()), fetch(apiUrl("/api/units")).then(response => response.json())])
       .then(([loadedFoods, loadedUnits]) => { setFoods(loadedFoods); setUnits(loadedUnits); if (loadedFoods[0]) setFoodId(loadedFoods[0].id); });
   }, []);
 

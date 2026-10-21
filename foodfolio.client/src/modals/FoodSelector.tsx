@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./FoodSelector.css";
 import NewFoodModal from "./NewFoodModal";
-import type { Food } from "../types/Food";
+import type { Food } from "../types/food";
 import { apiRequest } from "../services/api";
 
 type FoodSelectorProps = {

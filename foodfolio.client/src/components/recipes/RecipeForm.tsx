@@ -1,7 +1,7 @@
 import FoodSelector from "../../modals/FoodSelector";
-import type { Food } from "../../types/Food";
+import type { Food } from "../../types/food";
 import type { RecipeFormData } from "../../types/RecipeFormData";
-import type { Recipe } from "../../types/Recipe";
+import type { Recipe } from "../../types/recipe";
 import type { Unit } from "../../types/Unit";
 import "./RecipeForm.css";
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from "react";

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./ShoppingList.css";
+import { apiUrl } from "../services/api";
 
 type Item = { foodId: number; foodName: string; unit: string; quantity: number; category: string };
 function monday(date: Date) { const value = new Date(date); const day = value.getDay() || 7; value.setDate(value.getDate() - day + 1); value.setHours(0, 0, 0, 0); return value; }
@@ -17,7 +18,7 @@ function ShoppingList() {
   const itemKey = (item: Item) => item.foodId + ":" + item.unit;
 
   useEffect(() => {
-    fetch("/api/shopping-list?from=" + key(week) + "&to=" + key(end))
+    fetch(apiUrl("/api/shopping-list?from=" + key(week) + "&to=" + key(end)))
       .then(response => response.ok ? response.json() : Promise.reject(new Error("Einkaufszettel konnte nicht geladen werden.")))
       .then(setItems)
       .catch(e => setError(e instanceof Error ? e.message : "Einkaufszettel konnte nicht geladen werden."));

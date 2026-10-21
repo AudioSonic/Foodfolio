@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Recipe } from "../types/Recipe";
+import type { Recipe } from "../types/recipe";
 import type { RecipeFormData } from "../types/RecipeFormData";
 import RecipeModal from "./RecipeModal";
 import "./RecipeDetailModal.css";

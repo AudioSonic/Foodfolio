@@ -1,6 +1,6 @@
 import "./RecipeLibrary.css"
 import RecipeCard from "./RecipeCard";
-import type { Recipe } from "../../types/Recipe";
+import type { Recipe } from "../../types/recipe";
 import { useCallback, useEffect, useState } from "react";
 import RecipeModal from "../../modals/RecipeModal";
 import RecipeDetailModal from "../../modals/RecipeDetailModal";

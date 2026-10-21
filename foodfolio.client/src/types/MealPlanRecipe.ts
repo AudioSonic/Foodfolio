@@ -1,4 +1,4 @@
-import type { Recipe } from "./Recipe";
+import type { Recipe } from "./recipe";
 
 export type MealPlanRecipe = {
     recipe: Recipe;
