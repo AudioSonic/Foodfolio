@@ -16,17 +16,15 @@ Foodfolio ist eine persönliche Webanwendung zur Planung von Mahlzeiten, Verwalt
 - Automatische Berechnung von Kalorien, Eiweiß, Kohlenhydraten und Fett
 - Frei definierbare Tagesziele, lokal im Browser gespeichert
 
-[Screenshot des Dashboards mit Tagesplan, Mahlzeitenkarten und Nährwertübersicht]
+<img width="900" height="450" alt="grafik" src="https://github.com/user-attachments/assets/d394c998-04c9-4a35-87e5-ba685eb7df1e" />
+
 
 ### Rezeptverwaltung
 
 Rezepte können angelegt, angezeigt, bearbeitet und gelöscht werden. Unterstützt werden Name, Beschreibung, Bild, Portionen, Kategorie, Quelle, Quell-URL, Zutaten, Einheiten und nummerierte Zubereitungsschritte. Gesamtwerte und Werte pro Portion werden automatisch berechnet. In der Detailansicht kann die Portionsgröße angepasst werden.
 
-[Screenshot der Rezeptbibliothek mit Rezeptkarten und Such-/Filterbereich]
-
-[Screenshot des Rezeptformulars mit Zutatenliste, Portionen und Zubereitungsschritten]
-
-[Screenshot der Rezeptdetailansicht mit angepasster Portionsgröße und Nährwerten]
+<img width="900" height="450" alt="grafik" src="https://github.com/user-attachments/assets/837380fc-6908-49ff-8991-95aaff5f5e7b" />  
+<img width="900" height="450" alt="grafik" src="https://github.com/user-attachments/assets/474d2f87-d8c9-46b6-8918-8f43c25c0e12" />  
 
 ### Lebensmittelverwaltung
 
@@ -37,9 +35,8 @@ Lebensmittel enthalten Name, optionalen Markennamen, Kalorien, Eiweiß, Kohlenhy
 - Validierung positiver Mengen und gültiger Einheiten
 - Prüfung der Kompatibilität von Gewichts- und Volumeneinheiten
 
-[Screenshot der Lebensmittelübersicht mit Nährwertangaben]
+<img width="900" height="450" alt="grafik" src="https://github.com/user-attachments/assets/fa521bf7-25e0-411d-bc29-1ffbe3cffdd3" />
 
-[Screenshot des Dialogs „Neues Lebensmittel erstellen“ mit individuellen Einheiten]
 
 ### Wochenplanung und Einkaufsliste
 
@@ -50,9 +47,7 @@ Lebensmittel enthalten Name, optionalen Markennamen, Kalorien, Eiweiß, Kohlenhy
 - Artikel abhaken und erledigte Artikel ein-/ausblenden
 - Erledigungsstatus wochenbezogen im `localStorage` gespeichert
 
-[Screenshot des Wochenplans mit mehreren geplanten Rezepten]
-
-[Screenshot der automatisch gruppierten Einkaufsliste mit abgehakten Artikeln]
+<img width="900" height="450" alt="grafik" src="https://github.com/user-attachments/assets/297ef021-ed16-4d53-b3d2-ae2cd6e134d2" />
 
 ### Kategorien und Oberfläche
 
@@ -60,9 +55,7 @@ In den Einstellungen können Rezeptkategorien erstellt, umbenannt und gelöscht 
 
 Die Sidebar bietet Bereiche für Dashboard, Wochenplan, Rezepte, Lebensmittel, Einkaufszettel, Profil und Einstellungen. Die Oberfläche ist komponentenbasiert und verwendet eigene Dialoge für Rezepte, Lebensmittel, Portionen und Tagesziele.
 
-[Screenshot der Kategorieverwaltung in den Einstellungen]
-
-[Screenshot der vollständigen Anwendung mit geöffneter Sidebar-Navigation]
+<img width="900" height="450" alt="grafik" src="https://github.com/user-attachments/assets/11ce19ad-5eef-4bf7-8f48-0ab4b7376a82" />
 
 ## Technischer Aufbau
 
